@@ -9,7 +9,7 @@ class Apartment extends Model
 {
     use HasFactory;
     protected $fillable = [
-    
+
         'user_id',
 
         'title',
@@ -26,14 +26,26 @@ class Apartment extends Model
         'visible',
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
-    public function messages(){
+    public function messages()
+    {
         return $this->hasMany(Message::class);
     }
+<<<<<<< HEAD
     public function views(){
         return $this->hasMany(View::class);
     }
 
+=======
+    public function services()
+    {
+        return $this->belongsToMany(Service::class);
+    }
+    public function images(){
+        return $this->hasMany(Image::class);
+    }
+>>>>>>> 1903359a22d48fc9436d0a67dcea0a5dd8dd6845
 }

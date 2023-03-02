@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class Service extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'apartment_id',
-        'image',
+        'name',
+        'icon'
     ];
 
-    public function apartment(){
-        return $this->belongsTo(Apartment::class);
+    public function apartments()
+    {
+        return $this->belongsToMany(Apartment::class);
     }
 }
