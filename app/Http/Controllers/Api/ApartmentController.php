@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
@@ -30,16 +31,29 @@ class ApartmentController extends Controller
                 'address' => 'required|string',
                 'latitude' => 'required',
                 'longitude' => 'required',
-                'cover_img' => '',
-                'description' => '',
-                'rooms_qty' => '',
-                'beds_qty' => '',
-                'bathrooms_qty' => '',
-                'mq' => '',
-                'daily_price' => '',
-                'visible' => '',
+                'cover_img' => 'file|image',
+                'description' => 'string|size:1000',
+                'rooms_qty' => 'required|integer',
+                'beds_qty' => 'required|integer',
+                'bathrooms_qty' => 'required|integer',
+                'mq' => 'integer',
+                'daily_price' => 'required|decimal:2',
+                'visible' => 'nullable|boolean',
             ]
         );
+
+        if (key_exists('cover_img', $data)) {
+            $path = Storage::put('apartment-img', $data['cover_img']);
+        }
+
+        $apartment = Apartment::create(
+            [
+                ...$data,
+                'cover_img' => $path ?? null,
+            ]
+        );
+
+        return redirect()->route('dashboard');
     }
 
     /**
