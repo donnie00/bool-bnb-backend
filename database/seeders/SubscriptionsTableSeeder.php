@@ -15,17 +15,17 @@ class SubscriptionsTableSeeder extends Seeder
     {
         $subscriptions = [
             [
-                "name" => "silver",
+                "name" => "Silver",
                 "price" => 2.99,
                 "duration" => 24
             ],
             [
-                "name" => "gold",
+                "name" => "Gold",
                 "price" => 5.99,
                 "duration" => 72
             ],
             [
-                "name" => "diamond",
+                "name" => "Diamond",
                 "price" => 9.99,
                 "duration" => 144
             ]
