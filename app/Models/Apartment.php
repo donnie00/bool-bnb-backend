@@ -41,4 +41,8 @@ class Apartment extends Model
     public function images(){
         return $this->hasMany(Image::class);
     }
+
+    public function subsciptions(){
+        return $this->belongsToMany(Subscription::class);
+    }
 }
