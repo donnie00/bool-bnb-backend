@@ -13,4 +13,9 @@ class Service extends Model
         'name',
         'icon'
     ];
+
+    public function apartments()
+    {
+        return $this->belongsToMany(Apartment::class);
+    }
 }
