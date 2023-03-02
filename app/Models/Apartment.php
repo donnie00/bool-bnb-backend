@@ -34,6 +34,7 @@ class Apartment extends Model
     {
         return $this->hasMany(Message::class);
     }
+
     public function views(){
         return $this->hasMany(View::class);
     }
@@ -46,6 +47,6 @@ class Apartment extends Model
     }
 
     public function subsciptions(){
-        return $this->belongsToMany(Subscription::class);
+        return $this->belongsToMany(Subscription::class)->withPivot("expiration_date");
     }
 }
