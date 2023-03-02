@@ -32,5 +32,8 @@ class Apartment extends Model
     public function messages(){
         return $this->hasMany(Message::class);
     }
+    public function images(){
+        return $this->hasMany(Image::class);
+    }
 
 }
