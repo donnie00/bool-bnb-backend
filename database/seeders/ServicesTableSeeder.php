@@ -16,47 +16,47 @@ class ServicesTableSeeder extends Seeder
         $services = [
             [
                 'name' => 'Wi-fi',
-                'icon' => 'fa-solid fa-wifi'
+                'icon' => 'wifi-line-icon.svg'
             ],
             [
                 'name' => 'Cucina',
-                'icon' => 'fa-solid fa-fire-burner'
+                'icon' => 'kitchen-icon.svg',
             ],
             [
                 'name' => 'Lavatrice',
-                'icon' => ''
+                'icon' => 'washing-machine-icon.svg'
             ],
             [
                 'name' => 'Asciugatrice',
-                'icon' => ''
+                'icon' => 'dryer-icon.svg'
             ],
             [
                 'name' => 'Riscaldamento',
-                'icon' => 'fa-solid fa-fire'
+                'icon' => 'home-heating-icon.svg'
             ],
             [
                 'name' => 'Aria Condizionata',
-                'icon' => 'fa-solid fa-wind'
+                'icon' => 'air-conditioner-icon.svg'
             ],
             [
                 'name' => 'TV',
-                'icon' => 'fa-solid fa-tv'
+                'icon' => 'screen-icon.svg'
             ],
             [
                 'name' => 'Piscina',
-                'icon' => 'fa-solid fa-water-ladder'
+                'icon' => 'swimming-icon.svg'
             ],
             [
                 'name' => 'Palestra',
-                'icon' => 'fa-solid fa-dumbbell'
+                'icon' => 'gym-dumbbell-icon.svg'
             ],
             [
                 'name' => 'Colazione',
-                'icon' => 'fa-solid fa-mug-saucer'
+                'icon' => 'cups-icon.svg'
             ],
             [
                 'name' => 'Parcheggio',
-                'icon' => 'fa-solid fa-square-parking'
+                'icon' => 'parking-location-icon.svg'
             ],
         ];
 
