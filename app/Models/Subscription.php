@@ -17,6 +17,6 @@ class Subscription extends Model
     ];
 
     public function apartments(){
-        return $this->belongsToMany(Apartment::class);
+        return $this->belongsToMany(Apartment::class)->withPivot("expiration_date");
     }
 }
