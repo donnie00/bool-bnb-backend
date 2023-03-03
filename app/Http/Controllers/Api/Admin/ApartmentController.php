@@ -24,7 +24,7 @@ class ApartmentController extends Controller
                 'latitude' => 'required',
                 'longitude' => 'required',
                 'cover_img' => 'file|image',
-                'description' => 'string|size:1000',
+                'description' => 'string|max:1000',
                 'rooms_qty' => 'required|integer',
                 'beds_qty' => 'required|integer',
                 'bathrooms_qty' => 'required|integer',
