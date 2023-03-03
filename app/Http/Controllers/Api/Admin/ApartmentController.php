@@ -62,7 +62,7 @@ class ApartmentController extends Controller
     public function update(Request $request, string $id)
     {
 
-        $data = $request->validated(
+        $data = $request->validate(
             [
                 'user_id' => 'exists:user,id',
                 'title' => 'string',
