@@ -19,6 +19,10 @@ class ApartmentController extends Controller
         return response()->json($apartments);
     }
 
+    public function create(){
+        return redirect()->to(config("frontEnd.url"));
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -53,7 +57,7 @@ class ApartmentController extends Controller
             ]
         );
 
-        return redirect()->route('dashboard');
+        return redirect()->to(config("frontEnd.url"));
     }
 
     /**
