@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
+use App\Models\ApartmentSubscription;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 //Da gestire l'autenticazione
 
@@ -122,10 +126,29 @@ class ApartmentController extends Controller
         $apartment->delete();
     }
 
-    public function add_subscription(Request $request, string $id){
+    public function add_subscription(Request $request, string $id)
+    {
+        // DA RIVEDERE
 
-        $data = $request->validate([
-            "subscription_id" => "exists:services,id"
-        ]);
+        // $data = $request->validate([
+        //     "subscription_id" => "exists:subscriptions,id"
+        // ]);
+        // $id = 1;
+        // $data = [];
+        // $data["subscription_id"] = 6;
+        // $duration = DB::table("subscriptions")->select("duration")
+        //     ->where("id", $data["subscription_id"])
+        //     ->get();
+
+        // $exp_date = date("Y-m-d: H:i:s", strtotime("+48 hours"));
+
+
+        // $apartment = Apartment::findOrFail($id);
+        // $apartment->subscriptions()->attach($data["subscription_id"]);
+
+        // DB::table("apartment_subscription")
+        //     ->where("subscription_id", $data["subscription_id"])
+        //     ->where("apartment_id", $id)
+        //     ->update(["expiration_date" => $exp_date]);
     }
 }

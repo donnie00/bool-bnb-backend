@@ -46,7 +46,7 @@ class Apartment extends Model
         return $this->hasMany(Image::class);
     }
 
-    public function subsciptions(){
+    public function subscriptions(){
         return $this->belongsToMany(Subscription::class)->withPivot("expiration_date");
     }
 }

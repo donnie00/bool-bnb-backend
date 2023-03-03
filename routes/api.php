@@ -53,6 +53,7 @@ Route::prefix('admin')
             'show',
             'destroy'
         );
+        Route::get('/apartments/{id}/subscriptions', [AdminApartmentController::class, "add_subscription"])->name("apartments.add_subscription");
     });
 
 Route::resource('/messages', MessageController::class)->only(
@@ -65,3 +66,4 @@ Route::resource('/services', Service::class)->only(
 Route::resource('/subscriptons', Subscription::class)->only(
     'index'
 );
+
