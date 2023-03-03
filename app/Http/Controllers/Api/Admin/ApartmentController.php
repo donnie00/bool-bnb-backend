@@ -16,7 +16,7 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validated(
+        $data = $request->validate(
             [
                 'user_id' => 'required|exists:user,id',
                 'title' => 'required|string',
