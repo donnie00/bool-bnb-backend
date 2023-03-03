@@ -128,27 +128,28 @@ class ApartmentController extends Controller
 
     public function add_subscription(Request $request, string $id)
     {
-        // DA RIVEDERE
 
-        // $data = $request->validate([
-        //     "subscription_id" => "exists:subscriptions,id"
-        // ]);
+        $data = $request->validate([
+            "subscription_id" => "exists:subscriptions,id"
+        ]);
+
+        // Per provare senza dati passati dal front-end
         // $id = 1;
         // $data = [];
         // $data["subscription_id"] = 6;
-        // $duration = DB::table("subscriptions")->select("duration")
-        //     ->where("id", $data["subscription_id"])
-        //     ->get();
 
-        // $exp_date = date("Y-m-d: H:i:s", strtotime("+48 hours"));
+        $duration = DB::table("subscriptions")->select("duration")
+            ->where("id", $data["subscription_id"])
+            ->get();
+    
+        $exp_date = date("Y-m-d: H:i:s", strtotime("+{$duration[0]->duration} hours"));
 
+        $apartment = Apartment::findOrFail($id);
+        $apartment->subscriptions()->attach($data["subscription_id"]);
 
-        // $apartment = Apartment::findOrFail($id);
-        // $apartment->subscriptions()->attach($data["subscription_id"]);
-
-        // DB::table("apartment_subscription")
-        //     ->where("subscription_id", $data["subscription_id"])
-        //     ->where("apartment_id", $id)
-        //     ->update(["expiration_date" => $exp_date]);
+        DB::table("apartment_subscription")
+            ->where("subscription_id", $data["subscription_id"])
+            ->where("apartment_id", $id)
+            ->update(["expiration_date" => $exp_date]);
     }
 }
