@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ApartmentController;
+use App\Http\Controllers\Api\Admin\ApartmentController as AdminApartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,8 +24,18 @@ Route::middleware('auth:sanctum')
         }
     );
 
+
+//Da gestire l'autenticazione
 Route::prefix('admin')
     ->name('admin.')
     ->group(function () {
-        Route::resource('/apartments', ApartmentController::class);
+        Route::resource('/apartments', AdminApartmentController::class)->except(
+            'index',
+            'show'
+        );
     });
+
+Route::resource('/apartments', ApartmentController::class)->only(
+    'index',
+    'show'
+);
