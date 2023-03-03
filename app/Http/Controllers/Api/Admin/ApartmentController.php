@@ -70,7 +70,7 @@ class ApartmentController extends Controller
                 'latitude' => '',
                 'longitude' => '',
                 'cover_img' => 'file|image',
-                'description' => 'string|size:1000',
+                'description' => 'string|max:1000',
                 'rooms_qty' => 'integer',
                 'beds_qty' => 'integer',
                 'bathrooms_qty' => 'integer',
