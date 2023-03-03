@@ -31,6 +31,7 @@ class ApartmentController extends Controller
                 'mq' => 'integer',
                 'daily_price' => 'required|decimal:2',
                 'visible' => 'nullable|boolean',
+                'services' => 'nullable|array',
             ]
         );
 
@@ -44,6 +45,10 @@ class ApartmentController extends Controller
                 'cover_img' => $path ?? null,
             ]
         );
+
+        if ($data["services"]) {
+            $apartment->services()->attach($data["services"]);
+        }
     }
 
     /**
@@ -64,7 +69,7 @@ class ApartmentController extends Controller
 
         $data = $request->validate(
             [
-                'user_id' => 'exists:user,id',
+                'user_id' => 'exists:users,id',
                 'title' => 'string',
                 'address' => 'string',
                 'latitude' => '',
@@ -77,12 +82,26 @@ class ApartmentController extends Controller
                 'mq' => 'integer',
                 'daily_price' => 'decimal:2',
                 'visible' => 'nullable|boolean',
+                'services' => 'nullable|array',
             ]
         );
 
+
+        if (key_exists('cover_img', $data)) {
+            $path = Storage::put('apartment-img', $data['cover_img']);
+        }
+
         $apartment = Apartment::findOrFail($id);
 
-        $apartment->update($data);
+
+        $apartment->update([
+            ...$data,
+            "cover_img" => $path ?? $apartment->cover_img,
+        ]);
+
+        if ($data["services"]) {
+            $apartment->services()->sync($data["services"]);
+        }
 
         return response()->json($apartment);
     }
@@ -94,6 +113,19 @@ class ApartmentController extends Controller
     {
         $apartment = Apartment::findOrFail($id);
 
+        if ($apartment->cover_img) {
+            Storage::delete($apartment->cover_img);
+        }
+
+        $apartment->services()->detach();
+
         $apartment->delete();
+    }
+
+    public function add_subscription(Request $request, string $id){
+
+        $data = $request->validate([
+            "subscription_id" => "exists:services,id"
+        ]);
     }
 }
