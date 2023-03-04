@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\ApartmentController;
+use App\Http\Controllers\Api\ApartmentController as ApiApartmentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +31,21 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+
+// FOR TESTING
+
+Route::middleware('auth')->group(function () {
+    Route::get('/apartment/create', function(){
+        return view('apartment.create');
+    })->name('apartment.create');
+    Route::post('/apartment/store',[ApartmentController::class,  'store'])->name('apartment.test.store');
+    Route::get('/apartment/{id}/edit', [ApartmentController::class, "edit"])->name('apartment.edit');
+    Route::get('/apartment/index',[ApartmentController::class, "index"])->name('apartment.index');
+    Route::get("/apartment/{id}/show", [ApartmentController::class, "show"])->name('apartment.show');
+    Route::post("/apartment/{id}/update", [ApartmentController::class, "update"])->name('apartment.update');
+});
+
+
+

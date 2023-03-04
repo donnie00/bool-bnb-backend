@@ -7,6 +7,7 @@ use App\Models\Apartment;
 use App\Models\ApartmentSubscription;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -15,44 +16,68 @@ use Illuminate\Support\Facades\DB;
 
 class ApartmentController extends Controller
 {
+
+    public function index(){
+        $apartments = Db::table("apartments")
+            ->where("user_id",Auth::id())->get();
+        
+            return view("apartment.index", compact("apartments") );
+    }
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $data = $request->validate(
-            [
-                'user_id' => 'required|exists:user,id',
-                'title' => 'required|string',
-                'address' => 'required|string',
-                'latitude' => 'required',
-                'longitude' => 'required',
-                'cover_img' => 'file|image',
-                'description' => 'string|max:1000',
-                'rooms_qty' => 'required|integer',
-                'beds_qty' => 'required|integer',
-                'bathrooms_qty' => 'required|integer',
-                'mq' => 'integer',
-                'daily_price' => 'required|decimal:2',
-                'visible' => 'nullable|boolean',
-                'services' => 'nullable|array',
-            ]
-        );
+    {   
+
+        $data = $request->all();
+        // $data = $request->validate(
+        //     [
+        //         //'user_id' => 'required|exists:user,id',
+        //         'title' => 'required|string',
+        //         'address' => 'required|string',
+        //         //'latitude' => 'required|nullable',
+        //         //'longitude' => 'required|nullable',
+        //         'cover_img' => 'file|image|nullable',
+        //         'description' => 'string|max:1000',
+        //         'rooms_qty' => 'required|integer',
+        //         'beds_qty' => 'required|integer',
+        //         'bathrooms_qty' => 'required|integer',
+        //         'mq' => 'integer',
+        //         'daily_price' => 'required|decimal:2',
+        //         'visible' => 'nullable|boolean',
+        //         'services' => 'nullable|array',
+        //     ]
+        // );
+
+    
 
         if (key_exists('cover_img', $data)) {
             $path = Storage::put('apartment-img', $data['cover_img']);
         }
 
+        
+
         $apartment = Apartment::create(
             [
                 ...$data,
                 'cover_img' => $path ?? null,
+                'user_id' => Auth::id(),
+                'latitude' => 20.34566,
+                'longitude' => 92.34466,
             ]
         );
 
-        if ($data["services"]) {
+        if ($request->has("services")) {
             $apartment->services()->attach($data["services"]);
         }
+
+        
+    }
+
+    public function show($id){
+        $apartment = Apartment::findOrFail($id);
+
+        return view("apartment.show", compact("apartment"));
     }
 
     /**
@@ -62,7 +87,7 @@ class ApartmentController extends Controller
     {
         $apartment = Apartment::findOrFail($id);
 
-        return response()->json($apartment);
+        return view("apartment.edit", compact("apartment"));
     }
 
     /**
@@ -70,25 +95,26 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $data = $request->all();
 
-        $data = $request->validate(
-            [
-                'user_id' => 'exists:users,id',
-                'title' => 'string',
-                'address' => 'string',
-                'latitude' => '',
-                'longitude' => '',
-                'cover_img' => 'file|image',
-                'description' => 'string|max:1000',
-                'rooms_qty' => 'integer',
-                'beds_qty' => 'integer',
-                'bathrooms_qty' => 'integer',
-                'mq' => 'integer',
-                'daily_price' => 'decimal:2',
-                'visible' => 'nullable|boolean',
-                'services' => 'nullable|array',
-            ]
-        );
+        // $data = $request->validate(
+        //     [
+        //         'user_id' => 'exists:users,id',
+        //         'title' => 'string',
+        //         'address' => 'string',
+        //         'latitude' => 'nullabke',
+        //         'longitude' => 'nullable',
+        //         'cover_img' => 'file|image|nullable',
+        //         'description' => 'string|max:1000',
+        //         'rooms_qty' => 'integer',
+        //         'beds_qty' => 'integer',
+        //         'bathrooms_qty' => 'integer',
+        //         'mq' => 'integer',
+        //         'daily_price' => 'decimal:2',
+        //         'visible' => 'nullable|boolean',
+        //         'services' => 'nullable|array',
+        //     ]
+        // );
 
 
         if (key_exists('cover_img', $data)) {
@@ -100,14 +126,17 @@ class ApartmentController extends Controller
 
         $apartment->update([
             ...$data,
-            "cover_img" => $path ?? $apartment->cover_img,
+            'user_id' => Auth::id(),
+            'latitude' => 20.34566,
+            'longitude' => 92.34466,
+            //"cover_img" => $path ?? $apartment->cover_img,
         ]);
 
-        if ($data["services"]) {
-            $apartment->services()->sync($data["services"]);
-        }
+         if ($request->has("services")) {
+             $apartment->services()->sync($data["services"]);
+         }
 
-        return response()->json($apartment);
+        return redirect()->route("apartment.index");
     }
 
     /**
