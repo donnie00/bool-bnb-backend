@@ -34,7 +34,7 @@ class ApartmentsTableSeeder extends Seeder
             ],
 
             [
-                'user_id' =>'1',
+                'user_id' =>'2',
                 'title' =>'Appartamento al Colosseo',
                 'address'=>'Via pescara, 56',
                 'latitude'=>'41.90793',
@@ -48,7 +48,7 @@ class ApartmentsTableSeeder extends Seeder
             ],
 
             [
-                'user_id' =>'1',
+                'user_id' =>'3',
                 'title' =>'Suite Termini con Balcone, Wi-Fi e A/C',
                 'address'=>'Via caio, 56',
                 'latitude'=>'41.90793',
@@ -62,7 +62,7 @@ class ApartmentsTableSeeder extends Seeder
             ],
 
             [
-                'user_id' =>'1',
+                'user_id' =>'4',
                 'title' => 'Splendido Loft Appartamento',
                 'address'=>'Via trieste, 6',
                 'latitude'=>'41.90793',
@@ -74,27 +74,42 @@ class ApartmentsTableSeeder extends Seeder
                 'mq' =>'40',
                 'daily_price'=>'36'
             ],
+
+            [
+                'user_id' =>'5',
+                'title' => 'La Rosa dei Venti',
+                'address'=>'Via Dante, 38',
+                'latitude'=>'41.90793',
+                'longitude'=>'12.46557',
+                'description' =>'Bilocale vista mare molto spazioso con terrazzo e zona relax',
+                'rooms_qty' => '3',
+                'beds_qty' =>'3',
+                'bathrooms_qty' =>'1',
+                'mq' =>'40',
+                'daily_price'=>'36'
+            ],
         ];
 
-        
-
-
-        foreach ($apartments as $apartment) {
-            $newApartment = new Apartment();
-
-            $newApartment->user_id = $apartment['user_id'];
-            $newApartment->title = $apartment['title'];
-            $newApartment->address = $apartment['address'];
-            $newApartment->latitude = $apartment['latitude'];
-            $newApartment->longitude = $apartment['longitude'];
-            $newApartment->description = $apartment['description'];
-            $newApartment->rooms_qty= $apartment['rooms_qty'];
-            $newApartment->beds_qty = $apartment['beds_qty'];
-            $newApartment->bathrooms_qty = $apartment['bathrooms_qty'];
-            $newApartment->daily_price = $apartment['daily_price'];
-            $newApartment->mq = $apartment['mq'];
-            
-            $newApartment->save();
+        for ($i=0; $i <14 ; $i++) { 
+            foreach ($apartments as $apartment) {
+                $newApartment = new Apartment();
+    
+                $newApartment->user_id = $apartment['user_id'];
+                $newApartment->title = $apartment['title'];
+                $newApartment->address = $apartment['address'];
+                $newApartment->latitude = $apartment['latitude'];
+                $newApartment->longitude = $apartment['longitude'];
+                $newApartment->description = $apartment['description'];
+                $newApartment->rooms_qty= $apartment['rooms_qty'];
+                $newApartment->beds_qty = $apartment['beds_qty'];
+                $newApartment->bathrooms_qty = $apartment['bathrooms_qty'];
+                $newApartment->daily_price = $apartment['daily_price'];
+                $newApartment->mq = $apartment['mq'];
+                
+                $newApartment->save();
+            };
         }
+
+
     }
 }
