@@ -22,7 +22,7 @@ class ApartmentController extends Controller
     {
         $data = $request->validate(
             [
-                'user_id' => 'required|exists:user,id',
+                'user_id' => 'required|exists:users,id',
                 'title' => 'required|string',
                 'address' => 'required|string',
                 'latitude' => 'required',
@@ -50,7 +50,7 @@ class ApartmentController extends Controller
             ]
         );
 
-        if ($data["services"]) {
+        if ($request->has('services')) {
             $apartment->services()->attach($data["services"]);
         }
     }
@@ -141,7 +141,7 @@ class ApartmentController extends Controller
         $duration = DB::table("subscriptions")->select("duration")
             ->where("id", $data["subscription_id"])
             ->get();
-    
+
         $exp_date = date("Y-m-d: H:i:s", strtotime("+{$duration[0]->duration} hours"));
 
         $apartment = Apartment::findOrFail($id);
