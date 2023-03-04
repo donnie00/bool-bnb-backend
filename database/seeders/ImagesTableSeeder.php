@@ -14,16 +14,20 @@ class ImagesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $imgJson = Storage::get('database/data/immagini.json');
+        $imgJson = file_get_contents('database/data/immagini.json');
 
         $apartmentsImages = json_decode($imgJson, true);
 
-        foreach ($apartmentsImages as $images) {
-            $newImage = new Image();
-
-            $newImage->apartment_id = 1;
+        foreach ($apartmentsImages as $key => $images) {
             foreach ($images as $image) {
+
+                $newImage = new Image();
+
+                $newImage->apartment_id = $key;
+
                 $newImage->image = $image;
+
+                $newImage->save();
             }
         }
     }
