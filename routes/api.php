@@ -6,8 +6,6 @@ use App\Http\Controllers\Api\Admin\ApartmentController as AdminApartmentControll
 use App\Http\Controllers\Api\Admin\MessageController as AdminMessageController;
 use App\Http\Controllers\api\ServiceController;
 use App\Http\Controllers\api\SubscriptionController;
-use App\Http\Controllers\api\ServiceController;
-use App\Http\Controllers\api\SubscriptionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -63,9 +61,9 @@ Route::resource('/messages', MessageController::class)->only(
 );
 
 Route::resource('/services', ServiceController::class)->only(
-Route::resource('/services', ServiceController::class)->only(
     'index'
 );
+
 Route::resource('/subscriptions', SubscriptionController::class)->only(
     'index'
 );
