@@ -4,8 +4,8 @@ use App\Http\Controllers\Api\ApartmentController;
 use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\Admin\ApartmentController as AdminApartmentController;
 use App\Http\Controllers\Api\Admin\MessageController as AdminMessageController;
-use App\Models\Service;
-use App\Models\Subscription;
+use App\Http\Controllers\api\ServiceController;
+use App\Http\Controllers\api\SubscriptionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -60,10 +60,10 @@ Route::resource('/messages', MessageController::class)->only(
     'store'
 );
 
-Route::resource('/services', Service::class)->only(
+Route::resource('/services', ServiceController::class)->only(
     'index'
 );
-Route::resource('/subscriptons', Subscription::class)->only(
+Route::resource('/subscriptons', SubscriptionController::class)->only(
     'index'
 );
 
