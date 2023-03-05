@@ -21,7 +21,6 @@ class ApartmentController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(20);
             
-
         return response()->json($apartments);
     }
 

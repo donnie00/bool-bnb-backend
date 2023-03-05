@@ -74,8 +74,8 @@ class ApartmentController extends Controller
         $data = $request->validate(
             [
                 'user_id' => 'exists:users,id',
-                'title' => 'string|string',
-                'address' => 'string|string',
+                'title' => 'required|string',
+                'address' => 'required|string',
                 'latitude' => 'required',
                 'longitude' => 'required',
                 'cover_img' => 'file|image',
