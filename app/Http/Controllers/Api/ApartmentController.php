@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+
 
 class ApartmentController extends Controller
 {
@@ -14,7 +16,11 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::paginate(20);
+        //$apartments = Apartment::paginate(20);
+        $apartments = DB::table("apartments")
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+            
 
         return response()->json($apartments);
     }
