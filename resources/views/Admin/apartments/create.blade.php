@@ -226,14 +226,14 @@
 
                 {{-- street name --------------------------------------------------------------- --}}
                 <div class="input-container pb-2 col-12 col-md-5">
-                    <label  class="form-label"
-                    for="streetName">Street Name:</label>
-                    <input type="text" class="form-control 
+                    <label class="form-label" for="streetName">Street Name:</label>
+                    <input type="text"
+                        class="form-control 
                   @error('streetName') is-invalid @elseif(old('	streetName')) is-valid @enderror"
                         name="streetName" id="streetName"
                         value="{{ $errors->has('streetName') ? '' : old('streetName') }}">
 
-                        @error('streetName')
+                    @error('streetName')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @elseif(old('streetName'))
                         <div class="valid-feedback"> ok </div>
@@ -291,7 +291,8 @@
                 {{-- countryCode --}}
                 <div class="input-container pb-2 col-12 col-md-2">
                     <label class="form-label" for="countryCode">COUNTRY CODE:</label>
-                    <select  class="form-control 
+                    <select
+                        class="form-control 
         @error('countryCode') is-invalid @elseif(old('countryCode')) is-valid @enderror"
                         id="countryCode" name="countryCode">
 
@@ -305,7 +306,6 @@
                     @enderror
                 </div>
             </fieldset>
-
 
             {{-- opzioni --}}
             <div class="p-3">
