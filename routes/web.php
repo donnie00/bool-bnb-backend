@@ -1,8 +1,6 @@
 <?php
 
-
 use App\Http\Controllers\Admin\apartments\ApartmentController;
-
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +35,10 @@ require __DIR__.'/auth.php';
 
 // FOR TESTING
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')
+    ->prefix("Admin")
+    ->name("Admin.")
+    ->group(function () {
   Route::resource("/apartments", ApartmentController::class);
 });
 

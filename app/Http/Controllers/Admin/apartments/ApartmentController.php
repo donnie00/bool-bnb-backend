@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\apartments;
 
 use App\Http\Controllers\Controller;
-use App\Models\Apartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Apartment;
 class ApartmentController extends Controller
 {
     /**
@@ -17,10 +16,11 @@ class ApartmentController extends Controller
         $id = Auth::id();
 
         $apartments = Apartment::where("user_id", $id)
+            ->orderBy("created_at", "desc")
             ->get(); 
             
             
-            return view("Admin.apartment.index", compact("apartments"));
+            return view("Admin.apartments.index", compact("apartments"));
     }
 
     /**
@@ -28,7 +28,7 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        //
+        return view("Admin.apartments.create");
     }
 
     /**
@@ -36,7 +36,19 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $id = Auth::id();
+
+        $newApartment = [
+            ...$data,
+            "user_id" => $id,
+            "latitude" => 98.57485,
+            "longitude" => 98.57485,
+        ];
+
+        $apartment = Apartment::create($newApartment);
+
+        return redirect()->route("Admin.apartments.show", $apartment->id);
     }
 
     /**
@@ -44,7 +56,9 @@ class ApartmentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $apartment = Apartment::findOrFail($id);
+
+        return view("Admin.apartments.show", compact("apartment"));
     }
 
     /**
@@ -52,15 +66,22 @@ class ApartmentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $apartment = Apartment::findOrFail($id);
+        return view("Admin.apartments.edit", compact("apartment"));
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        //
+    {   
+        $data = $request->all();
+        $apartment = Apartment::findOrFail($id);
+
+        $apartment->update($data);
+        
+
+        return redirect()->route("Admin.apartments.show", $id);
     }
 
     /**
@@ -68,6 +89,9 @@ class ApartmentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $apartment = Apartment::findOrFail($id);
+        $apartment->delete();
+
+        return redirect()->route("Admin.apartments.index");
     }
 }
