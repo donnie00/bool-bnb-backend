@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 
 
@@ -6,7 +5,7 @@
 @section('content')
 
 <div class="container">
-
+ <h1 class="text-uppercase">create</h1>
     <form action="{{route("apartment.test.store")}}" method="POST">
         @csrf
         <div class="form-group mt-3">
@@ -36,10 +35,3 @@
 </div>
     
 @endsection
-=======
-@extends('layouts.app')
-
-@section('content')
-<h1 class="text-uppercase">create</h1>
-@endsection
->>>>>>> f5-vue-laravel-crud
