@@ -22,7 +22,7 @@
             @csrf
 
             {{-- title --------------------------------------------------------------- --}}
-            <div class="input-container pb-2 col-12 col-md-5">
+            <div class="input-container pb-2 col-12 ">
                 <label class="form-label">TITOLO:</label>
                 <input type="text"
                     class="form-control 
@@ -37,9 +37,40 @@
             </div>
 
 
+
+            {{-- price/night --------------------------------------------------------------- --}}
+            <div class="input-container pb-2 col-12 col-md-5">
+                <label for="daily_price" class="form-label">price/night:</label>
+                <input type="number"
+                    class="form-control 
+@error('daily_price') is-invalid @elseif(old('	daily_price')) is-valid @enderror"
+                    name="daily_price" value="{{ $errors->has('daily_price') ? '' : old('daily_price') }}">
+
+                @error('daily_price')
+                    <div class="invalid-feedback"> {{ $message }} </div>
+                @elseif(old(''))
+                    <div class="valid-feedback"> ok </div>
+                @enderror
+            </div>
+
+            {{-- MQ --------------------------------------------------------------- --}}
+            <div class="input-container pb-2 col-12 col-md-5">
+                <label for="mq" class="form-label">MQ:</label>
+                <input type="number"
+                    class="form-control 
+@error('mq') is-invalid @elseif(old('	mq')) is-valid @enderror"
+                    name="mq" value="{{ $errors->has('mq') ? '' : old('mq') }}">
+
+                @error('mq')
+                    <div class="invalid-feedback"> {{ $message }} </div>
+                @elseif(old(''))
+                    <div class="valid-feedback"> ok </div>
+                @enderror
+            </div>
+
             {{-- visible ------------------------------------------------------------ --}}
-            <div class="input-container pb-2 col-12  col-sm-4 col-md-2 ps-3">
-                <div class="form-check form-switch p-0">
+            <div class="input-container pb-2 col-12  col-sm-4 col-md-2 ps-3 d-flex align-items-center justify-content-center">
+                <div class="form-check form-switch p-0 ">
 
                     <label class="form-check-label" for="visible">visible</label>
 
@@ -90,7 +121,6 @@
                     <div class="valid-feedback">ok</div>
                 @enderror
             </div>
-
 
             {{-- ROOMS QTY ------------------------------------------------------------------ --}}
 
@@ -180,8 +210,8 @@
                                 name="services" {{--  {{ old('services', $service->id) ? 'checked' : '' }} --}}>
                             {{-- ICONE che si coloran con over --}}
 
-                            <label for="service_{{ $service->id }}"
-                              >{{ $service->name =='Aria Condizionata' ? 'Clima' : $service->name }}</label>
+                            <label
+                                for="service_{{ $service->id }}">{{ $service->name == 'Aria Condizionata' ? 'Clima' : $service->name }}</label>
 
                         </div>
                     @endforeach
@@ -276,8 +306,6 @@
             <div class="p-3">
                 <a href="http://localhost:5175/apartments" class="btn btn-primary">Annulla</a>
                 <button class="btn btn-secondary">crea progetto</button>
-
-
         </form>
     </div>
 

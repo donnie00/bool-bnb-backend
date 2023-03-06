@@ -20,8 +20,6 @@ class ApartmentController extends Controller
         $apartments = Apartment::where("user_id", $id)
             ->orderBy("created_at", "desc")
             ->get();
-
-
         return view("Admin.apartments.index", compact("apartments"));
     }
 
@@ -69,8 +67,9 @@ class ApartmentController extends Controller
      */
     public function edit(string $id)
     {
+        $services = Service::all();
         $apartment = Apartment::findOrFail($id);
-        return view("Admin.apartments.edit", compact("apartment"));
+        return view("Admin.apartments.edit", compact("apartment","services"));
     }
 
     /**
