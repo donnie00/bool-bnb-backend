@@ -22,7 +22,7 @@
 
         <form action="{{ route('Admin.apartments.update', $apartment->id) }}" method="POST" enctype="multipart/form-data"
             class="row">
-            @csrf()
+            @csrf
             @method('PUT')
 
             {{-- title --------------------------------------------------------------- --}}
