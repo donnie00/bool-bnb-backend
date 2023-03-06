@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/dashboard', function () {
@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 
 
@@ -39,8 +39,5 @@ Route::middleware('auth')
     ->prefix("Admin")
     ->name("Admin.")
     ->group(function () {
-  Route::resource("/apartments", ApartmentController::class);
-});
-
-
-
+        Route::resource("/apartments", ApartmentController::class);
+    });
