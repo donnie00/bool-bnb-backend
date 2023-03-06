@@ -9,7 +9,7 @@
         @if ($errors->any())
             <div class="alert alert-danger">
                 I dati inseriti non sono validi:
-
+                {{-- lista errori da fixare --}}
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -19,15 +19,15 @@
         @endif
 
         <form action="{{ route('Admin.apartments.store') }}" method="POST" enctype="multipart/form-data" class="row">
-            @csrf
+            @csrf()
 
             {{-- title --------------------------------------------------------------- --}}
-            <div class="input-container pb-2 col-12 col-md-5">
-                <label class="form-label">TITOLO:</label>
+            <div class="input-container pb-2 col-12 ">
+                <label class="form-label text-uppercase" for="title">TITOLO:</label>
                 <input type="text"
                     class="form-control 
                     @error('title') is-invalid @elseif(old('title')) is-valid @enderror"
-                    name="title" value="{{ $errors->has('title') ? '' : old('title') }}">
+                    name="title" id="title" value="{{ $errors->has('title') ? '' : old('title') }}">
 
                 @error('title')
                     <div class="invalid-feedback"> {{ $message }} </div>
@@ -37,25 +37,57 @@
             </div>
 
 
-            {{-- visible ------------------------------------------------------------ --}}
-            <div class="input-container pb-2 col-12  col-sm-4 col-md-2 ps-3">
-                <div class="form-check form-switch p-0">
 
+            {{-- price/night --------------------------------------------------------------- --}}
+            <div class="input-container pb-2 col-12 col-md-5">
+                <label for="daily_price" class="form-label text-uppercase">price/night:</label>
+                <input type="number"
+                    class="form-control 
+                    @error('daily_price') is-invalid @elseif(old('daily_price')) is-valid @enderror"
+                    name="daily_price" id="daily-price" value="{{ $errors->has('daily_price') ? '' : old('daily_price') }}">
+
+                @error('daily_price')
+                    <div class="invalid-feedback"> {{ $message }} </div>
+                @elseif(old('daily_price'))
+                    <div class="valid-feedback"> ok </div>
+                @enderror
+            </div>
+
+            {{-- MQ --------------------------------------------------------------- --}}
+            <div class="input-container pb-2 col-12 col-md-5">
+                <label for="mq" class="form-label text-uppercase">MQ:</label>
+                <input type="number"
+                    class="form-control 
+                    @error('mq') is-invalid @elseif(old('mq')) is-valid @enderror"
+                    name="mq" id="mq" value="{{ $errors->has('mq') ? '' : old('mq') }}">
+
+                @error('mq')
+                    <div class="invalid-feedback"> {{ $message }} </div>
+                @elseif(old('mq'))
+                    <div class="valid-feedback"> ok </div>
+                @enderror
+            </div>
+
+            {{-- visible ------------------------------------------------------------ --}}
+            <div
+                class="input-container pb-2 col-12  col-sm-4 col-md-2 ps-3 d-flex align-items-center justify-content-center">
+                <div class="form-check form-switch p-0 text-uppercase">
                     <label class="form-check-label" for="visible">visible</label>
 
                     <div class="form-check form-switch pt-2">
                         {{-- 2 imput per raccogliere true o false subito --}}
-                        <input type="hidden" name="visible" value="0">
+                        <input type="hidden" name="visible" id="visible" value="0">
 
                         <input
-                            class="form-check-input @error('visible') is-invalid @elseif(old('visible')) is-valid @enderror "
+                            class="form-check-input 
+                            @error('visible') is-invalid @elseif(old('visible')) is-valid @enderror "
                             value="1" type="checkbox" role="switch" id="visible" name="visible"
                             {{ old('visible', 1) ? 'checked' : '' }}>
                     </div>
                 </div>
                 @error('visible')
                     <div class="invalid-feedback"> {{ $message }} </div>
-                @elseif(old('type'))
+                @elseif(old('visible'))
                     <div class="valid-feedback"> ok </div>
                 @enderror
             </div>
@@ -63,10 +95,10 @@
 
             {{-- cover_img ----------------------------------------------------------- --}}
             <div class="input-container pb-2">
-                <label class="form-label">IMMAGINE</label>
+                <label class="form-label text-uppercase" for="cover_img">IMMAGINE</label>
                 <input type="file" class="form-control
                       @error('cover_img') is-invalid  @enderror"
-                    name="cover_img" value="{{ old('cover_img') }}">
+                    name="cover_img" id="cover_img" value="{{ old('cover_img') }}">
 
 
                 @error('cover_img')
@@ -78,8 +110,8 @@
 
             {{-- description -------------------------------------------------- --}}
             <div class="input-container pb-2">
-                <label class="form-label">Descrizione</label>
-                <textarea name="description" cols="30" rows="3"
+                <label class="form-label" for="description">Descrizione</label>
+                <textarea name="description" id="description" cols="30" rows="3"
                     class="form-control 
                       @error('description') is-invalid @elseif(old('description')) is-valid @enderror">
                       {{ old('description') }}</textarea>
@@ -90,7 +122,6 @@
                     <div class="valid-feedback">ok</div>
                 @enderror
             </div>
-
 
             {{-- ROOMS QTY ------------------------------------------------------------------ --}}
 
@@ -109,7 +140,7 @@
 
                     @error('rooms_qty')
                         <div class="invalid-feedback"> {{ $message }} </div>
-                    @elseif(old('type'))
+                    @elseif(old('rooms_qty'))
                         <div class="valid-feedback"> ok </div>
                     @enderror
                 </select>
@@ -132,7 +163,7 @@
 
                     @error('beds_qty')
                         <div class="invalid-feedback"> {{ $message }} </div>
-                    @elseif(old('type'))
+                    @elseif(old('beds_qty'))
                         <div class="valid-feedback"> ok </div>
                     @enderror
                 </select>
@@ -158,7 +189,7 @@
 
                     @error('bathrooms_qty')
                         <div class="invalid-feedback"> {{ $message }} </div>
-                    @elseif(old('type'))
+                    @elseif(old('bathrooms_qty'))
                         <div class="valid-feedback"> ok </div>
                     @enderror
                 </select>
@@ -169,22 +200,24 @@
 
             <div class="input-container pb-2">
                 <label class="form-label d-block">SERVICES:</label>
-                <input type="hidden" name="services" value="0">
-
                 <div class="row">
                     @foreach ($services as $service)
-                        <div class="col d-flex align-items-center">
-                            <input
-                                class="form-check @error('services') is-invalid @elseif(old('services')) is-valid @enderror "
-                                value="1" type="checkbox" role="switch" id="service_{{ $service->id }}"
-                                name="services" {{--  {{ old('services', $service->id) ? 'checked' : '' }} --}}>
-                            {{-- ICONE che si coloran con over --}}
-
-                            <label for="service_{{ $service->id }}"
-                              >{{ $service->name =='Aria Condizionata' ? 'Clima' : $service->name }}</label>
-
+                        <div class="col d-flex align-items-center @error('services') is-invalid @enderror ">
+                            <input class="form-check @error('services') is-invalid @enderror" type="checkbox"
+                                value="{{ $service->id }}" id="service_{{ $loop->index }}" name="services[]"
+                                {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}>
+                            {{-- ICONE che si coloran con over --++++++++++++++++++++++++++++++++++++++++++++++++++++ ++ + + --}}
+                            <label
+                                for="service_{{ $loop->index }}">{{ $service->name == 'Aria Condizionata' ? 'Clima' : $service->name }}</label>
                         </div>
                     @endforeach
+
+                    @error('services')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
                 </div>
             </div>
 
@@ -193,15 +226,16 @@
 
                 {{-- street name --------------------------------------------------------------- --}}
                 <div class="input-container pb-2 col-12 col-md-5">
-                    <label for="streetName" class="form-label">Street Name:</label>
-                    <input type="text"
-                        class="form-control 
+                    <label  class="form-label"
+                    for="streetName">Street Name:</label>
+                    <input type="text" class="form-control 
                   @error('streetName') is-invalid @elseif(old('	streetName')) is-valid @enderror"
-                        name="streetName" value="{{ $errors->has('streetName') ? '' : old('streetName') }}">
+                        name="streetName" id="streetName"
+                        value="{{ $errors->has('streetName') ? '' : old('streetName') }}">
 
-                    @error('streetName')
+                        @error('streetName')
                         <div class="invalid-feedback"> {{ $message }} </div>
-                    @elseif(old(''))
+                    @elseif(old('streetName'))
                         <div class="valid-feedback"> ok </div>
                     @enderror
                 </div>
@@ -212,11 +246,12 @@
                     <input type="text"
                         class="form-control 
                   @error('streetNumber') is-invalid @elseif(old('	streetNumber')) is-valid @enderror"
-                        name="streetNumber" value="{{ $errors->has('streetNumber') ? '' : old('streetNumber') }}">
+                        name="streetNumber" id="streetNumber"
+                        value="{{ $errors->has('streetNumber') ? '' : old('streetNumber') }}">
 
                     @error('streetNumber')
                         <div class="invalid-feedback"> {{ $message }} </div>
-                    @elseif(old(''))
+                    @elseif(old('streetNumber'))
                         <div class="valid-feedback"> ok </div>
                     @enderror
                 </div>
@@ -227,11 +262,12 @@
                     <input type="number"
                         class="form-control 
                   @error('postalCode') is-invalid @elseif(old('	postalCode')) is-valid @enderror"
-                        name="postalCode" value="{{ $errors->has('postalCode') ? '' : old('postalCode') }}">
+                        name="postalCode" id="postalCode"
+                        value="{{ $errors->has('postalCode') ? '' : old('postalCode') }}">
 
                     @error('postalCode')
                         <div class="invalid-feedback"> {{ $message }} </div>
-                    @elseif(old(''))
+                    @elseif(old('postalCode'))
                         <div class="valid-feedback"> ok </div>
                     @enderror
                 </div>
@@ -242,33 +278,32 @@
                     <input type="text"
                         class="form-control 
                   @error('municipality') is-invalid @elseif(old('	municipality')) is-valid @enderror"
-                        name="municipality" value="{{ $errors->has('municipality') ? '' : old('municipality') }}">
+                        name="municipality" id="municipality"
+                        value="{{ $errors->has('municipality') ? '' : old('municipality') }}">
 
                     @error('municipality')
                         <div class="invalid-feedback"> {{ $message }} </div>
-                    @elseif(old(''))
+                    @elseif(old('municipality'))
                         <div class="valid-feedback"> ok </div>
                     @enderror
                 </div>
 
-                {{-- country_code --}}
+                {{-- countryCode --}}
                 <div class="input-container pb-2 col-12 col-md-2">
-                    <label class="form-label" for="country_code">COUNTRY CODE:</label>
-                    <select
-                        class="form-control
-        @error('country_code') is-invalid @elseif(old('country_code')) is-valid @enderror"
-                        id="country_code" name="country_code">
+                    <label class="form-label" for="countryCode">COUNTRY CODE:</label>
+                    <select  class="form-control 
+        @error('countryCode') is-invalid @elseif(old('countryCode')) is-valid @enderror"
+                        id="countryCode" name="countryCode">
 
-                        <option value="IT" selected {{ old('country_code') ? 'selected' : '' }} --}}>IT </option>
+                        <option value="IT" selected {{ old('countryCode') ? 'selected' : '' }} --}}>IT </option>
 
                     </select>
-                    @error('country_code')
+                    @error('countryCode')
                         <div class="invalid-feedback">{{ $message }}</div>
-                    @elseif(old('country_code'))
+                    @elseif(old('countryCode'))
                         <div class="valid-feedback">ok </div>
                     @enderror
                 </div>
-
             </fieldset>
 
 
@@ -276,8 +311,6 @@
             <div class="p-3">
                 <a href="http://localhost:5175/apartments" class="btn btn-primary">Annulla</a>
                 <button class="btn btn-secondary">crea progetto</button>
-
-
         </form>
     </div>
 
