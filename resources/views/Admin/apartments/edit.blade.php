@@ -4,7 +4,8 @@
     <div class="container my-3">
 
 
-    <form action="{{route("apartment.update", $apartment->id)}}" method="POST">
+    <form action="{{route("Admin.apartments.update", $apartment->id)}}" method="POST">
+        @method("PUT")
         @csrf
         <div class="form-group mt-3">
           <label for="exampleInputEmail1">Title</label>
