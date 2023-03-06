@@ -30,6 +30,7 @@ class ApartmentController extends Controller
     public function show(string $id)
     {
         $apartment = Apartment::findOrFail($id);
+        $apartment->load('services','images');
 
         return response()->json($apartment);
     }
