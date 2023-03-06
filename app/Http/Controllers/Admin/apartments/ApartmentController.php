@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Apartment;
+use App\Models\Service;
+
 class ApartmentController extends Controller
 {
     /**
@@ -17,10 +19,10 @@ class ApartmentController extends Controller
 
         $apartments = Apartment::where("user_id", $id)
             ->orderBy("created_at", "desc")
-            ->get(); 
-            
-            
-            return view("Admin.apartments.index", compact("apartments"));
+            ->get();
+
+
+        return view("Admin.apartments.index", compact("apartments"));
     }
 
     /**
@@ -28,7 +30,8 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view("Admin.apartments.create");
+        $services = Service::all();
+        return view("Admin.apartments.create", compact("services"));
     }
 
     /**
@@ -74,12 +77,12 @@ class ApartmentController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {   
+    {
         $data = $request->all();
         $apartment = Apartment::findOrFail($id);
 
         $apartment->update($data);
-        
+
 
         return redirect()->route("Admin.apartments.show", $id);
     }
