@@ -6,7 +6,7 @@
 
 <div class="container">
 
-    <form action="{{route("apartment.test.store")}}" method="POST">
+    <form action="{{Route("Admin.apartments.store")}}" method="POST">
         @csrf
         <div class="form-group mt-3">
           <label for="exampleInputEmail1">Title</label>
