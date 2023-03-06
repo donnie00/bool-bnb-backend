@@ -1,1 +1,104 @@
-@import '~bootstrap/scss/bootstrap'
+/*****  BOOTSTRAP  *****************************************/
+
+/* @use "@fortawesome/fontawesome-free/css/all.min.css"; */
+
+//VARIABLES (bootstrap)
+$primary_color: #007bff;
+$secondary_color: #6c757d;
+
+$success_color: #28a745;
+$info_color: #17a2b8;
+$warning_color: #ffc107;
+$danger_color: #dc3545;
+$light_color: #f8f9fa;
+$dark_color: #343a40;
+
+@use "bootstrap/scss/bootstrap" with ($primary: $primary_color,
+  $secondary: $secondary_color,
+  $success: $success_color,
+  $info: $info_color,
+  $warning: $warning_color,
+  $danger: $danger_color,
+  $light: $light_color,
+  $dark: $dark_color,
+);
+
+/*****  FONTS  *****************************************/
+
+//font-family: 'Raleway', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+//font-family: 'Cinzel', serif;
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap');
+
+
+/*******  MIXIN ********************************************/
+
+/***** MEDIA  QUERIES *****************************************/
+@import 'bootstrap/scss/_functions';
+@import 'bootstrap/scss/_variables';
+@import 'bootstrap/scss/mixins/_breakpoints';
+
+/* visualizzare */
+q {
+  border: 1px solid rgb(216, 127, 228);
+
+  @include media-breakpoint-up(xs) {
+    border: 1px solid rgb(9, 0, 128);
+  }
+
+  @include media-breakpoint-up(sm) {
+    border: 1px solid rgb(0, 128, 128);
+  }
+
+  @include media-breakpoint-up(lg) {
+    border: 1px solid rgb(125, 236, 91);
+  }
+
+  @include media-breakpoint-up(xl) {
+    border: 1px solid rgb(255, 174, 0);
+  }
+
+  @include media-breakpoint-up(xxl) {
+    border: 1px solid rgb(255, 0, 119);
+  }
+}
+
+/**********************************************/
+
+body {
+  /*    font-family: 'Raleway', sans-serif;
+   color: $light_color; */
+
+}
+
+/***** NAVBAR ******/
+nav {
+  .nav-item {
+  
+    a {
+      text-decoration: none;
+      color: $secondary_color;
+
+      &+.link-underline {
+        background-color: $primary_color;
+        height: 0px;
+        width: 0px;
+        transition: all .3s;
+      }
+
+      &:hover,
+      &:active,
+      &.active {
+        color: saturate($primary_color, 30%);
+
+        &+.link-underline {
+          background-color: saturate($primary_color, 30%);
+          height: 1px;
+          width: calc(100% - 1rem);
+        }
+      }
+    }
+  }
+
+}
