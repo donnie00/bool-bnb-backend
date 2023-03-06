@@ -29,41 +29,41 @@ Route::middleware('auth:sanctum')
     );
 
 
-//Da gestire l'autenticazione
-Route::prefix('admin')
-    ->name('admin.')
-    ->group(function () {
-        Route::resource('/apartments', AdminApartmentController::class)->except(
-            'index',
-            'show'
-        );
-    });
+// //Da gestire l'autenticazione
+// Route::prefix('admin')
+//     ->name('admin.')
+//     ->group(function () {
+//         Route::resource('/apartments', AdminApartmentController::class)->except(
+//             'index',
+//             'show'
+//         );
+//     });
 
-Route::resource('/apartments', ApartmentController::class)->only(
-    'index',
-    'show'
-);
+// Route::resource('/apartments', ApartmentController::class)->only(
+//     'index',
+//     'show'
+// );
 
 
-Route::prefix('admin')
-    ->name('admin.')
-    ->group(function () {
-        Route::resource('/messages', AdminMessageController::class)->only(
-            'index',
-            'show',
-            'destroy'
-        );
-        Route::get('/apartments/{id}/subscriptions', [AdminApartmentController::class, "add_subscription"])->name("apartments.add_subscription");
-    });
+// Route::prefix('admin')
+//     ->name('admin.')
+//     ->group(function () {
+//         Route::resource('/messages', AdminMessageController::class)->only(
+//             'index',
+//             'show',
+//             'destroy'
+//         );
+//         Route::get('/apartments/{id}/subscriptions', [AdminApartmentController::class, "add_subscription"])->name("apartments.add_subscription");
+//     });
 
-Route::resource('/messages', MessageController::class)->only(
-    'store'
-);
+// Route::resource('/messages', MessageController::class)->only(
+//     'store'
+// );
 
-Route::resource('/services', ServiceController::class)->only(
-    'index'
-);
+// Route::resource('/services', ServiceController::class)->only(
+//     'index'
+// );
+// Route::resource('/subscriptons', SubscriptionController::class)->only(
+//     'index'
+//);
 
-Route::resource('/subscriptions', SubscriptionController::class)->only(
-    'index'
-);
