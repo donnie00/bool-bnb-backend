@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin\apartments;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreApartmentRequest;
+use App\Http\Requests\Admin\UpdateApartmentRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Apartment;
 use App\Models\Service;
 
 use Illuminate\Support\Facades\Storage;
+
 class ApartmentController extends Controller
 {
     /**
@@ -38,9 +41,9 @@ class ApartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreApartmentRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $id = Auth::id();
 
         $newApartment = [
@@ -58,29 +61,25 @@ class ApartmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Apartment $apartment)
     {
-        $apartment = Apartment::findOrFail($id);
-
         return view("Admin.apartments.show", compact("apartment"));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Apartment $apartment)
     {
-        $apartment = Apartment::findOrFail($id);
         return view("Admin.apartments.edit", compact("apartment"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
-        $data = $request->all();
-        $apartment = Apartment::findOrFail($id);
+        $data = $request->validated();
 
         if (key_exists("cover_img", $data)) {
             $path = Storage::put("apartments_images", $data["cover_img"]);
@@ -92,18 +91,17 @@ class ApartmentController extends Controller
             ...$data,
             "cover_img" => $path ?? $apartment->cover_img
         ]);
-        
+
         $apartment->services()->sync($data["services"]);
 
-        return redirect()->route("Admin.apartments.show", $id);
+        return redirect()->route("Admin.apartments.show", $apartment->id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Apartment $apartment)
     {
-        $apartment = Apartment::findOrFail($id);
         $apartment->delete();
 
         return redirect()->route("Admin.apartments.index");
