@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Apartment;
+use Illuminate\Support\Facades\Storage;
 class ApartmentController extends Controller
 {
     /**
@@ -78,8 +79,18 @@ class ApartmentController extends Controller
         $data = $request->all();
         $apartment = Apartment::findOrFail($id);
 
-        $apartment->update($data);
+        if (key_exists("cover_img", $data)) {
+            $path = Storage::put("apartments_images", $data["cover_img"]);
+            Storage::delete($apartment->cover_img);
+        }
+
+
+        $apartment->update([
+            ...$data,
+            "cover_img" => $path ?? $apartment->cover_img
+        ]);
         
+        $apartment->services()->sync($data["services"]);
 
         return redirect()->route("Admin.apartments.show", $id);
     }
