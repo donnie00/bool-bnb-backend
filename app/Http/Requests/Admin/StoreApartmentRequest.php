@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreApartmentRequest extends FormRequest
 {
@@ -11,6 +12,11 @@ class StoreApartmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
+
+        if (!Auth::id()) {
+            return false;
+        }
+
         return true;
     }
 
