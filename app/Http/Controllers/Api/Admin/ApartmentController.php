@@ -103,6 +103,8 @@ class ApartmentController extends Controller
             "cover_img" => $path ?? $apartment->cover_img,
         ]);
 
+        $apartment->save();
+        
         if ($request->has('services')) {
             $apartment->services()->sync($data["services"]);
         }
