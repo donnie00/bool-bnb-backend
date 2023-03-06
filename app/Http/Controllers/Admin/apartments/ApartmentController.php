@@ -112,7 +112,6 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        $apartment = Apartment::findOrFail($id);
 
         if ($apartment->cover_img) {
             Storage::delete($apartment->cover_img);
@@ -125,7 +124,7 @@ class ApartmentController extends Controller
         return redirect()->route("Admin.apartments.index");
     }
 
-    public function add_subscription(Request $request, string $id)
+    public function add_subscription(Request $request, Apartment $apartment)
     {
 
         $data = $request->validate([
@@ -143,12 +142,11 @@ class ApartmentController extends Controller
 
         $exp_date = date("Y-m-d: H:i:s", strtotime("+{$duration[0]->duration} hours"));
 
-        $apartment = Apartment::findOrFail($id);
         $apartment->subscriptions()->attach($data["subscription_id"]);
 
         DB::table("apartment_subscription")
             ->where("subscription_id", $data["subscription_id"])
-            ->where("apartment_id", $id)
+            ->where("apartment_id", $apartment->id)
             ->update(["expiration_date" => $exp_date]);
     }
 }
