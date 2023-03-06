@@ -74,10 +74,10 @@ class ApartmentController extends Controller
         $data = $request->validate(
             [
                 'user_id' => 'exists:users,id',
-                'title' => 'required|string',
-                'address' => 'required|string',
-                'latitude' => 'required',
-                'longitude' => 'required',
+                'title' => 'string',
+                'address' => 'string',
+                'latitude' => '',
+                'longitude' => '',
                 'cover_img' => 'file|image',
                 'description' => 'string|max:1000',
                 'rooms_qty' => 'integer',
@@ -103,7 +103,7 @@ class ApartmentController extends Controller
             "cover_img" => $path ?? $apartment->cover_img,
         ]);
 
-        if ($data["services"]) {
+        if ($request->has('services')) {
             $apartment->services()->sync($data["services"]);
         }
 
