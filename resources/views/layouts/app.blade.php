@@ -21,6 +21,7 @@
 
 <body>
     <div id="app">
+        @include('structure.headerNav')
 
 
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
