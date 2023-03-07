@@ -59,7 +59,6 @@ class ApartmentController extends Controller
         
         // Composizione stringa indirizzo da inserire a DB
         $complete_address = $data["streetName"] ." ". $data["streetNumber"] ." ". $data["municipality"] ." ". $data["postalCode"] ." ". $data["countryCode"];
-        dd($complete_address);
 
 
 
