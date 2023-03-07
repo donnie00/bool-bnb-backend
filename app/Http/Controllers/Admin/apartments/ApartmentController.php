@@ -11,6 +11,7 @@ use App\Models\Apartment;
 use App\Models\Service;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
 {
@@ -39,27 +40,50 @@ class ApartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreApartmentRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->validated();
+        $data = $request->all();
         $id = Auth::id();
 
+        
+        // reupero coordinate da campi create con TomTom API
+        $fetch_coordinates = Http::get("https://api.tomtom.com/search/2/structuredGeocode.json?",[
+            "key" => "OwsqVQlIWGAZAkomcYI0rDYG2tDpmRPE",
+            "countryCode" => $data["countryCode"],
+            "limit" => 1,
+            "streetName" => $data["streetName"],
+            "streetNumber" => $data["streetNumber"],
+            "municipality" => $data["municipality"],
+
+        ])->json()["results"][0]["position"];
+        
+        // Composizione stringa indirizzo da inserire a DB
+        $complete_address = $data["streetName"] ." ". $data["streetNumber"] ." ". $data["municipality"] ." ". $data["postalCode"] ." ". $data["countryCode"];
+        dd($complete_address);
+
+
+
+        
+        // dati del nuovo appartamento
         $newApartment = [
             ...$data,
+            "address" => $complete_address,
             "user_id" => $id,
-            "latitude" => 98.57485,
-            "longitude" => 98.57485,
+            "latitude" => $fetch_coordinates["lat"],
+            "longitude" => $fetch_coordinates["lon"],
         ];
 
         if (key_exists("cover_img", $data)) {
             $path = Storage::put("apartments_images", $data["cover_img"]);
         }
 
+        // inserimento nuovo appartamento a DB
         $apartment = Apartment::create([
             ...$newApartment,
             'cover_img' => $path ?? null
         ]);
 
+        //aggiornamento relazione MOLTIaMOLTI services
         if ($request->has('services')) {
             $apartment->services()->attach($data["services"]);
         }
@@ -132,10 +156,6 @@ class ApartmentController extends Controller
             "subscription_id" => "exists:subscriptions,id"
         ]);
 
-        // Per provare senza dati passati dal front-end
-        // $id = 1;
-        // $data = [];
-        // $data["subscription_id"] = 6;
 
         $duration = DB::table("subscriptions")->select("duration")
             ->where("id", $data["subscription_id"])
