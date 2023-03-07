@@ -1,7 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
+
     <div class="container">
+        <h1>INDEX APARTMENSTS</h1>
         <div class="row">
             @foreach ( $apartments as $apartment )
                 

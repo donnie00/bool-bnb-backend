@@ -20,7 +20,7 @@ class ApartmentController extends Controller
         
         $apartments = Apartment::with('images' ,'services')
             ->orderBy('created_at', 'desc')
-            ->paginate(20);
+            ->paginate(15);
 
             
 
