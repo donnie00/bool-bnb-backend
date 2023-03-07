@@ -1,8 +1,5 @@
-@extends('layouts.app')
-
+@extends('layouts.form')
 @section('content')
-
-
     <div class="container">
         <h1 class="text-uppercase">EDIT APARTMENT: # {{ $apartment->id }}</h1>
 
@@ -227,7 +224,7 @@
                 </div>
             </div>
 
-            <h6 class="">address saved: {{$apartment->address}}</h6>
+            <h6 class="">address saved: {{ $apartment->address }}</h6>
             <legend>MODIFY ADDRESS: </legend>
             <fieldset class="border rounded-3 p-3 row">
 
