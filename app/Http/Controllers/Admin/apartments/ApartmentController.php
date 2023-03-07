@@ -118,6 +118,7 @@ class ApartmentController extends Controller
         }
 
         $apartment->services()->detach();
+        $apartment->subscriptions()->detach();
 
         $apartment->delete();
 

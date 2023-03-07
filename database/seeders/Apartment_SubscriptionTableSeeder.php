@@ -10,7 +10,7 @@ use App\Models\ApartmentSubscription;
 use DateTime;
 use Illuminate\Support\Facades\DB;
 
-class Apartament_SubscriptionTableSeeder extends Seeder
+class Apartment_SubscriptionTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
