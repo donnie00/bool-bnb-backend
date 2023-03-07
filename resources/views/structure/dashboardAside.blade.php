@@ -5,7 +5,7 @@
 
             {{-- HOME NO --}}
 
-                 <li id="home " class="list w-100 ">
+            <li id="home " class="list w-100 ">
                 <b></b>
                 <b></b>
                 <a class="p-relative w-100 text-decoration-none " href="#">
@@ -14,43 +14,41 @@
                     </span>
                     <span class="title d-block p-relative ps-3">Home</span>
                 </a>
-            </li> 
+            </li>
             <li id="profile" class="  list w-100  d-block">
                 <b></b>
                 <b></b>
                 <a class="p-relative w-100 text-decoration-none " href="#">
-                    <span  class="icon text-cemter pt-2 d-block ">
+                    <span class="icon text-cemter pt-2 d-block ">
                         <ion-icon class="fs-3" name="person-outline"></ion-icon>
                     </span>
                     <span class="title d-block p-relative ps-3">Profile</span>
                 </a>
             </li>
 
-  {{--           @if ($user->apartments) --}}
-                <li id="admin-dashboard"  class="list active w-100 d-block">
-                    <b></b>
-                    <b></b>
-                    <a class="p-relative w-100 text-decoration-none " href="#">
-                        <span class="icon text-cemter pt-2 d-block">
-                            <ion-icon class="fs-3" name="stats-chart-outline"></ion-icon>
-                        </span>
-                        <span class="title d-block p-relative ps-3">Stat</span>
-                    </a>
-                </li>
+            <li id="apartments" class="list w-100 ">
+                <b></b>
+                <b></b>
+                <a class="p-relative w-100 text-decoration-none " href="#">
+                    <span class="icon text-cemter pt-2 d-block">
+                        <ion-icon class="fs-3" name="images-outline"></ion-icon>
+                    </span>
+                    <span class="title d-block p-relative ps-3">apartments</span>
+                </a>
+            </li>
+          
+            <li id="admin-dashboard" class="list active w-100 d-block">
+                <b></b>
+                <b></b>
+                <a class="p-relative w-100 text-decoration-none " href="#">
+                    <span class="icon text-cemter pt-2 d-block">
+                        <ion-icon class="fs-3" name="stats-chart-outline"></ion-icon>
+                    </span>
+                    <span class="title d-block p-relative ps-3">Stat</span>
+                </a>
+            </li>
 
-                <li id="portfolio" class="list w-100 ">
-                    <b></b>
-                    <b></b>
-                    <a  class="p-relative w-100 text-decoration-none " href="#">
-                        <span class="icon text-cemter pt-2 d-block">
-                            <ion-icon class="fs-3" name="images-outline"></ion-icon>
-                        </span>
-                        <span class="title d-block p-relative ps-3">Portfolio</span>
-                    </a>
-                </li>
-{{--             @endif --}}
-
-            <li id="messages"  class="list w-100 ">
+            <li id="messages" class="list w-100 ">
                 <b></b>
                 <b></b>
                 <a class="p-relative w-100 text-decoration-none " href="#">
@@ -64,7 +62,7 @@
             <li id="setting" class="list w-100  ">
                 <b></b>
                 <b></b>
-                <a  class="p-relative w-100 text-decoration-none " href="#">
+                <a class="p-relative w-100 text-decoration-none " href="#">
                     <span class="icon text-cemter pt-2 d-block">
                         <ion-icon class="fs-3" name="settings-outline"></ion-icon>
                     </span>
