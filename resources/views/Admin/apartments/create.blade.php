@@ -1,8 +1,8 @@
-@extends('layouts.app')
-@section('content')
+@extends('layouts.form')
 
+@section('content')
    <div class="container">
-      <h1 class="text-uppercase">create</h1>
+      <h1 class="text-uppercase">create New Apartment:</h1>
 
 
       {{-- rintraccia qualsiasi errore --}}
@@ -305,9 +305,9 @@
          </fieldset>
 
          {{-- opzioni --}}
-         <div class="p-3">
-            <a href="http://localhost:5175/apartments" class="btn btn-primary">Annulla</a>
-            <button class="btn btn-secondary">Aggiungi appartamento</button>
+         <div class="p-3 text-end">
+            <a href="http://localhost:5175/apartments" class="btn btn-info text-light">Annulla</a>
+            <button class="btn btn-primary text-light">Aggiungi appartamento</button>
       </form>
    </div>
 

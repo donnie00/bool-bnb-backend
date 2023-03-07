@@ -3,8 +3,13 @@
 /* @use "@fortawesome/fontawesome-free/css/all.min.css"; */
 
 //VARIABLES (bootstrap)
-$primary_color: #007bff;
-$secondary_color: #6c757d;
+$primary_color: #f7645f;
+$primary_color_light: lighten(saturate($primary_color, 20%), 10%);
+$primary_color_dark: darken($primary_color, 15%);
+
+$secondary_color: #ffffff;
+$secondary_color_light: lighten(saturate($secondary_color, 30%), 10%);
+$secondary_color_dark: darken($secondary_color, 15%);
 
 $success_color: #28a745;
 $info_color: #17a2b8;
@@ -75,7 +80,7 @@ body {
 /***** NAVBAR ******/
 nav {
   .nav-item {
-  
+
     a {
       text-decoration: none;
       color: $secondary_color;
@@ -100,5 +105,208 @@ nav {
       }
     }
   }
+}
 
+/* DASHBOARD */
+.dashboard-container {
+  height: 100vh;
+  width: 100vw;
+
+  background: linear-gradient(180deg, $secondary_color, desaturate($secondary_color_light, 15%), saturate(white, 10%));
+
+
+  /* MAIN ***********************/
+  main.dashboard {
+    margin-left: 90px;
+    width: 100%;
+    background: $secondary_color;
+
+
+    .portfolio {
+      .container * {
+        border: 1px solid red;
+
+        .card {
+          aspect-ratio: 16/9;
+          position: relative;
+
+          &.projects {
+            background: linear-gradient(270deg, $primary_color, desaturate($primary_color_light, 15%), lighten(saturate($primary_color_light, 5%), 10%));
+            color: $light_color;
+          }
+
+          span.count {
+            font-size: 3.5rem;
+          }
+
+          .card-icon {
+            position: absolute;
+            font-size: 7rem;
+            opacity: .8;
+            top: 0;
+            right: 0;
+            --ionicon-stroke-width: 5px;
+
+          }
+        }
+      }
+    }
+  }
+
+  /* ASIDE ^^^^^^^^^^^^^^^^^^^^^*/
+  aside.navigation {
+
+    * {
+      padding: 5px;
+    }
+
+    padding: 2px;
+    position: fixed;
+    width: 70px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-sizing: initial;
+    border-left: 5px solid $primary_color;
+    border-right: 10px solid $secondary_color_light;
+    background: $primary_color;
+    transition: 0.5s;
+    overflow-x: hidden;
+
+    .nav-title {
+      color: white;
+      display: none;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    &.active {
+      width: 200px;
+    }
+
+    ul {
+      position: absolute;
+      padding-top: 75px;
+
+      li {
+        position: relative;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+
+        a {
+          display: block;
+          display: flex;
+          color: $secondary_color_light;
+
+          .icon {
+            position: relative;
+            min-width: 60px;
+            height: 60px;
+            line-height: 70px;
+          }
+
+          .title {
+            height: 60px;
+            line-height: 60px;
+            white-space: normal;
+
+          }
+        }
+
+        &.active {
+          background: $secondary_color_light;
+          font-weight: bold;
+
+          a {
+            color: $primary_color;
+
+          }
+
+          b:nth-child(1),
+          b:nth-child(2) {
+            display: block;
+          }
+        }
+
+
+        b {
+          &:nth-child(1) {
+            position: absolute;
+            top: -20px;
+            height: 20px;
+            width: 100%;
+            background: $secondary_color_light;
+            display: none;
+
+            &::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              border-bottom-right-radius: 20px;
+              background: $primary_color;
+            }
+          }
+
+          &:nth-child(2) {
+            position: absolute;
+            bottom: -20px;
+            height: 20px;
+            width: 100%;
+            background: $secondary_color_light;
+            display: none;
+
+            &::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              border-top-right-radius: 20px;
+              background: $primary_color;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    float: left;
+
+    ion-icon {
+      position: absolute;
+      color: white;
+      font-size: 34px;
+      display: none;
+
+      &.open {
+        display: block;
+      }
+
+      &.close {
+        display: none;
+      }
+    }
+
+    &.active {
+      left: 270px;
+
+      ion-icon {
+        &.close {
+          display: block;
+        }
+
+        &.open {
+          display: none;
+        }
+      }
+    }
+  }
 }
