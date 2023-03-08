@@ -20,13 +20,13 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $id = Auth::id();
+        $user = Auth::user();
 
-        $apartments = Apartment::where("user_id", $id)
+        $apartments = Apartment::where("user_id", $user->id)
             ->orderBy("created_at", "desc")
             ->get();
 
-        return view("Admin.apartments.index", compact("apartments"));
+        return view("Admin.apartments.index", compact("apartments", 'user'));
     }
 
     /**
@@ -46,9 +46,9 @@ class ApartmentController extends Controller
         $data = $request->all();
         $id = Auth::id();
 
-        
+
         // reupero coordinate da campi create con TomTom API
-        $fetch_coordinates = Http::get("https://api.tomtom.com/search/2/structuredGeocode.json?",[
+        $fetch_coordinates = Http::get("https://api.tomtom.com/search/2/structuredGeocode.json?", [
             "key" => "OwsqVQlIWGAZAkomcYI0rDYG2tDpmRPE",
             "countryCode" => $data["countryCode"],
             "limit" => 1,
@@ -57,13 +57,13 @@ class ApartmentController extends Controller
             "municipality" => $data["municipality"],
 
         ])->json()["results"][0]["position"];
-        
+
         // Composizione stringa indirizzo da inserire a DB
-        $complete_address = $data["streetName"] ." ". $data["streetNumber"] ." ". $data["municipality"] ." ". $data["postalCode"] ." ". $data["countryCode"];
+        $complete_address = $data["streetName"] . " " . $data["streetNumber"] . " " . $data["municipality"] . " " . $data["postalCode"] . " " . $data["countryCode"];
 
 
 
-        
+
         // dati del nuovo appartamento
         $newApartment = [
             ...$data,
