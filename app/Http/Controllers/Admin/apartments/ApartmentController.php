@@ -21,12 +21,13 @@ class ApartmentController extends Controller
     public function index()
     {
         $id = Auth::id();
+        $user = Auth::user();
 
         $apartments = Apartment::where("user_id", $id)
             ->orderBy("created_at", "desc")
             ->get();
 
-        return view("Admin.apartments.index", compact("apartments"));
+        return view("Admin.apartments.index", compact("apartments" , "user"));
     }
 
     /**

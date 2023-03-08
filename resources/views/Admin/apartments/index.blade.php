@@ -1,6 +1,4 @@
-@extends('layouts.dashboard')
-
-@section('content')
+@include('structure.dashboardAside')
 
 <div class="container">
   <h1 class="my-3">Index</h1>
@@ -49,4 +47,4 @@
 
 
 </div>
-@endsection
+
