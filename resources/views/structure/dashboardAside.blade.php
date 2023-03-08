@@ -1,7 +1,7 @@
     <aside class="navigation top-0 bottom-0 start-0">
         {{--    @dump($backendURL) 
            @dump($frontendURL)  --}}
-           @dump( Route::currentRouteName()) 
+        @dump(Route::currentRouteName())
         <ul class=" top-0 start-0 w-100 ps-1 d-flex flex-column">
             {{--        <p class="nav-title fs-3">MENU</p> --}}
 
@@ -16,12 +16,13 @@
                     <span class="title d-block p-relative ps-3">Home</span>
                 </a>
             </li>
-            <li id="profile" class="  list w-100  d-block   {{ Route::currentRouteName() === "dashboard" ? 'active' : '' }} ">
+            <li id="profile"
+                class="  list w-100  d-block   {{ Route::currentRouteName() === 'dashboard' ? 'active' : '' }} ">
                 <b></b>
                 <b></b>
                 <a class="p-relative w-100 text-decoration-none" href="{{ $backendURL }}/dashboard">
-                  
-                    
+
+
                     <span class="icon text-cemter pt-2 d-block ">
                         <ion-icon class="fs-3" name="person-outline"></ion-icon>
                     </span>
@@ -29,7 +30,8 @@
                 </a>
             </li>
 
-            <li id="apartments" class="list w-100  {{ Route::currentRouteName() === "Admin.apartments.index" ? 'active' : '' }} ">
+            <li id="apartments"
+                class="list w-100  {{ Route::currentRouteName() === 'Admin.apartments.index' ? 'active' : '' }} ">
                 <b></b>
                 <b></b>
                 <a class="p-relative w-100 text-decoration-none " href="#">
@@ -40,7 +42,8 @@
                 </a>
             </li>
 
-            <li id="messages" class="list w-100 {{ Route::currentRouteName() === "Admin.dashboard.messages" ? 'active' : '' }} ">
+            <li id="messages"
+                class="list w-100 {{ Route::currentRouteName() === 'Admin.dashboard.messages' ? 'active' : '' }} ">
                 <b></b>
                 <b></b>
                 <a class="p-relative w-100 text-decoration-none " href="{{ $backendURL }}/Admin/dashboard/messages">
