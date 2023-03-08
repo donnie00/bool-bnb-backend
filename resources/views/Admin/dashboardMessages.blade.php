@@ -25,21 +25,8 @@
          @include('structure.dashboardAside')
 
          <main class="dashboard w-100 ps-5 p-4 overflow-x-hidden">
-            <h1>DASHBOARD</h1>
-            <h2>Ciao {{ $user->name }}</h2>
-            <h3>Hai {{ count($userApartments) }} appartamenti in totale</h3>
-            <h3>Ultimi aggiunti: </h3>
-            <ul>
-               @for ($i = 0; $i < 3; $i++)
-                  <li>{{ $userApartments[$i]['title'] }}</li>
-               @endfor
-               {{-- @foreach ($lastApartments as $apartment)
-               @endforeach --}}
-            </ul>
+            <h1>Messages</h1>
 
-            <h3>Hai {{ $totalMessages }} messaggi in totale</h3>
-
-            <h3 class="my-3">Ultimi ricevuti: </h3>
             @foreach ($messages as $apartment => $message)
                <h5>Annuncio: {{ $apartment }}</h5>
 

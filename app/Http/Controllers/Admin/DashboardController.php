@@ -45,8 +45,44 @@ class DashboardController extends Controller
         //Recupera tutti gli appartamenti di quell'utente e lo converte in array
         $userApartments = Apartment::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get()->toArray();
 
-        $messages = [];
+        $userApartmentsCount = count($userApartments);
+
+        $lastApartments = [];
         $totalMessages = 0;
+
+        foreach ($userApartments as $apartment) {
+
+            if (count($lastApartments) < 3) {
+
+                array_push($lastApartments, $apartment);
+
+                $apartmentId = $apartment['id'];
+                $apartmentTitle = $apartment['title'];
+
+                $message = Message::where('apartment_id', $apartmentId)->get()->toArray();
+
+                if (count($message)) {
+                    $messages[$apartmentTitle] = $message;
+                    $totalMessages += count($message);
+                }
+            }
+        }
+
+        // dd($lastApartments);
+
+
+        return view('Admin.dashboard', compact('user', 'userApartmentsCount', 'lastApartments', 'messages', 'totalMessages'));
+    }
+
+    public function userMessages()
+    {
+        //Recupera l'utente dall'Auth
+        $user = Auth::user();
+
+        //Recupera tutti gli appartamenti di quell'utente e lo converte in array
+        $userApartments = Apartment::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get()->toArray();
+
+        $messages = [];
 
         foreach ($userApartments as $apartment) {
 
@@ -57,14 +93,11 @@ class DashboardController extends Controller
 
             if (count($message)) {
                 $messages[$apartmentTitle] = $message;
-                $totalMessages += count($message);
             }
         }
 
-        return view('Admin.dashboard', compact('user', 'userApartments', 'messages', 'totalMessages'));
-    }
+        // dd($messages);
 
-    public function userMessages()
-    {
+        return view('Admin.dashboardMessages', compact('messages'));
     }
 }
