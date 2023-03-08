@@ -21,6 +21,10 @@
 
 <body>
     <div id="app">
+        @php
+            $frontendURL = 'http://localhost:5174';
+        @endphp
+
 
         {{-- MAVBAR --}}
         @include('structure.headerNav')
