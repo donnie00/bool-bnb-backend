@@ -25,6 +25,7 @@ class ApartmentController extends Controller
         $apartments = Apartment::where("user_id", $id)
             ->orderBy("created_at", "desc")
             ->get();
+
         return view("Admin.apartments.index", compact("apartments"));
     }
 
