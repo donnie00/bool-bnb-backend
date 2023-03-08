@@ -1,12 +1,13 @@
-<nav class="navbar navbar-expand-md navbar-light shadow-sm  p-0">
+<nav class="navbar navbar-expand-md navbar-primary shadow-sm  p-0">
     <div class="container-fluid px-md-5 d-flex align-items-md-end">
         <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
 
             <div class="logo pt-2 {{-- all'espansione del burger deve allargarsi e avvicinarsi alle voci del menu --}}">
-                {{-- Keller-logo --}}
-                <img src="" alt="LOGO">
+
+                {{-- AIRBNB-logo ------------------------------------da modificare--}}
+                <img src="/images/BoolBnB_logo.png" alt="LOGO" class="header nav-logo pb-2 mb-2">
             </div>
-            {{-- config('app.name', 'Laravel') --}}
+
         </a>
 
         <div class="flex-fill ps-3 pe-2 pe-lg-3 text-end">
@@ -26,22 +27,22 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                 <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav  me-md-auto align-items-end">
-                    <li class="nav-item  d-flex flex-column align-items-center">
-                        <a class="nav-link fs-5  py-md-4 px-2     
+                <ul class="navbar nav me-md-auto align-items-end py-0">
+                    <li class="nav-item d-flex flex-column align-items-center">
+                        <a class="nav-link fs-5  pt-md-4 px-2     
                      {{ Route::currentRouteName() === null ? 'active' : '' }}"
                             href="{{ url('/') }}">{{-- WTF?! ______??? --}}
                             {{ __('Home') }}</a>
                         <div class="link-underline m-3 mb-0"></div>
                     </li>
                     <li class="nav-item  d-flex flex-column align-items-center">
-                        <a class="nav-link fs-5  py-md-4 px-2"
+                        <a class="nav-link fs-5  pt-md-4 px-2"
                             href="{{ url('http://localhost:5175/apartments') }}">{{-- ok redirect to client side --}}
                             {{ __('Appartamenti') }}</a>
                         <div class="link-underline m-3 mb-0"></div>
                     </li>
                     <li class="nav-item  d-flex flex-column align-items-center">
-                        <a class="nav-link fs-5  py-md-4 px-2" href="{{ url('/') }}">
+                        <a class="nav-link fs-5  pt-md-4 px-2" href="{{ url('/') }}">
                             {{ __('link') }}</a>
                         <div class="link-underline m-3 mb-0"></div>
                     </li>
@@ -50,9 +51,8 @@
                 <ul class="navbar-nav ml-auto align-items-end">
                     <!-- Authentication Links -->
                     @guest
-
                         <li class="nav-item  d-flex flex-column align-items-center">
-                            <a class="nav-link fs-5  py-md-4 px-2
+                            <a class="nav-link fs-5  pt-md-4 px-2
                          {{ Route::currentRouteName() === 'login' ? 'active' : '' }}"
                                 href="{{ route('login') }}">{{ __('Login') }}</a>
                             <div class="link-underline m-3 mb-0"></div>
@@ -60,7 +60,7 @@
 
                         @if (Route::has('register'))
                             <li class="nav-item   d-flex flex-column align-items-center">
-                                <a class="nav-link fs-5 py-md-4 px-2
+                                <a class="nav-link fs-5 pt-md-4 px-2
                              {{ Route::currentRouteName() === 'register' ? 'active' : '' }}"
                                     href="{{ route('register') }}">{{ __('Register') }}</a>
                                 <div class="link-underline m-3 mb-0"></div>
@@ -80,7 +80,6 @@
                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
-
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>

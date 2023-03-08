@@ -4,7 +4,6 @@
             {{--        <p class="nav-title fs-3">MENU</p> --}}
 
             {{-- HOME NO --}}
-
             <li id="home " class="list w-100 ">
                 <b></b>
                 <b></b>
