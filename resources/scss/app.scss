@@ -45,7 +45,7 @@ $dark_color: #343a40;
 @import 'bootstrap/scss/mixins/_breakpoints';
 
 /* visualizzare */
-q {
+.ambacabanane {
   border: 1px solid rgb(216, 127, 228);
 
   @include media-breakpoint-up(xs) {
@@ -74,7 +74,6 @@ q {
 body {
   /*    font-family: 'Raleway', sans-serif;
    color: $light_color; */
-
 }
 
 /***** NAVBAR ******/
@@ -121,36 +120,29 @@ nav {
     width: 100%;
     background: $secondary_color;
 
+    
+/* APARTMENT SHOW  ***********************/
+#ds-Show-Apartment {
+  .img-container {
+    height: 1/3vh;
+    .img-row-left img {
 
-    .portfolio {
-      .container * {
-        border: 1px solid red;
+      @include media-breakpoint-up(lg) {
+        transform: scaleY(120%) translateY(8%);
+      }
 
-        .card {
-          aspect-ratio: 16/9;
-          position: relative;
-
-          &.projects {
-            background: linear-gradient(270deg, $primary_color, desaturate($primary_color_light, 15%), lighten(saturate($primary_color_light, 5%), 10%));
-            color: $light_color;
-          }
-
-          span.count {
-            font-size: 3.5rem;
-          }
-
-          .card-icon {
-            position: absolute;
-            font-size: 7rem;
-            opacity: .8;
-            top: 0;
-            right: 0;
-            --ionicon-stroke-width: 5px;
-
-          }
-        }
+      @include media-breakpoint-up(xl) {
+        transform: scaleY(120%) translateY(5%);
       }
     }
+    .row-dx {
+      transform: scaleY(115%) scaleX(102%) translate(10px);
+      position: relative;
+      top: 0;
+      left: 0;
+    }
+  }
+}
   }
 
   /* ASIDE ^^^^^^^^^^^^^^^^^^^^^*/
