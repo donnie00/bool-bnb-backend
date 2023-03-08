@@ -78,11 +78,15 @@ body {
 
 /***** NAVBAR ******/
 nav {
-  .nav-item {
+  .nav-logo {
+    height: 60px;
 
+  }
+
+  .nav-item {
     a {
       text-decoration: none;
-      color: $secondary_color;
+      color: $dark_color;
 
       &+.link-underline {
         background-color: $primary_color;
@@ -94,11 +98,11 @@ nav {
       &:hover,
       &:active,
       &.active {
-        color: saturate($primary_color, 30%);
+        color: saturate($primary_color, 20%);
 
         &+.link-underline {
-          background-color: saturate($primary_color, 30%);
-          height: 1px;
+          background-color: saturate($primary_color, 20%);
+          height: 2px;
           width: calc(100% - 1rem);
         }
       }
@@ -110,9 +114,7 @@ nav {
 .dashboard-container {
   height: 100vh;
   width: 100vw;
-
   background: linear-gradient(180deg, $secondary_color, desaturate($secondary_color_light, 15%), saturate(white, 10%));
-
 
   /* MAIN ***********************/
   main.dashboard {
@@ -120,29 +122,30 @@ nav {
     width: 100%;
     background: $secondary_color;
 
-    
-/* APARTMENT SHOW  ***********************/
-#ds-Show-Apartment {
-  .img-container {
-    height: 1/3vh;
-    .img-row-left img {
+    /* APARTMENT SHOW  ***********************/
+    #ds-Show-Apartment {
+      .img-container {
+        height: 1/3vh;
 
-      @include media-breakpoint-up(lg) {
-        transform: scaleY(120%) translateY(8%);
-      }
+        .img-row-left img {
 
-      @include media-breakpoint-up(xl) {
-        transform: scaleY(120%) translateY(5%);
+          @include media-breakpoint-up(lg) {
+            transform: scaleY(120%) translateY(8%);
+          }
+
+          @include media-breakpoint-up(xl) {
+            transform: scaleY(120%) translateY(5%);
+          }
+        }
+
+        .row-dx {
+          transform: scaleY(115%) scaleX(102%) translate(10px);
+          position: relative;
+          top: 0;
+          left: 0;
+        }
       }
     }
-    .row-dx {
-      transform: scaleY(115%) scaleX(102%) translate(10px);
-      position: relative;
-      top: 0;
-      left: 0;
-    }
-  }
-}
   }
 
   /* ASIDE ^^^^^^^^^^^^^^^^^^^^^*/
