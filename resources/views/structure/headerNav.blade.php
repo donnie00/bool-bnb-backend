@@ -4,7 +4,7 @@
 
             <div class="logo pt-2 {{-- all'espansione del burger deve allargarsi e avvicinarsi alle voci del menu --}}">
 
-                {{-- AIRBNB-logo ------------------------------------da modificare--}}
+                {{-- AIRBNB-logo ------------------------------------da modificare --}}
                 <img src="/images/BoolBnB_logo.png" alt="LOGO" class="header nav-logo pb-2 mb-2">
             </div>
 
@@ -19,31 +19,34 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-
             {{-- funzione per recuperare il nome della rotta ----------------!!!!!!}}
          {{--   @dump(Route::getCurrentRoute()) --}}
-
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar nav me-md-auto align-items-end py-0">
                     <li class="nav-item d-flex flex-column align-items-center">
                         <a class="nav-link fs-5  pt-md-4 px-2     
-                     {{ Route::currentRouteName() === null ? 'active' : '' }}"
-                            href="{{ url('/') }}">{{-- WTF?! ______??? --}}
+                    {{ Route::currentRouteName() === null ? 'active' : '' }}"
+                            {{--      href="{{ url('/') }}" --}} href="{{ $frontendURL }}">
                             {{ __('Home') }}</a>
                         <div class="link-underline m-3 mb-0"></div>
                     </li>
                     <li class="nav-item  d-flex flex-column align-items-center">
                         <a class="nav-link fs-5  pt-md-4 px-2"
-                            href="{{ url('http://localhost:5175/apartments') }}">{{-- ok redirect to client side --}}
-                            {{ __('Appartamenti') }}</a>
+                            href="{{ $frontendURL }}/apartments">{{-- ok redirect to client side --}}
+                            {{ __('Apartments') }}</a>
+                        <div class="link-underline m-3 mb-0"></div>
+                    </li>
+
+                    <li class="nav-item  d-flex flex-column align-items-center">
+                        <a class="nav-link fs-5  pt-md-4 px-2" href="{{ $frontendURL }}/abaut">
+                            {{ __('About') }}</a>
                         <div class="link-underline m-3 mb-0"></div>
                     </li>
                     <li class="nav-item  d-flex flex-column align-items-center">
-                        <a class="nav-link fs-5  pt-md-4 px-2" href="{{ url('/') }}">
-                            {{ __('link') }}</a>
+                        <a class="nav-link fs-5  pt-md-4 px-2" href="{{ $frontendURL }}/contact">
+                            {{ __('Contacts') }}</a>
                         <div class="link-underline m-3 mb-0"></div>
                     </li>
                 </ul>
