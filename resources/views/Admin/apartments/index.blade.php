@@ -2,35 +2,47 @@
 
 @section('content')
 
-    <div class="container">
-        <h1>INDEX APARTMENSTS</h1>
-        <div class="row">
-            @foreach ( $apartments as $apartment )
-                
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="{{url('/images/img_app_test.jpg')}}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">{{$apartment->title}}</h5>
-                        <p class="card-text">{{$apartment->description}}</p>
-                        {{-- <a href="{{Route("apartment.edit", $apartment->id)}}" class="btn btn-primary">Edit</a>
-                        <a href="{{Route("apartment.show", $apartment->id)}}" class="btn btn-success">Show</a> --}}
-                        
-                        <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class="w-100 btn btn-success">Edit</a>
-                        <a href="{{ route('Admin.apartments.show', $apartment->id) }}" class="w-100 btn btn-warning">Show</a>
-                        <form action="{{ route('Admin.apartments.destroy', $apartment->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-        
-                            <button class="btn btn-danger w-100">Delete</button>
-        
-                        </form>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+  <h1 class="my-3">Index</h1>
 
-            @endforeach
-        </div>
+  <a class="btn btn-warning my-3" href="{{ route('Admin.apartments.create') }}">Add new Apartmet</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Cover</th>
+        <th>address</th>
+        <th></th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      @foreach ($apartments as $apartment)
+      <tr>
+        <td>{{ $apartment->title }}</td>
+        <td><img src="{{ url('/images/img_app_test.jpg') }}" style="width: 80px; height: 50px; object-fit:cover; object-position: top  " alt="Card image cap"></td>
+        <td>{{ $apartment->address }}</td>
 
-    </div>
+        <td>
+          <div class="d-flex gap-2 ">
+            <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class=" btn btn-success">Edit</a>
+            <a href="{{ route('Admin.apartments.show', $apartment->id) }}" class=" btn btn-warning">Show</a>
+            <form action="{{ route('Admin.apartments.destroy', $apartment->id) }}" method="POST">
+              @csrf
+              @method('DELETE')
+              <button class="btn btn-danger">Delete</button>
+            </form>
+            <a href="@{{--{{ route('Admin.apartments.sponsored', $apartment->id) }}--}}" class="ms-4 btn btn-info rounded-4">Sponsor</a> 
+          </div>
+        </td>
+        
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+
+
+
+
+</div>
 @endsection
