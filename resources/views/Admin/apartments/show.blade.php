@@ -1,48 +1,38 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="container">
-        <h1>APARTMENST: # {{ $apartment->id }}</h1>
-        <div class="container">
+    <section id="ds-Show-Apartment" class="px-xxl-5  mx-3 mx-sm-5 mx-lg-5">
+        <div class=" container.fluid  px-md-3 px-xl-5">
+
             <!--Apartments Show -->
 
             <h1 class="mb-4">{{ $apartment->title }}</h1>
-            <div v-if="$apartment->images" class="row d-flex">
-                <div class="col-xl-6 col-lg-6 col-md-4 col-sm-12 col-6 mb-2 ">
-                    <img class="img-fluid mb-2 card-img container-cards-left " :src="$apartment - > images[0].image"
-                        alt="" />
-                </div>
-                <div class="col-6">
-                    <div class="row d-flex">
-                        <div v-for="(img, index) in $apartment->images" key="index"
-                            v-bind:class="(index ===0) ? ' ' : 'col-xl-6 col-lg-6 col-md-5 col-sm-6 ' ">
 
-                            <img v-if="index > 0"
-                                :class="(index === 2) ? 'container-cards-top-right' : '' | (index === 4) ?
-                                'container-cards-bottom-right' : ''"
-                                class="img-fluid mb-2 card-img my-imgs " :src="img.image"
-                                :alt="'image ' + (index + 1)" />
+            <div class="img-container rounded-4 overflow-hidden">
+
+                @if ($apartment->images)
+                    <div class="img-row-left border-success border-5 row  row-cols-1  row-cols-lg-2 gap-2">
+
+                        <!-- main img -->
+                        <div class="col h-100 p-0 pb-md-2">
+                            <img class="img-fluid w-100" src="{{$apartment->images[0]->image}}" alt="" />
+                        </div>
+
+                        <!--  <div class="col h-100 p-0"> -->
+                        <div class="row-dx col row row-cols-4 row-cols-lg-2 p-0">
+                            @foreach($apartment->images as $img)
+                            @if($loop->index>0)
+                            <div class="col h-50 p-0 px-md-1  px-lg-3 py-lg-4">
+                                <img class="img-fluid" src="{{$img->image}}" alt="{{$apartment->title}}_img_{{$loop->index + 1}}" />
+                            </div>
+                            @endif
+                            @endforeach
                         </div>
                     </div>
-                </div>
-            </div>
-            <div v-else class="col-8 m-auto">
-
-                <img class="img-fluid mb-2 card-img" :src="$apartment - > cover_img" alt="" />
+                @endif
 
             </div>
-            <!-- <div class="col-6 container-cards">
-                                      <img class="img-fluid container-cards-left mb-2 card-img  "
-                                        :src="this.$apartment - > images[0].image"
-                                        alt="" />
-                                    </div>
-                                    <div class="col-6">
-                                      <div v-for="(img, i) in $apartment->images" class="row">
-                                        <div  class="col-6 mb-2"><img class="img-fluid mb-2 card-img "
-                                            :src="img.image"
-                                            alt="" /></div>
-                                      </div>
-                                    </div> -->
+
             <div class="my-2">
                 <i class="h5 me-2 fa-solid fa-map-location-dot"></i> {{ $apartment->address }}
             </div>
@@ -77,43 +67,15 @@
 
             <div class="mb-2 mx-2 col-8">
                 <span class="fw-semibold">Cosa troverai</span>
+
                 @foreach ($apartment->services as $service)
                     <i>{{ $service->name }},</i>
                     <a href="ciao"></a>
                 @endforeach
             </div>
 
-            {{--      <router-link v-slot="{ ButtonDelete }" :to="{ name: 'Apartments.index' }">
-                <ButtonDelete :is="ButtonDelete" @click="onDeleteClick()" />
-            </router-link> --}}
-
             <a href="http://localhost:5173/apartments" class="btn btn-info ms-2 text-light">RETURN TO INDEX</a>
 
         </div>
-    </div>
-    <div class="container">
-        <div class="card m-auto" style="width: 18rem;">
-            <img class="card-img-top" src="{{ url('/images/img_app_test.jpg') }}" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">{{ $apartment->title }}</h5>
-                <p class="card-text">{{ $apartment->description }}</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"> <b>Rooms qty: </b>{{ $apartment->rooms_qty }} </li>
-                <li class="list-group-item"> <b>Bathrooms qty: </b>{{ $apartment->bathrooms_qty }} </li>
-                <li class="list-group-item"> <b>Beds qty: </b>{{ $apartment->beds_qty }} </li>
-            </ul>
-            <div class="card-body">
-
-                <form action="{{ route('Admin.apartments.destroy', $apartment->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-
-                    <button class="btn btn-danger w-100">Delete</button>
-
-                </form>
-                <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class="btn btn-success">Edit</a>
-            </div>
-        </div>
-    </div>
+    </section>
 @endsection
