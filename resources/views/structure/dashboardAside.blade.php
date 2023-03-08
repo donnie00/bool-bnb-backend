@@ -20,7 +20,7 @@
                 class="  list w-100  d-block   {{ Route::currentRouteName() === 'dashboard' ? 'active' : '' }} ">
                 <b></b>
                 <b></b>
-                <a class="p-relative w-100 text-decoration-none" href="{{ $backendURL }}/dashboard">
+                <a class="p-relative w-100 text-decoration-none" href="{{ $backendURL }}Admin/dashboard">
 
 
                     <span class="icon text-cemter pt-2 d-block ">
@@ -34,7 +34,7 @@
                 class="list w-100  {{ Route::currentRouteName() === 'Admin.apartments.index' ? 'active' : '' }} ">
                 <b></b>
                 <b></b>
-                <a class="p-relative w-100 text-decoration-none " href="#">
+                <a class="p-relative w-100 text-decoration-none " href="{{ $backendURL }}/Admin/apartments">
                     <span class="icon text-cemter pt-2 d-block">
                         <ion-icon class="fs-3" name="images-outline"></ion-icon>
                     </span>
