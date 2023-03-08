@@ -25,18 +25,26 @@
          @include('structure.dashboardAside')
 
          <main class="dashboard w-100 ps-5 p-4 overflow-x-hidden">
-            <h1>DASHBOARD</h1>
-            <h2>Ciao {{ $user->name }}</h2>
-            <h3>Hai {{ $userApartmentsCount }} appartamenti in totale</h3>
-            <h3>Ultimi aggiunti: </h3>
-            <ul>
-               @foreach ($lastApartments as $apartment)
-                  <li>{{ $apartment['title'] }}</li>
-               @endforeach
-            </ul>
+            <h1>Messages</h1>
 
-            <h3>Hai {{ $totalMessages }} messaggi in totale</h3>
-            <a href="{{ route('Admin.dashboard.messages') }}">Visualizza tutti</a>
+            @foreach ($messages as $apartment => $message)
+               <h5>Annuncio: {{ $apartment }}</h5>
+
+               <div class="card p-3 mb-3">
+                  <ol>
+                     @foreach ($message as $singleMessage)
+                        <li>
+                           <p class="fw-bold">{{ $singleMessage['sender'] }}</p>
+                           <p>Email: {{ $singleMessage['email'] }}</p>
+                           <p>Subject: {{ $singleMessage['subject'] }}</p>
+                           <p>Message: {{ $singleMessage['message'] }}</p>
+                        </li>
+                     @endforeach
+                  </ol>
+               </div>
+            @endforeach
+
+
             {{-- qua ci starebbe l'if --}}
             @yield('content')
          </main>
