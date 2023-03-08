@@ -4,22 +4,11 @@ use App\Http\Controllers\Admin\apartments\ApartmentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/Admin/dashboard', function () {
+Route::get('/dashboard', function () {
     return view('Admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -31,10 +20,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-
-
 // FOR TESTING
-
 Route::middleware('auth')
     ->prefix("Admin")
     ->name("Admin.")
