@@ -20,7 +20,11 @@
       @foreach ($apartments as $apartment)
       <tr>
         <td>{{ $apartment->title }}</td>
-        <td><img src="{{ url('/images/img_app_test.jpg') }}" style="width: 80px; height: 50px; object-fit:cover; object-position: top  " alt="Card image cap"></td>
+        @if($apartment->cover_img !== null)
+        <td><img src="{{$apartment->cover_img }}" style="width: 80px; height: 50px; object-fit:cover; object-position: top  " alt="Card image cap"></td>
+        @else
+        <td><img src="{{$apartment->images[0]->image }}" style="width: 80px; height: 50px; object-fit:cover; object-position: top  " alt="Card image cap"></td>
+        @endif
         <td>{{ $apartment->address }}</td>
 
         <td>

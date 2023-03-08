@@ -20,12 +20,11 @@
 <body class=" dashboard-container bg-secondary">
 
     <div id="app" class="">
-        <div class="dashboard-container d-flex justify-content-end">
+        <div class="d-flex justify-content-end">
 
             @include('structure.dashboardAside')
 
             <main class="dashboard w-100 ps-5 p-4 overflow-x-hidden">
-                <h1>DASHBOARD</h1>
 
                 {{-- qua ci starebbe l'if --}}
                 @yield('content')
