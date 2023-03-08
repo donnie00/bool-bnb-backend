@@ -1,5 +1,4 @@
 @extends('layouts.dashboard')
-
 @section('content')
     <section id="ds-Show-Apartment" class="px-xxl-5  mx-3 mx-sm-5 mx-lg-5">
         <div class=" container.fluid  px-md-3 px-xl-5">
