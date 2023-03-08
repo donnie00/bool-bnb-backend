@@ -33,7 +33,9 @@
                   <td>
                      <div class="d-flex gap-2 ">
                         <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class=" btn btn-success">Edit</a>
-                        <a href="{{ route('Admin.apartments.show', $apartment->id) }}" class=" btn btn-warning">Show</a>
+                        {{-- Da risolvere il localhost statico --}}
+                        <a href="{{ 'http://localhost:5173/apartments/' . $apartment->id }}"
+                           class=" btn btn-warning">Show</a>
                         <form action="{{ route('Admin.apartments.destroy', $apartment->id) }}" method="POST">
                            @csrf
                            @method('DELETE')
