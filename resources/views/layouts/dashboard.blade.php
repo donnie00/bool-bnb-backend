@@ -22,24 +22,12 @@
    <div id="app" class="">
       <div class="dashboard-container d-flex justify-content-end">
 
-         @include('structure.dashboardAside')
-
          <main class="dashboard w-100 ps-5 p-4 overflow-x-hidden">
-            <h1>DASHBOARD</h1>
-            <h2>Ciao {{ $user->name }}</h2>
-            <h3>Hai {{ $userApartmentsCount }} appartamenti in totale</h3>
-            <h3>Ultimi aggiunti: </h3>
-            <ul>
-               @foreach ($lastApartments as $apartment)
-                  <li>{{ $apartment['title'] }}</li>
-               @endforeach
-            </ul>
-
-            <h3>Hai {{ $totalMessages }} messaggi in totale</h3>
-            <a href="{{ route('Admin.dashboard.messages') }}">Visualizza tutti</a>
-            {{-- qua ci starebbe l'if --}}
+            @include('structure.dashboardAside')
+            <h1>Ciao {{ $user->name }}</h1>
             @yield('content')
          </main>
+
       </div>
    </div>
 
