@@ -65,11 +65,11 @@
             <hr>
 
             <div class="mb-2 mx-2 col-8">
-                <span class="fw-semibold">Cosa troverai</span>
+                <span class="fw-semibold">Cosa troverai: </span>
 
                 @foreach ($apartment->services as $service)
-                    <i>{{ $service->name }},</i>
-                    <a href="ciao"></a>
+                    <img class="icons-services ms-1 " src="{{asset('services-icons/' . $service->icon)}}" alt="">
+                    <i class=" me-3">{{ $service->name }}</i>
                 @endforeach
             </div>
 
