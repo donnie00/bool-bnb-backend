@@ -1,8 +1,8 @@
     <aside class="navigation top-0 bottom-0 start-0">
         {{--    @dump($backendURL)
         @dump($frontendURL)  --}}
-     
-        <ul class=" top-0 start-0 w-100 ps-1 d-flex flex-column">
+
+        <ul class=" top-0 start-0 w-100 ps-1 d-flex flex-column h-100">
             {{--        <p class="nav-title fs-3">MENU</p> --}}
 
             {{-- HOME NO --}}
@@ -54,15 +54,18 @@
                 </a>
             </li>
 
-            <li id="setting" class="list w-100  ">
-                <b></b>
-                <b></b>
-                <a class="p-relative w-100 text-decoration-none " href="#">
-                    <span class="icon text-cemter pt-2 d-block">
-                        <ion-icon class="fs-3" name="log-out-outline"></ion-icon>
-                    </span>
-                    <span class="title d-block p-relative ps-3">setting</span>
-                </a>
+
+            {{-- logout link --}}
+            <li  class="" style="margin-left: -5px">
+                <form class=" " id="logout-form" action="{{ route('logout') }}" method="POST"
+                    {{-- class="d-none" --}}>
+                    @csrf
+                    <button class="btn btn-link p-0 m-0">
+                        <span class="icon text-cemter pt-2 d-block">
+                            <ion-icon class="fs-3" name="log-out-outline"></ion-icon>
+                        </span>
+                    </button>
+                </form>
             </li>
         </ul>
     </aside>
