@@ -45,6 +45,8 @@ class SearchController extends Controller
             $dbCoord[$apartmentCoord['id']] = $toPush;
         }
 
+        /*esempio  1:{123415,2344534} */
+
         $distances = [];
 
         foreach ($dbCoord as $key => $coord) {
@@ -80,7 +82,7 @@ class SearchController extends Controller
 
         if (in_array('min_rooms', $data)) {
 
-            $dbApartments = DB::table("apartments")->select("id")
+            $dbApartments = Apartment::select("id")
                 ->whereIn("id", $nearby)
                 ->where('rooms_qty', '>', $data['min_rooms'])
                 ->get()
@@ -119,9 +121,8 @@ class SearchController extends Controller
                 }
             }
         }
-
+        /*  $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10); */
         $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10);
-
         return response()->json($nearApartments);
     }
 }
