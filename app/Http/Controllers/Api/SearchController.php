@@ -10,75 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
-    // public function search()
-    // {
-    //     $lat = $_GET['lat'];
-    //     $log = $_GET['log'];
-    //     $circle_radius = 6371;
-    //     $radius = $_GET['radius'];
-
-    //     // $lat = 43.0911;
-    //     // $log = 12.44;
-    //     // $circle_radius = 6371;
-    //     // $radius = 20;
-
-    //     $services = Service::all();
-
-    //     $houses = DB::select(DB::raw('SELECT , ( ' . $circle_radius . ' acos( cos( radians(' . $lat . ') ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $log . ') ) + sin( radians(' . $lat . ') ) * sin( radians(latitude) ) ) ) AS distance FROM houses WHERE visible=1 HAVING distance < ' . $radius . ' ORDER BY distance'));
-
-    //     // foreach ($houses as $key => $house) {
-    //     //     foreach ($house->services as $key => $service) {
-    //     //         dd($service);
-    //     //         $house['services'] = $house->services;
-    //     //     }
-    //     //
-    //     // };
-
-    //     $promotions = Promotion::orderBy('price', 'DESC')->get();
-    //     foreach ($promotions as $key => $promotion) {
-    //         $sponsoredHouses = $promotion->houses()->where('visible', '1')->limit(8)->get();
-    //     };
-
-    //     return view('guest.search', compact('houses', 'sponsoredHouses', 'services'));
-    // }
-
-    // $lat = 45.46427; // latitudine dell'indirizzo cercato
-    // $lng = 9.18951; // longitudine dell'indirizzo cercato
-    // $raggio = 20; // raggio di ricerca in km (valore di default)
-    // $citta = request('citta'); // città o indirizzo cercato
-    // $stanze = request('stanze'); // numero minimo di stanze
-    // $posti_letto = request('posti_letto'); // numero minimo di posti letto
-    // $servizi_aggiuntivi = request('servizi_aggiuntivi'); // servizi aggiuntivi obbligatori
-
-    // // Calcola la distanza tra l'indirizzo cercato e gli appartamenti nel database
-    // // e seleziona solo quelli che rientrano nel raggio di ricerca
-    // $appartamenti = DB::table('appartamenti')
-    //     ->selectRaw('*, ( 6371 * acos( cos( radians(?) ) * cos( radians( latitudine ) ) * cos( radians( longitudine ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitudine ) ) ) ) AS distance', [$lat, $lng, $lat])
-    //     ->whereRaw('( 6371 * acos( cos( radians(?) ) * cos( radians( latitudine ) ) * cos( radians( longitudine ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitudine ) ) ) ) < ?', [$lat, $lng, $lat, $raggio])
-    //     ->orderBy('distance')
-    //     ->get();
-
-    // // Filtra gli appartamenti in base ai criteri di ricerca aggiuntivi
-    // if ($citta) {
-    //     $appartamenti = $appartamenti->where('citta', 'LIKE', '%' . $citta . '%');
-    // }
-    // if ($stanze) {
-    //     $appartamenti = $appartamenti->where('stanze', '>=', $stanze);
-    // }
-    // if ($posti_letto) {
-    //     $appartamenti = $appartamenti->where('posti_letto', '>=', $posti_letto);
-    // }
-    // if ($servizi_aggiuntivi) {
-    //     foreach ($servizi_aggiuntivi as $servizio) {
-    //         $appartamenti = $appartamenti->where($servizio, true);
-    //     }
-    // }
-
-    // // Restituisci gli appartamenti che corrispondono ai criteri di ricerca
-    // return view('risultati_ricerca', ['appartamenti' => $appartamenti]);
-    // In questo esempio, la query SQL utilizza la funzione selectRaw() per calcolare la distanza tra l'indirizzo cercato e gli appartamenti nel database, e la funzione whereRaw() per selezionare solo quelli che rientrano nel raggio di ricerca. Successivamente, la query filtra gli appartamenti in base ai criteri di ricerca aggiuntivi (città, numero minimo di stanze, numero minimo di posti letto e servizi aggiuntivi obbligatori).
-
-
     public function search(Request $request)
     {
 
@@ -91,6 +22,8 @@ class SearchController extends Controller
         //     'services' => [1, 4],
         // ];
 
+        // dd($request->query());
+
         $data = $request->all();
 
         // Punto di partenza
@@ -98,6 +31,7 @@ class SearchController extends Controller
             'lat' => deg2rad($data['lat']),
             'lon' => deg2rad($data['lon']),
         ];
+
 
         //Punto del mio appartamento da recuperare a database
         $apartmentsCoord = Apartment::select('id', 'latitude', 'longitude')->get();
@@ -142,11 +76,9 @@ class SearchController extends Controller
             }
         }
 
-        // dump($nearby);
+        $apartments = $nearby;
 
-        $apartments = [];
-
-        if ($data['min_rooms'] > 0) {
+        if (in_array('min_rooms', $data)) {
 
             $dbApartments = DB::table("apartments")->select("id")
                 ->whereIn("id", $nearby)
@@ -160,7 +92,7 @@ class SearchController extends Controller
         }
 
 
-        if ($data['min_beds'] > 0) {
+        if (in_array('min_beds', $data)) {
 
             $dbApartments = Apartment::select("id")->whereIn('id', $nearby)
                 ->where('beds_qty', '>', $data['min_beds'])
@@ -175,7 +107,7 @@ class SearchController extends Controller
             }
         }
 
-        if (count($data['services']) > 0) {
+        if (in_array('services', $data) && count($data['services'])) {
             foreach ($data['services'] as $service) {
                 $dbApartments = ApartmentService::select('apartment_id')->whereIn('apartment_id', $nearby)->where('service_id', $service)->get()->pluck('apartment_id')->toArray();
                 array_merge($apartments, $dbApartments);
