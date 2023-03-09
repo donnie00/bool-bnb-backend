@@ -34,7 +34,7 @@
                            </td>
 
                         @else
-                           <td><img src="{{ asset('storage/place-holder-image.png') }}"
+                           <td><img src="{{ asset('storage/placeholder-image.png') }}"
                               style="width: 80px; height: 50px; object-fit:cover; object-position: top  "
                               alt="Card image cap">
                            </td>
