@@ -1,7 +1,7 @@
     <aside class="navigation top-0 bottom-0 start-0">
         {{--    @dump($backendURL)
         @dump($frontendURL)  --}}
-        @dump(Route::currentRouteName())
+     
         <ul class=" top-0 start-0 w-100 ps-1 d-flex flex-column">
             {{--        <p class="nav-title fs-3">MENU</p> --}}
 
@@ -17,10 +17,10 @@
                 </a>
             </li>
             <li id="profile"
-                class="  list w-100  d-block   {{ Route::currentRouteName() === 'dashboard' ? 'active' : '' }} ">
+                class="  list w-100  d-block   {{ Route::currentRouteName() === 'Admin.dashboard' ? 'active' : '' }} ">
                 <b></b>
                 <b></b>
-                <a class="p-relative w-100 text-decoration-none" href="{{ $backendURL }}Admin/dashboard">
+                <a class="p-relative w-100 text-decoration-none" href="{{ $backendURL }}/Admin/dashboard">
 
 
                     <span class="icon text-cemter pt-2 d-block ">
@@ -59,7 +59,7 @@
                 <b></b>
                 <a class="p-relative w-100 text-decoration-none " href="#">
                     <span class="icon text-cemter pt-2 d-block">
-                        <ion-icon class="fs-3" name="settings-outline"></ion-icon>
+                        <ion-icon class="fs-3" name="log-out-outline"></ion-icon>
                     </span>
                     <span class="title d-block p-relative ps-3">setting</span>
                 </a>
