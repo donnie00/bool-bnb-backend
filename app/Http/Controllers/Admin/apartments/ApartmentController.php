@@ -12,6 +12,7 @@ use App\Models\Service;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redirect;
 
 class ApartmentController extends Controller
 {
@@ -85,7 +86,7 @@ class ApartmentController extends Controller
             $apartment->services()->attach($data["services"]);
         }
 
-        return redirect()->route("Admin.apartments.show", $apartment->id);
+        return Redirect::to(env('MY_FRONTEND_URL') . '/apartments/' . $apartment->id);
     }
 
     /**
@@ -125,7 +126,8 @@ class ApartmentController extends Controller
 
         $apartment->services()->sync($data["services"]);
 
-        return redirect()->route("Admin.apartments.show", $apartment->id);
+        // return redirect()->route("Admin.apartments.show", $apartment->id);
+        return Redirect::to(env('MY_FRONTEND_URL') . '/apartments/' . $apartment->id);
     }
 
     /**
