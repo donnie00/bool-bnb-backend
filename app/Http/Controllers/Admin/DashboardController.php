@@ -44,7 +44,7 @@ class DashboardController extends Controller
             }
         }
 
-        return view('Admin.dashboardUser', compact('user', 'userApartmentsCount', 'lastApartments', 'messages', 'totalMessages'));
+        return view('Admin.dashboardUser', compact('user', 'userApartmentsCount', 'lastApartments', 'message', 'totalMessages'));
     }
 
     public function userMessages()
@@ -69,7 +69,7 @@ class DashboardController extends Controller
             }
         }
 
-         dd($userApartments);
+        
 
         return view('Admin.dashboardMessages', compact('user', 'messages'));
     }
