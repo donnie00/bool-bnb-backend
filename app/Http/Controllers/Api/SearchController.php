@@ -111,6 +111,8 @@ class SearchController extends Controller
             $dbCoord[$apartmentCoord['id']] = $toPush;
         }
 
+       /*esempio  1:{123415,2344534} */
+
         $distances = [];
 
         foreach ($dbCoord as $key => $coord) {
@@ -146,7 +148,11 @@ class SearchController extends Controller
 
         $apartments = [];
 
-        if ($data['min_rooms'] > 0) {
+/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
+
+
+  
+        if (array_key_exists('min_rooms', $data) && $data['min_rooms'] > 0) {
 
             $dbApartments = DB::table("apartments")->select("id")
                 ->whereIn("id", $nearby)
@@ -159,8 +165,7 @@ class SearchController extends Controller
             $apartments = $dbApartments;
         }
 
-
-        if ($data['min_beds'] > 0) {
+        if (array_key_exists('min_beds', $data)&& $data['min_beds'] > 0) {
 
             $dbApartments = Apartment::select("id")->whereIn('id', $nearby)
                 ->where('beds_qty', '>', $data['min_beds'])
@@ -175,7 +180,7 @@ class SearchController extends Controller
             }
         }
 
-        if (count($data['services']) > 0) {
+        if ( array_key_exists('services', $data) && count($data['services']) > 0) {
             foreach ($data['services'] as $service) {
                 $dbApartments = ApartmentService::select('apartment_id')->whereIn('apartment_id', $nearby)->where('service_id', $service)->get()->pluck('apartment_id')->toArray();
                 array_merge($apartments, $dbApartments);
@@ -187,9 +192,9 @@ class SearchController extends Controller
                 }
             }
         }
-
-        $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10);
-
+/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
+       /*  $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10); */
+        $nearApartments = Apartment::whereIn('id', $nearby )->paginate(10);
         return response()->json($nearApartments);
     }
 }
