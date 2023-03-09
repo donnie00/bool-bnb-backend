@@ -20,14 +20,14 @@
 
 <body class=" dashboard-container bg-secondary">
 
-   <div id="app" class="">
-      <div class="dashboard-container d-flex justify-content-end">
-         @php
-            $backendURL = 'http://127.0.0.1:8000';
-            $frontendURL = 'http://localhost:5174';
-         @endphp
+    <div id="app" class="">
+        <div class="dashboard-container d-flex justify-content-end">
+            @php
+                $backendURL = 'http://127.0.0.1:8000';
+                $frontendURL = 'http://localhost:5174';
+            @endphp
 
-         @include('structure.dashboardAside')
+            @include('structure.dashboardAside')
 
             <main class="dashboard w-100 ps-5 p-4 overflow-x-hidden">
 
