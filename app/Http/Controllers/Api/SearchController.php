@@ -150,10 +150,9 @@ class SearchController extends Controller
 
 /* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
 
-
-  
-        if (array_key_exists('min_rooms', $data) && $data['min_rooms'] > 0) {
-
+if (array_key_exists('min_rooms', $data) || array_key_exists('min_beds', $data)|| array_key_exists('services', $data)){
+ 
+        if ( array_key_exists('min_rooms', $data)&& $data['min_rooms'] > 0) {
             $dbApartments = DB::table("apartments")->select("id")
                 ->whereIn("id", $nearby)
                 ->where('rooms_qty', '>', $data['min_rooms'])
@@ -165,7 +164,7 @@ class SearchController extends Controller
             $apartments = $dbApartments;
         }
 
-        if (array_key_exists('min_beds', $data)&& $data['min_beds'] > 0) {
+        if ( array_key_exists('min_beds', $data) &&  $data['min_beds'] > 0) {
 
             $dbApartments = Apartment::select("id")->whereIn('id', $nearby)
                 ->where('beds_qty', '>', $data['min_beds'])
@@ -192,9 +191,14 @@ class SearchController extends Controller
                 }
             }
         }
+
+    }else{
+        $apartments=$nearby;
+
+    }
 /* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
        /*  $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10); */
-        $nearApartments = Apartment::whereIn('id', $nearby )->paginate(10);
+        $nearApartments = Apartment::whereIn('id', $apartments )->paginate(10);
         return response()->json($nearApartments);
     }
 }
