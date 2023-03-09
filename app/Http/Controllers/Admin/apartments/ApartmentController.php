@@ -12,6 +12,7 @@ use App\Models\Service;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redirect;
 
 class ApartmentController extends Controller
 {
@@ -61,9 +62,6 @@ class ApartmentController extends Controller
         // Composizione stringa indirizzo da inserire a DB
         $complete_address = $data["streetName"] . " " . $data["streetNumber"] . " " . $data["municipality"] . " " . $data["postalCode"] . " " . $data["countryCode"];
 
-
-
-
         // dati del nuovo appartamento
         $newApartment = [
             ...$data,
@@ -88,7 +86,7 @@ class ApartmentController extends Controller
             $apartment->services()->attach($data["services"]);
         }
 
-        return redirect()->route("Admin.apartments.show", $apartment->id);
+        return Redirect::to(env('MY_FRONTEND_URL') . '/apartments/' . $apartment->id);
     }
 
     /**
@@ -128,7 +126,8 @@ class ApartmentController extends Controller
 
         $apartment->services()->sync($data["services"]);
 
-        return redirect()->route("Admin.apartments.show", $apartment->id);
+        // return redirect()->route("Admin.apartments.show", $apartment->id);
+        return Redirect::to(env('MY_FRONTEND_URL') . '/apartments/' . $apartment->id);
     }
 
     /**

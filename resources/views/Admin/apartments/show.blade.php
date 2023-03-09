@@ -9,7 +9,7 @@
 
          <div class="img-container rounded-4 overflow-hidden">
 
-            @if ($apartment->images)
+            @if (count($apartment->images))
                <div class="img-row-left border-success border-5 row  row-cols-1  row-cols-lg-2 gap-2">
 
                   <!-- main img -->
