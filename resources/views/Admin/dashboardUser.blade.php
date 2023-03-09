@@ -8,7 +8,6 @@
          <li>{{ $apartment['title'] }}</li>
       @endforeach
    </ul>
-
    <h3>Hai {{ $totalMessages }} messaggi in totale</h3>
    <a href="{{ route('Admin.dashboard.messages') }}">Visualizza tutti</a>
 @endsection

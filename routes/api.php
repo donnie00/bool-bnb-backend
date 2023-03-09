@@ -49,9 +49,9 @@ Route::get('/search', [SearchController::class, 'search'])->name('apartments.sea
 //     'store'
 // );
 
-// Route::resource('/services', ServiceController::class)->only(
-//     'index'
-// );
+ Route::resource('/services', ServiceController::class)->only(
+     'index'
+ );
 // Route::resource('/subscriptons', SubscriptionController::class)->only(
 //     'index'
 //);

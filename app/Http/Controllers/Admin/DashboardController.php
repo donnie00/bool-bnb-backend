@@ -30,21 +30,18 @@ class DashboardController extends Controller
 
             if (count($lastApartments) < 3) {
 
-                array_push($lastApartments, $apartment);
-
                 $apartmentId = $apartment['id'];
+
                 $apartmentTitle = $apartment['title'];
+            }
+            $apartment_messages = Message::where('apartment_id', $apartment["id"])->get()->toArray();
 
-                $message = Message::where('apartment_id', $apartmentId)->get()->toArray();
-
-                if (count($message)) {
-                    $messages[$apartmentTitle] = $message;
-                    $totalMessages += count($message);
-                }
+            if ($apartment_messages) {
+                $totalMessages += count($apartment_messages);
             }
         }
 
-        return view('Admin.dashboardUser', compact('user', 'userApartmentsCount', 'lastApartments', 'messages', 'totalMessages'));
+        return view('Admin.dashboardUser', compact('user', 'userApartmentsCount', 'lastApartments', 'totalMessages'));
     }
 
     public function userMessages()
@@ -52,24 +49,30 @@ class DashboardController extends Controller
         //Recupera l'utente dall'Auth
         $user = Auth::user();
 
+
         //Recupera tutti gli appartamenti di quell'utente e lo converte in array
         $userApartments = Apartment::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get()->toArray();
 
+
         $messages = [];
 
-        foreach ($userApartments as $apartment) {
 
-            $apartmentId = $apartment['id'];
-            $apartmentTitle = $apartment['title'];
+        $count_total_messages = 0;
 
-            $message = Message::where('apartment_id', $apartmentId)->get()->toArray();
+        foreach ($userApartments as $key => $apartment) {
 
-            if (count($message)) {
-                $messages[$apartmentTitle] = $message;
+            $apartmentId = $apartment["id"];
+
+
+            $apartment_messages = Message::where('apartment_id', $apartmentId)->get()->toArray();
+
+            if ($apartment_messages) {
+                // array_push($messages, $apartment_messages);
+
+                $messages[$apartment['title'] . ' ' . strval($key)] = $apartment_messages;
+                $count_total_messages += count($apartment_messages);
             }
         }
-
-        // dd($messages);
 
         return view('Admin.dashboardMessages', compact('user', 'messages'));
     }

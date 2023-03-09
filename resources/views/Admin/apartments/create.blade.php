@@ -125,7 +125,7 @@
          {{-- ROOMS QTY ------------------------------------------------------------------ --}}
 
          <div class="input-container pb-2 col-4 ">
-            <label class="form-label" for="rooms_qty">rooms quantity</label>
+            <label class="form-label" for="rooms_qty">Rooms quantity</label>
             <select
                class="form-control
                   @error('rooms_qty') is-invalid @elseif(old('rooms_qty')) is-valid @enderror"
@@ -148,7 +148,7 @@
          {{-- BEDROOMS QTY ------------------------------------------------------------------ --}}
 
          <div class="input-container pb-2 col-4 ">
-            <label class="form-label" for="beds_qty">bed quantity</label>
+            <label class="form-label" for="beds_qty">Bed quantity</label>
             <select
                class="form-control
                   @error('beds_qty') is-invalid @elseif(old('beds_qty')) is-valid @enderror"
@@ -172,7 +172,7 @@
          {{-- BATHROOMS QTY ------------------------------------------------------------------ --}}
 
          <div class="input-container pb-2 col-4 ">
-            <label class="form-label" for="bathrooms_qty">bed quantity</label>
+            <label class="form-label" for="bathrooms_qty">Bathrooms quantity</label>
             <select
                class="form-control
                   @error('bathrooms_qty') is-invalid @elseif(old('bathrooms_qty')) is-valid @enderror"
@@ -293,7 +293,7 @@
         @error('countryCode') is-invalid @elseif(old('countryCode')) is-valid @enderror"
                   id="countryCode" name="countryCode">
 
-                  <option value="IT" selected {{ old('countryCode') ? 'selected' : '' }} --}}>IT </option>
+                  <option value="IT" selected {{ old('countryCode') ? 'selected' : '' }}>IT </option>
 
                </select>
                @error('countryCode')

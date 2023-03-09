@@ -45,7 +45,7 @@ $dark_color: #343a40;
 @import 'bootstrap/scss/mixins/_breakpoints';
 
 /* visualizzare */
-/* .ambacabanane */ * {
+ .aa{
   border: 1px solid rgb(216, 127, 228);
 
   @include media-breakpoint-up(xs) {
@@ -186,12 +186,12 @@ nav {
       position: absolute;
       padding-top: 75px;
 
-      li {
+      li{
         position: relative;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
-
-        a {
+        a,
+        button {
           display: block;
           display: flex;
           color: $secondary_color_light;
