@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ApartmentController;
 use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\SubscriptionController;
 use Illuminate\Http\Request;
@@ -30,6 +31,8 @@ Route::resource('/apartments', ApartmentController::class)->only(
     'index',
     'show'
 );
+
+Route::get('/search', [SearchController::class, 'search'])->name('apartments.search');
 
 // Route::prefix('admin')
 //     ->name('admin.')

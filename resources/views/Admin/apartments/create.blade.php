@@ -306,7 +306,7 @@
 
          {{-- opzioni --}}
          <div class="p-3 text-end">
-            <a href="http://localhost:5175/apartments" class="btn btn-info text-light">Annulla</a>
+            <a href="{{ route('Admin.apartments.index') }}" class="btn btn-info text-light">Annulla</a>
             <button class="btn btn-primary text-light">Aggiungi appartamento</button>
       </form>
    </div>
