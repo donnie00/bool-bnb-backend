@@ -64,7 +64,7 @@
                         @if (Route::has('register'))
                             <li class="nav-item   d-flex flex-column align-items-center">
                                 <a class="nav-link fs-5 pt-md-4 px-2
-                             {{ Route::currentRouteName() === 'register' ? 'active' : '' }}"
+                            {{ Route::currentRouteName() === 'register' ? 'active' : '' }}"
                                     href="{{ route('register') }}">{{ __('Register') }}</a>
                                 <div class="link-underline m-3 mb-0"></div>
                             </li>
@@ -77,10 +77,10 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item fs-5" href="{{ url('/dashboard') }}">{{ __('Dashboard') }}</a>
+                                <a class="dropdown-item fs-5" href="{{ url('/Admin/dashboard') }}">{{ __('Dashboard') }}</a>
                                 <a class="dropdown-item fs-5" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                     document.getElementById('logout-form').submit();">
+                                    document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

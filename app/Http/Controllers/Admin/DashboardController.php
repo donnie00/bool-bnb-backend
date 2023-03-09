@@ -69,7 +69,7 @@ class DashboardController extends Controller
             }
         }
 
-        // dd($messages);
+         dd($userApartments);
 
         return view('Admin.dashboardMessages', compact('user', 'messages'));
     }
