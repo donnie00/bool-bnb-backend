@@ -1,4 +1,4 @@
-    <aside class="navigation top-0 bottom-0 start-0">
+    <aside class="navigation top-0 bottom-0 start-0 d-flex">
         {{--    @dump($backendURL)
         @dump($frontendURL)  --}}
 
@@ -26,7 +26,7 @@
                     <span class="icon text-cemter pt-2 d-block ">
                         <ion-icon class="fs-3" name="person-outline"></ion-icon>
                     </span>
-                    <span class="title d-block p-relative ps-3">Your Profile</span>
+                    <span class="title d-block p-relative ps-3">Profile</span>
                 </a>
             </li>
 
@@ -38,7 +38,7 @@
                     <span class="icon text-cemter pt-2 d-block">
                         <ion-icon class="fs-3" name="images-outline"></ion-icon>
                     </span>
-                    <span class="title d-block p-relative ps-3">apartments</span>
+                    <span class="title d-block p-relative ps-3">Apartments</span>
                 </a>
             </li>
 
@@ -50,20 +50,23 @@
                     <span class="icon text-cemter pt-2 d-block">
                         <ion-icon class="fs-3" name="mail-outline"></ion-icon>
                     </span>
-                    <span class="title d-block p-relative ps-3">messages</span>
+                    <span class="title d-block p-relative ps-3">Messages</span>
                 </a>
             </li>
-
-
             {{-- logout link --}}
-            <li  class="" style="margin-left: -5px">
+
+        </ul>
+
+        <ul class="bottom-0">
+            <li  class="" style="margin-left: -5px justify-self-end align-self-end position-relative bottom-0 flex-fill">
                 <form class=" " id="logout-form" action="{{ route('logout') }}" method="POST"
                     {{-- class="d-none" --}}>
                     @csrf
-                    <button class="btn btn-link p-0 m-0">
+                    <button class="btn btn-link p-0 m-0 text-decoration-none">
                         <span class="icon text-cemter pt-2 d-block">
                             <ion-icon class="fs-3" name="log-out-outline"></ion-icon>
                         </span>
+                        <span class="title d-block p-relative ps-3 ">Logout</span>
                     </button>
                 </form>
             </li>

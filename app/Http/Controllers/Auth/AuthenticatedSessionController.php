@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME); 
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**
@@ -43,6 +43,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        /* Marika è stata qui */
+        $frontendURL=env('MY_FRONTEND_URL');
+        return redirect($frontendURL);
     }
 }

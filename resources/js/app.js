@@ -6,4 +6,4 @@ import.meta.glob([
 ])
 
 
-console.log($(window));
+/* console.log($(window)); */
