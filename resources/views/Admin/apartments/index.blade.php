@@ -17,16 +17,18 @@
                </tr>
             </thead>
             <tbody>
+               
                @foreach ($apartments as $apartment)
                   <tr>
                         <td>{{ $apartment->title }}</td>
                         @if ($apartment->cover_img !== null)
-                           <td><img src="{{ $apartment->cover_img }}"
+                           <td><img src="{{asset('storage/apartments_images/' . $apartment->cover_img )}}"
                                     style="width: 80px; height: 50px; object-fit:cover; object-position: top  "
                                     alt="Card image cap">
                            </td>
-                        @else
-                           <td><img src="{{ $apartment->images[0]->image }}"
+                        @else 
+                           <td><img src="{{ asset('storage/apartments_images/placeholder-image.png') }}"
+
                                     style="width: 80px; height: 50px; object-fit:cover; object-position: top  "
                                     alt="Card image cap">
                            </td>

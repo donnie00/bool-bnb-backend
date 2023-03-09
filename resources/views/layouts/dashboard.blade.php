@@ -32,7 +32,7 @@
             <main class="dashboard w-100 ps-5 p-4 overflow-x-hidden">
 
                 <h1>Ciao {{ $user->name }}</h1>
-                @dump(Route::currentRouteName())
+                {{-- @dump(Route::currentRouteName()) --}}
                 @yield('content')
             </main>
 
