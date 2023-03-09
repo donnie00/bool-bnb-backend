@@ -22,15 +22,21 @@
                   <tr>
                         <td>{{ $apartment->title }}</td>
                         @if ($apartment->cover_img !== null)
-                           <td><img src="{{asset('storage/apartments_images/' . $apartment->cover_img )}}"
+                           <td><img src="{{asset('storage/' . $apartment->cover_img )}}"
                                     style="width: 80px; height: 50px; object-fit:cover; object-position: top  "
                                     alt="Card image cap">
                            </td>
-                        @else 
-                           <td><img src="{{ asset('storage/apartments_images/placeholder-image.png') }}"
+                        @elseif($apartment->images[0]->image) 
+                           <td><img src="{{ asset($apartment->images[0]->image) }}"
 
                                     style="width: 80px; height: 50px; object-fit:cover; object-position: top  "
                                     alt="Card image cap">
+                           </td>
+
+                        @else
+                           <td><img src="{{ asset('storage/place-holder-image.png') }}"
+                              style="width: 80px; height: 50px; object-fit:cover; object-position: top  "
+                              alt="Card image cap">
                            </td>
                         @endif
                         <td>{{ $apartment->address }}</td>
