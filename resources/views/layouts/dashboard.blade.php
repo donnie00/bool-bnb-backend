@@ -23,8 +23,11 @@
     <div id="app" class="">
         <div class="dashboard-container d-flex justify-content-end">
             @php
-                $backendURL = 'http://127.0.0.1:8000';
-                $frontendURL = 'http://localhost:5174';
+                /*    $backendURL = 'http://127.0.0.1:8000';
+ $frontendURL = 'http://localhost:5174'; */
+                
+                $backendURL = env('MY_BECKEND_URL');
+                $frontendURL = env('MY_FRONTEND_URL');
             @endphp
 
             @include('structure.dashboardAside')
