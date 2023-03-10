@@ -12,11 +12,6 @@ class StoreApartmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-
-        if (!Auth::id()) {
-            return false;
-        }
-
         return true;
     }
 
@@ -27,11 +22,10 @@ class StoreApartmentRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'title' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'latitude' => 'required',
-            'longitude' => 'required',
+            // 'address' => 'required|string|max:255',
             'cover_img' => 'file|image',
             'description' => 'string|max:1000',
             'rooms_qty' => 'required|integer',
@@ -41,6 +35,12 @@ class StoreApartmentRequest extends FormRequest
             'daily_price' => 'required|numeric',
             'visible' => 'nullable|boolean',
             'services' => 'nullable|array',
+            'countryCode' => 'string',
+            'limit' => 'integed',
+            'streetName' => 'string',
+            'postalCode' => 'nullable|integer',
+            'streetNumber' => 'nullable|integer',
+            'municipality' => 'nullable|string'
         ];
     }
 }

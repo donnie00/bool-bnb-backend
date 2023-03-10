@@ -12,10 +12,6 @@ class UpdateApartmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        if (!Auth::id()) {
-            return false;
-        }
-
         return true;
     }
 
@@ -42,6 +38,12 @@ class UpdateApartmentRequest extends FormRequest
             'daily_price' => 'numeric',
             'visible' => 'nullable|boolean',
             'services' => 'nullable|array',
+            'countryCode' => 'nullable|string',
+            'limit' => 'integed',
+            'streetName' => 'nullable|string',
+            'postalCode' => 'nullable|integer',
+            'streetNumber' => 'nullable|integer',
+            'municipality' => 'nullable|string'
         ];
     }
 }

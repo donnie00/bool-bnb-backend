@@ -42,9 +42,9 @@ class ApartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreApartmentRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $id = Auth::id();
 
 
@@ -57,7 +57,14 @@ class ApartmentController extends Controller
             "streetNumber" => $data["streetNumber"],
             "municipality" => $data["municipality"],
 
-        ])->json()["results"][0]["position"];
+        ])->json()["results"][0]["position"] ?? 'error';
+
+        if ($fetch_coordinates === 'error') {
+            return redirect()->route('Admin.apartments.create')->with([
+                'error' => true,
+                'error_message' => 'Indirizzo non valido'
+            ]);
+        }
 
         // Composizione stringa indirizzo da inserire a DB
         $complete_address = $data["streetName"] . " " . $data["streetNumber"] . " " . $data["municipality"] . " " . $data["postalCode"] . " " . $data["countryCode"];
@@ -120,11 +127,12 @@ class ApartmentController extends Controller
             }
         }
 
-
-        $apartment->update([
-            ...$data,
-            "cover_img" => $path ?? $apartment->cover_img
-        ]);
+        $apartment->update(
+            [
+                ...$data,
+                "cover_img" => $path ?? $apartment->cover_img
+            ]
+        );
 
         $apartment->services()->sync($data["services"]);
 

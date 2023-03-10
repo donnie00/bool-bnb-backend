@@ -4,6 +4,12 @@
    <div class="container">
       <h1 class="text-uppercase">create New Apartment:</h1>
 
+      @if (Session::get('error'))
+         <div class="alert alert-danger">
+            <p>{{ Session::get('error_message') }}</p>
+         </div>
+      @endif
+
 
       {{-- rintraccia qualsiasi errore --}}
       @if ($errors->any())
