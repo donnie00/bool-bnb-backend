@@ -309,7 +309,7 @@
 
          {{-- opzioni --}}
          <div class="p-3">
-            <a href="{{ route('Admin.apartments.index') }}" class="btn btn-primary">Annulla</a>
+            <a href="{{ route('Admin.apartments.show', $apartment->id) }}" class="btn btn-primary">Annulla</a>
             <button class="btn btn-secondary">update</button>
       </form>
    </div>

@@ -93,7 +93,7 @@ class ApartmentController extends Controller
             $apartment->services()->attach($data["services"]);
         }
 
-        return Redirect::to(env('MY_FRONTEND_URL') . '/apartments/' . $apartment->id);
+        return redirect()->route('Admin.apartments.show', $apartment->id);
     }
 
     /**
@@ -101,6 +101,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
+        $apartment->load('subscriptions', 'messages');
         return view("Admin.apartments.show", compact("apartment"));
     }
 
@@ -144,7 +145,7 @@ class ApartmentController extends Controller
         $apartment->services()->sync($data["services"]);
 
         // return redirect()->route("Admin.apartments.show", $apartment->id);
-        return Redirect::to(env('MY_FRONTEND_URL') . '/apartments/' . $apartment->id);
+        return redirect()->route('Admin.apartments.show', $apartment->id);
     }
 
     /**
