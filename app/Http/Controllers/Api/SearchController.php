@@ -58,7 +58,7 @@ class SearchController extends Controller
 
         asort($distances);
 
-        dump($distances);
+   /*      dump($distances); */
 
 
         $nearby = [];
@@ -129,7 +129,7 @@ class SearchController extends Controller
             $apartments = $nearby;
         }
 
-        dd($apartments);
+ /*        dd($apartments); */
         /* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
         /*  $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10); */
         $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10);

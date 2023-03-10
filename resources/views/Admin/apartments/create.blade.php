@@ -242,21 +242,22 @@
 
             <div class="text-center"> <legend>SEARCH ADDRESS: </legend></div>
            
-            <div class="input-container pb-2 col-12 ">
-                <label class="form-label fw-semibold " for="address">address:
-                    <span class="text-danger ps-1">*</span>
-                </label>
-                <input type="text"
-                    class="form-control
-              @error('address') is-invalid @elseif(old('address')) is-valid  @enderror"
-                    name="address" id="address" value="{{ old('address', $apartment->address) }}">
+      {{-- address --------------------------------------------------------------- --}}
+      <div class="input-container pb-2 col-12 ">
+        <label class="form-label fw-semibold text-uppercase" for="address">address:
+            <span class="text-danger ps-1">*</span>
+        </label>
+        <input type="text"
+            class="form-control
+            @error('address') is-invalid @elseif(old('address')) is-valid @enderror"
+            name="address" id="address" value="{{ $errors->has('address') ? '' : old('address') }}">
 
-                @error('address')
-                    <div class="invalid-feedback"> {{ $message }} </div>
-                @elseif(old('address'))
-                    <div class="valid-feedback"> ok </div>
-                @enderror
-            </div>
+        @error('address')
+            <div class="invalid-feedback"> {{ $message }} </div>
+        @elseif(old('address'))
+            <div class="valid-feedback"> ok </div>
+        @enderror
+    </div>
 
             {{-- opzioni --}}
             <div class="p-3 text-end">
