@@ -115,7 +115,10 @@ class ApartmentController extends Controller
 
         if (key_exists("cover_img", $data)) {
             $path = Storage::put("apartments_images", $data["cover_img"]);
-            Storage::delete($apartment->cover_img);
+            if($apartment->cover_img){
+                Storage::delete($apartment->cover_img);
+            }
+        
         }
 
 
