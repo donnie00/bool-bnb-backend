@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
+use App\Models\ApartmentSubscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -17,12 +18,19 @@ class ApartmentController extends Controller
     public function index()
     {
         //$apartments = Apartment::paginate(20);
-        
-        $apartments = Apartment::with('images' ,'services')
-            ->orderBy('created_at', 'desc')
-            ->paginate(15);
 
-            
+        $sponsored = ApartmentSubscription::select('apartment_id')->get()->pluck('apartment_id')->toArray();
+
+        if ($sponsored) {
+            $apartments = Apartment::with('images', 'services', 'subscriptions')
+                ->whereIn('id', $sponsored)
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        } else {
+            $apartments = Apartment::with('images', 'services')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        }
 
         return response()->json($apartments);
     }

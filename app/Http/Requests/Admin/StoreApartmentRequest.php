@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Service;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,11 +13,6 @@ class StoreApartmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-
-        if (!Auth::id()) {
-            return false;
-        }
-
         return true;
     }
 
@@ -27,12 +23,13 @@ class StoreApartmentRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'title' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
+          /*   'address' => 'required|string|max:255', */
             'latitude' => 'required',
             'longitude' => 'required',
-            'cover_img' => 'file|image',
+            'cover_img' => 'nullable|file|image',
             'description' => 'string|max:1000',
             'rooms_qty' => 'required|integer',
             'beds_qty' => 'required|integer',
@@ -40,7 +37,7 @@ class StoreApartmentRequest extends FormRequest
             'mq' => 'integer',
             'daily_price' => 'required|numeric',
             'visible' => 'nullable|boolean',
-            'services' => 'nullable|array',
+            'services' => 'required|array',
         ];
     }
 }

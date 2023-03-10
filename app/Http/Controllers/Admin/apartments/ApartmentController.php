@@ -42,9 +42,9 @@ class ApartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreApartmentRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $id = Auth::id();
 
 
@@ -57,7 +57,14 @@ class ApartmentController extends Controller
             "streetNumber" => $data["streetNumber"],
             "municipality" => $data["municipality"],
 
-        ])->json()["results"][0]["position"];
+        ])->json()["results"][0]["position"] ?? 'error';
+
+        if ($fetch_coordinates === 'error') {
+            return redirect()->route('Admin.apartments.create')->with([
+                'error' => true,
+                'error_message' => 'Indirizzo non valido'
+            ]);
+        }
 
         // Composizione stringa indirizzo da inserire a DB
         $complete_address = $data["streetName"] . " " . $data["streetNumber"] . " " . $data["municipality"] . " " . $data["postalCode"] . " " . $data["countryCode"];
@@ -102,8 +109,15 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        $services = Service::all();
-        return view("Admin.apartments.edit", compact("apartment", "services"));
+
+        $userId = Auth::id();
+
+        if ($apartment->user_id === $userId) {
+            $services = Service::all();
+            return view("Admin.apartments.edit", compact("apartment", "services"));
+        } else {
+            return redirect()->route('Admin.apartments.index');
+        }
     }
 
     /**
@@ -115,17 +129,17 @@ class ApartmentController extends Controller
 
         if (key_exists("cover_img", $data)) {
             $path = Storage::put("apartments_images", $data["cover_img"]);
-            if($apartment->cover_img){
+            if ($apartment->cover_img) {
                 Storage::delete($apartment->cover_img);
             }
-        
         }
 
-
-        $apartment->update([
-            ...$data,
-            "cover_img" => $path ?? $apartment->cover_img
-        ]);
+        $apartment->update(
+            [
+                ...$data,
+                "cover_img" => $path ?? $apartment->cover_img
+            ]
+        );
 
         $apartment->services()->sync($data["services"]);
 
@@ -145,6 +159,9 @@ class ApartmentController extends Controller
 
         $apartment->services()->detach();
         $apartment->subscriptions()->detach();
+
+        $images = DB::table('images')->where('apartment_id', $apartment->id)->delete();
+        $messages = DB::table('messages')->where('apartment_id', $apartment->id)->delete();
 
         $apartment->delete();
 
