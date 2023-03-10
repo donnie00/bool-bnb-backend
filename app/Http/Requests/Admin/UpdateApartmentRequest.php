@@ -12,10 +12,6 @@ class UpdateApartmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        if (!Auth::id()) {
-            return false;
-        }
-
         return true;
     }
 

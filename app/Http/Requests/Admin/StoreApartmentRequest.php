@@ -13,11 +13,6 @@ class StoreApartmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-
-        if (!Auth::id()) {
-            return false;
-        }
-
         return true;
     }
 
@@ -28,9 +23,10 @@ class StoreApartmentRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'title' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
+          /*   'address' => 'required|string|max:255', */
             'latitude' => 'required',
             'longitude' => 'required',
             'cover_img' => 'nullable|file|image',

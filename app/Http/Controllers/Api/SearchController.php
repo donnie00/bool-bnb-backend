@@ -14,15 +14,14 @@ class SearchController extends Controller
     {
 
         // $data = [
-        //     'lat' => 41.90793,
-        //     'lon' => 12.46557,
-        //     'radius' => 1.6910459936511,
+        //     'lat' => 41.89056,
+        //     'lon' => 12.49427,
+        //     'radius' => 2.3,
         //     'min_rooms' => 2,
-        //     'min_beds' => 3,
-        //     'services' => [1, 4],
+        //     'min_beds' => 4,
+        //     'services' => [1, 4, 6, 2, 7],
         // ];
 
-        // dd($request->query());
 
         $data = $request->all();
 
@@ -49,6 +48,7 @@ class SearchController extends Controller
 
         $distances = [];
 
+
         foreach ($dbCoord as $key => $coord) {
 
             $distance = acos((sin($searchCoord['lat'])) * (sin($coord['lat'])) + (cos($searchCoord['lat'])) * (cos($coord['lat'])) * (cos($coord['lon'] - $searchCoord['lon']))) * 6373;
@@ -57,6 +57,9 @@ class SearchController extends Controller
         }
 
         asort($distances);
+
+        dump($distances);
+
 
         $nearby = [];
 
@@ -77,43 +80,31 @@ class SearchController extends Controller
                 array_push($nearby, $key);
             }
         }
-/* 
+        /*
         $apartments = $nearby; */
         $apartments = [];
 
-/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
+        /* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
 
-if (array_key_exists('min_rooms', $data) || array_key_exists('min_beds', $data)|| array_key_exists('services', $data)){
- 
-        if ( array_key_exists('min_rooms', $data)&& $data['min_rooms'] > 0) {
-            $dbApartments = DB::table("apartments")->select("id")
-                ->whereIn("id", $nearby)
-                ->where('rooms_qty', '>', $data['min_rooms'])
-                ->get()
-                ->pluck('id')
-                ->toArray();
-            $apartments = $dbApartments;
-        }
+        if (array_key_exists('min_rooms', $data) || array_key_exists('min_beds', $data) || array_key_exists('services', $data)) {
 
-        if ( array_key_exists('min_beds', $data) &&  $data['min_beds'] > 1) {
-
-            $dbApartments = Apartment::select("id")->whereIn('id', $nearby)
-                ->where('beds_qty', '>', $data['min_beds'])
-                ->get()
-                ->pluck('id')
-                ->toArray();
-
-            foreach ($apartments as $key => $apartment) {
-                if (!in_array($apartment, $dbApartments)) {
-                    array_splice($apartments, $key, 1);
-                }
+            if (array_key_exists('min_rooms', $data) && $data['min_rooms'] > 0) {
+                $dbApartments = DB::table("apartments")->select("id")
+                    ->whereIn("id", $nearby)
+                    ->where('rooms_qty', '>', $data['min_rooms'])
+                    ->get()
+                    ->pluck('id')
+                    ->toArray();
+                $apartments = $dbApartments;
             }
-        }
 
-        if (in_array('services', $data) && count($data['services'])) {
-            foreach ($data['services'] as $service) {
-                $dbApartments = ApartmentService::select('apartment_id')->whereIn('apartment_id', $nearby)->where('service_id', $service)->get()->pluck('apartment_id')->toArray();
-                array_merge($apartments, $dbApartments);
+            if (array_key_exists('min_beds', $data) &&  $data['min_beds'] > 1) {
+
+                $dbApartments = Apartment::select("id")->whereIn('id', $nearby)
+                    ->where('beds_qty', '>', $data['min_beds'])
+                    ->get()
+                    ->pluck('id')
+                    ->toArray();
 
                 foreach ($apartments as $key => $apartment) {
                     if (!in_array($apartment, $dbApartments)) {
@@ -121,14 +112,27 @@ if (array_key_exists('min_rooms', $data) || array_key_exists('min_beds', $data)|
                     }
                 }
             }
+
+            if (in_array('services', $data) && count($data['services'])) {
+                foreach ($data['services'] as $service) {
+                    $dbApartments = ApartmentService::select('apartment_id')->whereIn('apartment_id', $nearby)->where('service_id', $service)->get()->pluck('apartment_id')->toArray();
+                    array_merge($apartments, $dbApartments);
+
+                    foreach ($apartments as $key => $apartment) {
+                        if (!in_array($apartment, $dbApartments)) {
+                            array_splice($apartments, $key, 1);
+                        }
+                    }
+                }
+            }
+        } else {
+            $apartments = $nearby;
         }
 
-    }else{
-        $apartments=$nearby;
-    }
-/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
-       /*  $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10); */
-        $nearApartments = Apartment::whereIn('id', $apartments )->paginate(10);
+        dd($apartments);
+        /* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
+        /*  $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10); */
+        $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10);
         return response()->json($nearApartments);
     }
 }
