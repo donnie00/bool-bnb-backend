@@ -34,7 +34,7 @@ class StoreApartmentRequest extends FormRequest
             'mq' => 'integer',
             'daily_price' => 'required|numeric',
             'visible' => 'nullable|boolean',
-            'services' => 'nullable|array',
+            'services' => 'required|array',
             'countryCode' => 'string',
             'limit' => 'integed',
             'streetName' => 'string',

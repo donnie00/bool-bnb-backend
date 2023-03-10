@@ -19,13 +19,18 @@ class ApartmentController extends Controller
     {
         //$apartments = Apartment::paginate(20);
 
-        // $sponsored = ApartmentSubscription::select('apartment_id')->get()->pluck('id')->toArray();
+        $sponsored = ApartmentSubscription::select('apartment_id')->get()->pluck('apartment_id')->toArray();
 
-        $apartments = Apartment::with('images', 'services')
-            ->orderBy('created_at', 'desc')
-            ->paginate(15);
-
-
+        if ($sponsored) {
+            $apartments = Apartment::with('images', 'services', 'subscriptions')
+                ->whereIn('id', $sponsored)
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        } else {
+            $apartments = Apartment::with('images', 'services')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        }
 
         return response()->json($apartments);
     }

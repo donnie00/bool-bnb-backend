@@ -37,7 +37,7 @@ class UpdateApartmentRequest extends FormRequest
             'mq' => 'integer',
             'daily_price' => 'numeric',
             'visible' => 'nullable|boolean',
-            'services' => 'nullable|array',
+            'services' => 'required|array',
             'countryCode' => 'nullable|string',
             'limit' => 'integed',
             'streetName' => 'nullable|string',
