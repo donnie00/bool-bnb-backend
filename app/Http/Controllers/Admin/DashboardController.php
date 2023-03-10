@@ -23,6 +23,8 @@ class DashboardController extends Controller
 
         $userApartmentsCount = count($userApartments);
 
+
+
         $lastApartments = [];
         $totalMessages = 0;
 
