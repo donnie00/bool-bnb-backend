@@ -26,7 +26,7 @@ class registerRequest extends FormRequest
             'name' => 'required | string |min:2 |max:255',
             'surname' => 'required | string | min:2 |max:255',
             'birth_date' => 'required | date',
-            'email' => 'required | string | email | max:255| unique:users',//'unique:'.User::class
+            'email' => 'required | string | email | max:255| unique:users',
             'password' => 'required| min:6|confirmed ',
         ];
     }

@@ -27,21 +27,20 @@ class UpdateApartmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'exists:users,id',
-
-            'title' => 'string|max:255',
-            'address' => 'string|max:255',
-            'latitude' => '',
-            'longitude' => '',
+            'user_id' => 'required|exists:users,id',
+            'title' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'latitude' => 'required',
+            'longitude' => 'required',
             'cover_img' => 'file|image',
             'description' => 'string|max:1000',
-            'rooms_qty' => 'integer',
-            'beds_qty' => 'integer',
-            'bathrooms_qty' => 'integer',
+            'rooms_qty' => 'required|integer',
+            'beds_qty' => 'required|integer',
+            'bathrooms_qty' => 'required|integer',
             'mq' => 'integer',
-            'daily_price' => 'numeric',
+            'daily_price' => 'required|numeric',
             'visible' => 'nullable|boolean',
-            'services' => 'nullable|array',
+            'services' => 'required|array',
         ];
     }
 }

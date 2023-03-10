@@ -24,7 +24,9 @@
 
             {{-- title --------------------------------------------------------------- --}}
             <div class="input-container pb-2 col-12 ">
-                <label class="form-label text-uppercase" for="title">TITOLO:</label>
+                <label class="form-label fw-semibold " for="title">Title:
+                    <span class="text-danger ps-1">*</span>
+                </label>
                 <input type="text"
                     class="form-control
               @error('title') is-invalid @elseif(old('title')) is-valid  @enderror"
@@ -41,7 +43,9 @@
 
             {{-- price/night --------------------------------------------------------------- --}}
             <div class="input-container pb-2 col-12 col-md-5">
-                <label for="daily_price" class="form-label text-uppercase">price/night:</label>
+                <label for="daily_price" class="form-label fw-semibold">price/night:
+                    <span class="text-danger ps-1">*</span>
+                </label>
                 <input type="number"
                     class="form-control
               @error('daily_price') is-invalid @elseif(old('daily_price')) is-valid @enderror"
@@ -56,7 +60,7 @@
 
             {{-- MQ --------------------------------------------------------------- --}}
             <div class="input-container pb-2 col-12 col-md-5">
-                <label for="mq" class="form-label text-uppercase">MQ:</label>
+                <label for="mq" class="form-label fw-semibold">MQ:</label>
                 <input type="number"
                     class="form-control
               @error('mq') is-invalid @elseif(old('mq')) is-valid @enderror"
@@ -96,7 +100,7 @@
 
             {{-- cover_img ----------------------------------------------------------- --}}
             <div class="input-container pb-2">
-                <label class="form-label text-uppercase" for="cover_img">IMMAGINE</label>
+                <label class="form-label fw-semibold text-uppercase" for="cover_img">IMMAGINE</label>
                 <input type="file" class="form-control
                 @error('cover_img') is-invalid  @enderror"
                     name="cover_img" id="cover_img" value="{{ old('cover_img') }}">
@@ -111,7 +115,7 @@
 
             {{-- description -------------------------------------------------- --}}
             <div class="input-container pb-2">
-                <label class="form-label" for="description">Descrizione</label>
+                <label class="form-label fw-semibold" for="description">Descrizione</label>
                 <textarea name="description" id="description" cols="30" rows="3"
                     class="form-control
                 @error('description') is-invalid @elseif(old('description')) is-valid @enderror">
@@ -127,7 +131,9 @@
             {{-- ROOMS QTY ------------------------------------------------------------------ --}}
 
             <div class="input-container pb-2 col-4 ">
-                <label class="form-label" for="rooms_qty">rooms quantity</label>
+                <label class="form-label fw-semibold" for="rooms_qty">rooms quantity
+                    <span class="text-danger ps-1">*</span>
+                </label>
                 <select
                     class="form-control
             @error('rooms_qty') is-invalid @elseif(old('rooms_qty')) is-valid @enderror"
@@ -151,7 +157,9 @@
             {{-- BEDROOMS QTY ------------------------------------------------------------------ --}}
 
             <div class="input-container pb-2 col-4 ">
-                <label class="form-label" for="beds_qty">bed quantity</label>
+                <label class="form-label fw-semibold" for="beds_qty">bed quantity
+                    <span class="text-danger ps-1">*</span>
+                </label>
                 <select
                     class="form-control
             @error('beds_qty') is-invalid @elseif(old('beds_qty')) is-valid @enderror"
@@ -176,7 +184,9 @@
             {{-- BATHROOMS QTY ------------------------------------------------------------------ --}}
 
             <div class="input-container pb-2 col-4 ">
-                <label class="form-label" for="bathrooms_qty">bed quantity</label>
+                <label class="form-label fw-semibold" for="bathrooms_qty">bed quantity
+                    <span class="text-danger ps-1">*</span>
+                </label>
                 <select
                     class="form-control
             @error('bathrooms_qty') is-invalid @elseif(old('bathrooms_qty')) is-valid @enderror"
@@ -203,7 +213,9 @@
             {{-- services ------------------------------------------------------------------ --}}
 
             <div class="input-container pb-2">
-                <label class="form-label d-block">SERVICES:</label>
+                <label class="form-label fw-semibold d-block">SERVICES:
+                    <span class="text-danger ps-1">*</span>
+                </label>
                 <div class="row">
                     @foreach ($services as $service)
                         <div class="col d-flex align-items-center @error('services') is-invalid @enderror ">
@@ -226,89 +238,22 @@
 
             <h6 class="">address saved: {{ $apartment->address }}</h6>
             <legend>MODIFY ADDRESS: </legend>
-            <fieldset class="border rounded-3 p-3 row">
 
-                {{-- street name --------------------------------------------------------------- --}}
-                <div class="input-container pb-2 col-12 col-md-5">
-                    <label class="form-label" for="streetName">Street Name:</label>
-                    <input type="text"
-                        class="form-control
-            @error('streetName') is-invalid @elseif(old('	streetName')) is-valid @enderror"
-                        name="streetName" id="streetName"
-                        value="{{ $errors->has('streetName') ? '' : old('streetName') }}">
+            <div class="input-container pb-2 col-12 ">
+                <label class="form-label fw-semibold " for="address">address:
+                    <span class="text-danger ps-1">*</span>
+                </label>
+                <input type="text"
+                    class="form-control
+              @error('address') is-invalid @elseif(old('address')) is-valid  @enderror"
+                    name="address" id="address" value="{{ old('address', $apartment->address) }}">
 
-                    @error('streetName')
-                        <div class="invalid-feedback"> {{ $message }} </div>
-                    @elseif(old('streetName'))
-                        <div class="valid-feedback"> ok </div>
-                    @enderror
-                </div>
-
-                {{-- street number --------------------------------------------------------------- --}}
-                <div class="input-container pb-2 col-12 col-md-4">
-                    <label for="streetNumber" class="form-label">Street Number:</label>
-                    <input type="text"
-                        class="form-control
-            @error('streetNumber') is-invalid @elseif(old('	streetNumber')) is-valid @enderror"
-                        name="streetNumber" id="streetNumber"
-                        value="{{ $errors->has('streetNumber') ? '' : old('streetNumber') }}">
-
-                    @error('streetNumber')
-                        <div class="invalid-feedback"> {{ $message }} </div>
-                    @elseif(old('streetNumber'))
-                        <div class="valid-feedback"> ok </div>
-                    @enderror
-                </div>
-
-                {{-- postal code --------------------------------------------------------------- --}}
-                <div class="input-container pb-2 col-12 col-md-3">
-                    <label for="postalCode" class="form-label">Postal Code:</label>
-                    <input type="number"
-                        class="form-control
-            @error('postalCode') is-invalid @elseif(old('	postalCode')) is-valid @enderror"
-                        name="postalCode" id="postalCode"
-                        value="{{ $errors->has('postalCode') ? '' : old('postalCode') }}">
-
-                    @error('postalCode')
-                        <div class="invalid-feedback"> {{ $message }} </div>
-                    @elseif(old('postalCode'))
-                        <div class="valid-feedback"> ok </div>
-                    @enderror
-                </div>
-
-                {{-- city--------------------------------------------------------------- --}}
-                <div class="input-container pb-2 col-12 col-md-5">
-                    <label for="municipality" class="form-label">City/TOWN:</label>
-                    <input type="text"
-                        class="form-control
-            @error('municipality') is-invalid @elseif(old('	municipality')) is-valid @enderror"
-                        name="municipality" id="municipality"
-                        value="{{ $errors->has('municipality') ? '' : old('municipality') }}">
-
-                    @error('municipality')
-                        <div class="invalid-feedback"> {{ $message }} </div>
-                    @elseif(old('municipality'))
-                        <div class="valid-feedback"> ok </div>
-                    @enderror
-                </div>
-
-                {{-- countryCode --}}
-                <div class="input-container pb-2 col-12 col-md-2">
-                    <label class="form-label" for="countryCode">COUNTRY CODE:</label>
-                    <select
-                        class="form-control
-                        @error('countryCode') is-invalid @elseif(old('countryCode')) is-valid @enderror"
-                        id="countryCode" name="countryCode">
-                        <option value="IT" selected>IT </option>
-
-                    </select>
-                    @error('countryCode')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @elseif(old('countryCode'))
-                        <div class="valid-feedback">ok </div>
-                    @enderror
-                </div>
-            </fieldset>
+                @error('address')
+                    <div class="invalid-feedback"> {{ $message }} </div>
+                @elseif(old('address'))
+                    <div class="valid-feedback"> ok </div>
+                @enderror
+            </div>
 
             {{-- opzioni --}}
             {{-- opzioni --}}
@@ -319,4 +264,18 @@
         </form>
     </div>
 
+
+    <!-- Javascript Requirements -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Laravel Javascript Validation -->
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
+
+    {!! JsValidator::formRequest('App\Http\Requests\Admin\UpdateApartmentRequest') !!};
+    <style>
+        span {
+            color: red
+        }
+    </style>
 @endsection
