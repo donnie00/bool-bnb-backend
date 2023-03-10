@@ -4,6 +4,18 @@ import * as bootstrap from 'bootstrap';
 import.meta.glob([
     '../img/**'
 ])
+const deleteForms_list = document.querySelectorAll(".delete-form");
 
+/* DELETE INDEX BUTTONS */
+deleteForms_list.forEach((deleteForm) => {
+    deleteForm.addEventListener("submit", function (event) {
 
-/* console.log($(window)); */
+        event.preventDefault();
+        const conf = confirm("do you really want to delete this item?");
+
+        if (conf === true) {
+            deleteForm.submit();
+        }
+    })
+});
+
