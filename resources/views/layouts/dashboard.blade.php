@@ -36,7 +36,7 @@
 
                 <h1>Ciao {{ $user->name }}</h1>
                 {{-- @dump(Route::currentRouteName()) --}}
-                @yield('content')
+                @yield('content','frontendURL')
             </main>
 
         </div>
