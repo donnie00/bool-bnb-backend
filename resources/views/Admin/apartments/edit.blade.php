@@ -255,7 +255,6 @@
          </div>
 
          {{-- opzioni --}}
-         {{-- opzioni --}}
          <div class="p-3 text-end">
             <a href="{{ route('Admin.apartments.index') }}" class="btn btn-info text-light"> Back </a>
             <button class="btn btn-primary text-light">Update apartament</button>
