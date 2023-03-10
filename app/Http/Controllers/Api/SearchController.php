@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
+
+
+
     public function search(Request $request)
     {
 
@@ -53,12 +56,12 @@ class SearchController extends Controller
 
             $distance = acos((sin($searchCoord['lat'])) * (sin($coord['lat'])) + (cos($searchCoord['lat'])) * (cos($coord['lat'])) * (cos($coord['lon'] - $searchCoord['lon']))) * 6373;
 
-            $distances[$key] = $distance;
+            $distances += [$key => $distance];
         }
 
-        asort($distances);
+        //asort($distances);
 
-   /*      dump($distances); */
+        // dd($distances);
 
 
         $nearby = [];
@@ -129,10 +132,37 @@ class SearchController extends Controller
             $apartments = $nearby;
         }
 
- /*        dd($apartments); */
-        /* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
-        /*  $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10); */
+        
         $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10);
-        return response()->json($nearApartments);
+
+        foreach ($nearApartments as $nearApartment) {
+            $nearApartment["distance"] = $distances[$nearApartment->id];
+        }
+
+       // FUNZIONE ordinamento appartamenti per distanza  
+        function sort_apartments_by_distnace($apts)
+        {
+            // prende il numero di appartamenti 
+            $count = count($apts);
+
+            // Cicla gli appartamenti e confronta ognuno con  il successivo
+            for ($i = 0; $i < $count - 1; $i++) {
+                for ($j = $i + 1; $j < $count; $j++) {
+                    // se l'appartamento corrente ha distanza maggiore del successivo li scambia
+                    if ($apts[$i]["distance"] > $apts[$j]["distance"]) {
+                        $temp = $apts[$i];
+                        $apts[$i] = $apts[$j];
+                        $apts[$j] = $temp;
+                    }
+                }
+            }
+
+            return $apts;
+        }
+
+        $nearApartmentsSorted = sort_apartments_by_distnace($nearApartments);
+
+
+        return response()->json($nearApartmentsSorted);
     }
 }
