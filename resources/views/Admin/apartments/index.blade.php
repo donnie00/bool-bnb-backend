@@ -1,11 +1,10 @@
 @extends('layouts.dashboard')
 
 @section('content')
-
-{{-- pezza perchè non lo recupera da dashboard layout?? --}}
-@php
-     $frontendURL = env('MY_FRONTEND_URL');
-@endphp
+    {{-- pezza perchè non lo recupera da dashboard layout?? --}}
+    @php
+        $frontendURL = env('MY_FRONTEND_URL');
+    @endphp
 
 
 
@@ -53,15 +52,27 @@
                                         class=" btn btn-success">Edit</a>
                                 </div>
                                 <div>
+                                    {{-- href="{{ $frontendURL }}/apartments/{{ $apartment->id }} --}}
                                     {{-- {{ route('Admin.apartments.show', $apartment->id) }} --}}
-                                    <a href="{{ $frontendURL }}/apartments/{{ $apartment->id }}"
+                                    <a href=" {{ route('Admin.apartments.show', $apartment->id) }}"
                                         class=" btn btn-warning">Show</a>
                                 </div>
 
-                                <form action="{{ route('Admin.apartments.destroy', $apartment->id) }}" method="POST">
+{{-- 
+                                <form class="delete-form " action="{{ route($route, $element_id) }}" method="POST">
+                                    @csrf()
+                                    @method('DELETE')
+
+                                    <button class="destroy-btn btn btn-danger">
+                                        <ion-icon name="close-outline"></ion-icon>
+                                    </button>
+                                </form>
+ --}}
+
+                                <form  class="delete-form " action="{{ route('Admin.apartments.destroy', $apartment->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger">Delete</button>
+                                    <button class="destroy-btn btn btn-danger">Delete</button>
                                 </form>
                                 <div>
                                     <a href="{{-- {{route('Admin.apartments.sponsored', $apartment->id) }} --}}" class="ms-4 btn btn-info rounded-4">Sponsor</a>
