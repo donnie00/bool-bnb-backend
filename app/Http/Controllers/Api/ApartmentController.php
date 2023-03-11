@@ -17,17 +17,18 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        //$apartments = Apartment::paginate(20);
 
         $sponsored = ApartmentSubscription::select('apartment_id')->get()->pluck('apartment_id')->toArray();
 
         if ($sponsored) {
             $apartments = Apartment::with('images', 'services', 'subscriptions')
+                ->where('visible', 1)
                 ->whereIn('id', $sponsored)
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
         } else {
             $apartments = Apartment::with('images', 'services')
+                ->where('visible', 1)
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
         }
