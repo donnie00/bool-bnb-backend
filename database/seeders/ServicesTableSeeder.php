@@ -64,7 +64,7 @@ class ServicesTableSeeder extends Seeder
             ]
         ];
 
-        foreach ($services as $service)
+        foreach ($services as $service) {
 
             $newService = new Service();
 
