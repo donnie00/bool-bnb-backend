@@ -34,18 +34,18 @@
                     </li>
                     <li class="nav-item  d-flex flex-column align-items-center">
                         <a class="nav-link fs-5  pt-md-4 px-2"
-                            href="{{ $frontendURL }}/apartments">{{-- ok redirect to client side --}}
+                            href="{{ env('MY_FRONTEND_URL')  . "/apartments"}}">{{-- ok redirect to client side --}}
                             {{ __('Apartments') }}</a>
                         <div class="link-underline m-3 mb-0"></div>
                     </li>
 
                     <li class="nav-item  d-flex flex-column align-items-center">
-                        <a class="nav-link fs-5  pt-md-4 px-2" href="{{ env('MY_FRONTEND_URL') }}/abaut">
+                        <a class="nav-link fs-5  pt-md-4 px-2" href="{{ env('MY_FRONTEND_URL'). "/abaut" }}  ">
                             {{ __('About') }}</a>
                         <div class="link-underline m-3 mb-0"></div>
                     </li>
                     <li class="nav-item  d-flex flex-column align-items-center">
-                        <a class="nav-link fs-5  pt-md-4 px-2" href="{{ env('MY_FRONTEND_URL') }}/contact">
+                        <a class="nav-link fs-5  pt-md-4 px-2" href="{{ env('MY_FRONTEND_URL') . "/contact" }}">
                             {{ __('Contacts') }}</a>
                         <div class="link-underline m-3 mb-0"></div>
                     </li>
