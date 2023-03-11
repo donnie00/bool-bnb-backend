@@ -61,7 +61,7 @@ class SearchController extends Controller
 
         //asort($distances);
 
-        // dd($distances);
+        /*      dump($distances); */
 
 
         $nearby = [];

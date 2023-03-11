@@ -58,6 +58,10 @@ class ServicesTableSeeder extends Seeder
                 'name' => 'Parcheggio',
                 'icon' => 'parking-location-icon.svg'
             ],
+            [
+                'name' => 'Barbeque',
+                'icon' => 'bbq-icon.svg'
+            ]
         ];
 
         foreach ($services as $service) {
