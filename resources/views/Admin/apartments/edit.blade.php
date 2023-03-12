@@ -243,6 +243,15 @@
                 <label class="form-label fw-semibold " for="address">address:
                     <span class="text-danger ps-1">*</span>
 
+                      {{-- LAT E LON CON MANEGGIO PER MESSAGGIO  --}}
+                      <div>
+                        <input name="latitude" id="lat" class="SelectedAddress opacity-0" type="text" placeholder="lat"
+                            style="width:1px; margin-left:-5px" />
+
+                        <input name="longitude" id="lon" class="SelectedAddress opacity-0" type="text"
+                            placeholder="lon" style="width:1px" />
+                    </div>
+
                 </label>
                 <div class="position-relative">
                     <input type="text" placeholder="Search Apartment"

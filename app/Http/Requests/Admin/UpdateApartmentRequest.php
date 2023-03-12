@@ -23,12 +23,12 @@ class UpdateApartmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|exists:users,id',
+         /*    'user_id' => 'required|exists:users,id', */
             'title' => 'required|string|max:255',
-            /* devo fare un controllo: se non ci sono lat e long allora devo dire che address non è valido */
             'address' => 'required|string|max:255',
             'latitude' => 'required',
             'longitude' => 'required',
+
             'cover_img' => 'nullable|file|image',
             'description' => 'nullable|string|max:1000',
             'rooms_qty' => 'required|integer',
@@ -38,6 +38,14 @@ class UpdateApartmentRequest extends FormRequest
             'daily_price' => 'required|numeric',
             'visible' => 'nullable|boolean',
             'services' => 'required|array',
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'address.required' => '',
+            'latitude.required' => 'enter a valid address',
+            'longitude.required' => '',
         ];
     }
 }

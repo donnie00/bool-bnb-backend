@@ -249,16 +249,23 @@
                 <label class="form-label fw-semibold " for="address">address:
                     <span class="text-danger ps-1">*</span>
 
+
+                    {{-- LAT E LON CON MANEGGIO PER MESSAGGIO  --}}
+                    <div>
+                        <input name="latitude" id="lat" class="SelectedAddress opacity-0" type="text" placeholder="lat"
+                            style="width:1px; margin-left:-5px" />
+
+                        <input name="longitude" id="lon" class="SelectedAddress opacity-0" type="text"
+                            placeholder="lon" style="width:1px" />
+                    </div>
+
                 </label>
                 <div class="position-relative">
                     <input type="text" placeholder="Search Apartment"
                         class="form-control 
-            @error('address','latitude','longitude') is-invalid @elseif(old('address')) is-valid @enderror"
-       {{--      @error('address') is-invalid @elseif(old('address')) is-valid @enderror"
-            @error('latitude') is-invalid @elseif(old('latitude')) is-valid @enderror"
-            @error('longitude') is-invalid @elseif(old('longitude')) is-valid @enderror" --}}
-            
-                        name="address" id="search_input" value="{{ $errors->has('address') ? '' : old('address') }}">
+            @error('address', 'latitude', 'longitude') is-invalid @elseif(old('address')) is-valid @enderror"
+                name="address" id="search_input"
+                        value="{{ $errors->has('address') ? '' : old('address') }}">
 
                     <button class="my-btn">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -277,13 +284,6 @@
                         <li class="suggestion-list-items  list-unstyled list-group-item-action list-group-item d-none">
                         </li>
                     </ul>
-
-
-                    <input name="latitude" id="lat" class="SelectedAddress" type="text" placeholder="lat"  />
-
-                    <input name="longitude" id="lon" class="SelectedAddress" type="text" placeholder="lon" />
-
-
 
                     @error('address')
                         <div class="invalid-feedback"> {{ $message }} / invalid address entred </div>

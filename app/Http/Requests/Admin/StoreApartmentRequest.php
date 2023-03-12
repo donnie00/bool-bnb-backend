@@ -42,13 +42,12 @@ class StoreApartmentRequest extends FormRequest
             'services' => 'required|array',
         ];
     }
-    public function messages(): array{
-        return[
-            'latitude.required'=> 'enter a valid address',
-            //se non ce ne è anche solo uno vuol dire che non è andato a buon fine quindi commenterei uno dei due
-            'longitude.required'=> 'enter a valid address',
-            'address.required'=> 'enter a valid address',
-
+    public function messages(): array
+    {
+        return [
+            'address.required' => '',
+            'latitude.required' => 'enter a valid address',
+            'longitude.required' => '',
         ];
     }
 }
