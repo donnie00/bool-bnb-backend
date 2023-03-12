@@ -253,7 +253,11 @@
                 <div class="position-relative">
                     <input type="text" placeholder="Search Apartment"
                         class="form-control 
-            @error('address') is-invalid @elseif(old('address')) is-valid @enderror"
+            @error('address','latitude','longitude') is-invalid @elseif(old('address')) is-valid @enderror"
+       {{--      @error('address') is-invalid @elseif(old('address')) is-valid @enderror"
+            @error('latitude') is-invalid @elseif(old('latitude')) is-valid @enderror"
+            @error('longitude') is-invalid @elseif(old('longitude')) is-valid @enderror" --}}
+            
                         name="address" id="search_input" value="{{ $errors->has('address') ? '' : old('address') }}">
 
                     <button class="my-btn">
@@ -275,15 +279,27 @@
                     </ul>
 
 
-                    <input name="latitude" id="lat" class="SelectedAddress" type="hidden" placeholder="lat"  />
+                    <input name="latitude" id="lat" class="SelectedAddress" type="text" placeholder="lat"  />
 
-                    <input name="longitude" id="lon" class="SelectedAddress" type="hidden" placeholder="lon" />
+                    <input name="longitude" id="lon" class="SelectedAddress" type="text" placeholder="lon" />
 
 
 
                     @error('address')
-                        <div class="invalid-feedback"> {{ $message }} </div>
+                        <div class="invalid-feedback"> {{ $message }} / invalid address entred </div>
                     @elseif(old('address'))
+                        <div class="valid-feedback"> ok </div>
+                    @enderror
+
+                    @error('latitude')
+                        <div class="invalid-feedback"> {{ $message }} / invalid address entred </div>
+                    @elseif(old('latitude'))
+                        <div class="valid-feedback"> ok </div>
+                    @enderror
+
+                    @error('longitude')
+                        <div class="invalid-feedback"> {{ $message }} / invalid address entred </div>
+                    @elseif(old('longitude'))
                         <div class="valid-feedback"> ok </div>
                     @enderror
                 </div>
