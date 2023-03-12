@@ -26,15 +26,17 @@ class StoreApartmentRequest extends FormRequest
 
         return [
             'title' => 'required|string|max:255',
-          /*   'address' => 'required|string|max:255', */
+
+            /* devo fare un controllo: se non ci sono lat e long allora devo dire che address non è valido */
+            'address' => 'required|string|max:255',
             'latitude' => 'required',
             'longitude' => 'required',
             'cover_img' => 'nullable|file|image',
-            'description' => 'string|max:1000',
+            'description' => 'nullable|string|max:1000',
             'rooms_qty' => 'required|integer',
             'beds_qty' => 'required|integer',
             'bathrooms_qty' => 'required|integer',
-            'mq' => 'integer',
+            'mq' => 'nullable|integer',
             'daily_price' => 'required|numeric',
             'visible' => 'nullable|boolean',
             'services' => 'required|array',
