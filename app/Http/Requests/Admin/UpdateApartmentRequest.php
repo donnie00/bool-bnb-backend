@@ -25,6 +25,7 @@ class UpdateApartmentRequest extends FormRequest
         return [
             'user_id' => 'required|exists:users,id',
             'title' => 'required|string|max:255',
+            /* devo fare un controllo: se non ci sono lat e long allora devo dire che address non è valido */
             'address' => 'required|string|max:255',
             'latitude' => 'required',
             'longitude' => 'required',
