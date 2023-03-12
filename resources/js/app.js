@@ -7,23 +7,8 @@ import.meta.glob([
 ])
 
 
-/* DELETE FORM CONFIRMATION */
-const deleteForms_list = document.querySelectorAll(".delete-form");
 
-/* DELETE INDEX BUTTONS */
-deleteForms_list.forEach((deleteForm) => {
-    deleteForm.addEventListener("submit", function (event) {
-
-        event.preventDefault();
-        const conf = confirm("do you really want to delete this item?");
-
-        if (conf === true) {
-            deleteForm.submit();
-        }
-    })
-});
-
-/* AUTOCOMPLETE */
+/* AUTOCOMPLETE ***********************************************************/
 
 /* search text */
 const SearchImput_Element = document.getElementById('search_input');
@@ -162,3 +147,20 @@ function createElementFromObject(tagEl, classes) {
     created_El.classList.add(...classes);
     return created_El
 }
+
+
+/* DELETE FORM CONFIRMATION ************************************************/
+const deleteForms_list = document.querySelectorAll(".delete-form");
+
+/* DELETE INDEX BUTTONS */
+deleteForms_list.forEach((deleteForm) => {
+    deleteForm.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+        const conf = confirm("do you really want to delete this item?");
+
+        if (conf === true) {
+            deleteForm.submit();
+        }
+    })
+});

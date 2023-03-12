@@ -36,7 +36,7 @@ class StoreApartmentRequest extends FormRequest
             'rooms_qty' => 'required|integer',
             'beds_qty' => 'required|integer',
             'bathrooms_qty' => 'required|integer',
-            'mq' => 'integer',
+            'mq' => 'nullable|integer',
             'daily_price' => 'required|numeric',
             'visible' => 'nullable|boolean',
             'services' => 'required|array',
