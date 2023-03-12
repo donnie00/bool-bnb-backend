@@ -162,33 +162,3 @@ function createElementFromObject(tagEl, classes) {
     created_El.classList.add(...classes);
     return created_El
 }
-/* 
-getSuggestions() {
-    if (this.querySearchText.length > 0) {
-        axios.get(`https://api.tomtom.com/search/2/geocode/${this.querySearchText}.json?storeResult=false&limit=5&countrySet=IT&view=Unified&key=OwsqVQlIWGAZAkomcYI0rDYG2tDpmRPE`)
-            .then((resp) => {
-   
-                this.suggestions = resp.data.results;
-                console.log(this.suggestions);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    } else {
-        this.suggestions = [];
-    }
-},
-
-selectSuggestion(suggestion) {
-  
-    this.querySearchText = (suggestion.address.freeformAddress + ', ' + suggestion.address.country);
-  
-    this.dataToRedirect = { ...suggestion.position, homeSearchAddress: this.querySearchText };
-    console.log('QUELLO CHE PASSO IN ADVANCED SEARCH E SU CUI FACCIO LA CALL TOMTOM', this.dataToRedirect);
-    //reset list sparisce dropdown!
-
-    this.suggestions = [];
-
-    //REDIRECT
-    this.$router.push({ name: "AdvancedSearch", query: { ...this.dataToRedirect } });
-}, */

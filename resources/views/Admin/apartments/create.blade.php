@@ -249,38 +249,6 @@
                 <label class="form-label fw-semibold " for="address">address:
                     <span class="text-danger ps-1">*</span>
 
-
-
-                    {{--  
-                  IMPUT ORIGINALE 
-                  <div class="position-relative">
-                        <input name="querySearchText" id="search_input" type="text" placeholder="Search Apartment" />
-                        <button class="my-btn">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                        <ul class="SuggestionAddressList  list-group list-group-flush"
-                            v-if="suggestions && suggestions.length > 0">
-                            <li class="suggestion-list-items  list-unstyled list-group-item-action list-group-item d-none">
-                            </li>
-                            <li class="suggestion-list-items  list-unstyled list-group-item-action list-group-item d-none">
-                            </li>
-                            <li class="suggestion-list-items  list-unstyled list-group-item-action list-group-item d-none">
-                            </li>
-                            <li class="suggestion-list-items  list-unstyled list-group-item-action list-group-item d-none">
-                            </li>
-                            <li class="suggestion-list-items  list-unstyled list-group-item-action list-group-item d-none">
-                            </li>
-                        </ul>
-
-
-                        <input name="lat" id="lat" class="SelectedAddress" type="text"
-                            placeholder="lat" />
-                    </div>
-                    <input name="lon" id="lon" class="SelectedAddress" type="text" placeholder="lon" />
-            </div> --}}
-
-
-
                 </label>
                 <div class="position-relative">
                     <input type="text" placeholder="Search Apartment"
@@ -307,9 +275,9 @@
                     </ul>
 
 
-                    <input name="latitude" id="lat" class="SelectedAddress" type="text" placeholder="lat"  />
+                    <input name="latitude" id="lat" class="SelectedAddress" type="hidden" placeholder="lat"  />
 
-                    <input name="longitude" id="lon" class="SelectedAddress" type="text" placeholder="lon" />
+                    <input name="longitude" id="lon" class="SelectedAddress" type="hidden" placeholder="lon" />
 
 
 
