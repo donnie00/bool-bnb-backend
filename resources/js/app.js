@@ -17,8 +17,8 @@ console.log(SearchImput_Element);
 const suggestions_List = document.querySelectorAll('.suggestion-list-items');
 console.log(suggestions_List)
 
-const latitude_Element= document.getElementById('lat');
-const longitude_Element= document.getElementById('lon');
+const latitude_Element = document.getElementById('lat');
+const longitude_Element = document.getElementById('lon');
 
 //resp.data.result di getSuggestion
 let suggestionAddressList = [];
@@ -38,9 +38,9 @@ function getSuggestions(e) {
 
     if (e.target.value.length > 0) {
         console.log("parte chiamata axios");
+        /*    lAYuyhutioeCVRvHVSZgBC8wf8CPcO0E */
 
-
-        let queryURL = 'https://api.tomtom.com/search/2/geocode/' + querySearchText + '.json?storeResult=false&limit=5&countrySet=IT&view=Unified&key=OwsqVQlIWGAZAkomcYI0rDYG2tDpmRPE'
+        let queryURL = 'https://api.tomtom.com/search/2/geocode/' + querySearchText + '.json?storeResult=false&limit=5&countrySet=IT&view=Unified&key=lAYuyhutioeCVRvHVSZgBC8wf8CPcO0E'
 
         console.log(queryURL)
         // problema di cors qua vado a fantasia 
@@ -48,70 +48,72 @@ function getSuggestions(e) {
             .then((resp) => {
                 console.log(resp)
                 suggestionAddressList = resp.data.results
-                console.log("AXIOS OK resp=", suggestionAddressList)
+                console.log("AXIOS OK resp=", suggestionAddressList);
+
+                suggestions_List.forEach(function callback(listItem_Element, index) {
+                    //per ogni li in ul "suggestions_list innero i dati se esistenti e rendo visibile" 
+                    if (suggestionAddressList[index]) {
+                        listItem_Element.classList.remove('d-none')
+                        listItem_Element.innerHTML = suggestionAddressList[index].address.freeformAddress + ', ' + suggestionAddressList[index].address.country
+                    } else {
+                        listItem_Element.classList.add('d-none')
+                    }
+                });
 
             }).then(function (resp) {
                 console.log(resp)
             }).catch((error) => {
                 console.log(error);
-                suggestionAddressList = [
-
-                    {
-                        "address": {
-                            "country": "it",
-                            "freeformAddress": "Roma"
-                        },
-                        "position": {
-                            "lat": 41.89056,
-                            "lon": 12.49427
-                        },
-                    },
-                    {
-                        "address": {
-                            "country": "it",
-                            "freeformAddress": "Campagnano di Roma"
-                        },
-                        "position": {
-                            "lat": 42.14051,
-                            "lon": 12.38003
-                        },
-                    },
-                    {
-                        "address": {
-                            "country": "it",
-                            "freeformAddress": "Fabrica di Roma"
-                        },
-                        "position": {
-                            "lat": 42.33378,
-                            "lon": 12.29986
-                        },
-                    },
-                    {
-                        "address": {
-                            "country": "it",
-                            "freeformAddress": "Giuliano di Roma"
-                        },
-                        "position": {
-                            "lat": 41.5408,
-                            "lon": 13.28048
-                        },
-                    }
-                ];
-                console.log("PATACCATA=", suggestionAddressList)
+                /*  suggestionAddressList = [
+ 
+                     {
+                         "address": {
+                             "country": "it",
+                             "freeformAddress": "Roma"
+                         },
+                         "position": {
+                             "lat": 41.89056,
+                             "lon": 12.49427
+                         },
+                     },
+                     {
+                         "address": {
+                             "country": "it",
+                             "freeformAddress": "Campagnano di Roma"
+                         },
+                         "position": {
+                             "lat": 42.14051,
+                             "lon": 12.38003
+                         },
+                     },
+                     {
+                         "address": {
+                             "country": "it",
+                             "freeformAddress": "Fabrica di Roma"
+                         },
+                         "position": {
+                             "lat": 42.33378,
+                             "lon": 12.29986
+                         },
+                     },
+                     {
+                         "address": {
+                             "country": "it",
+                             "freeformAddress": "Giuliano di Roma"
+                         },
+                         "position": {
+                             "lat": 41.5408,
+                             "lon": 13.28048
+                         },
+                     }
+                 ];
+                 console.log("PATACCATA=", suggestionAddressList) */
 
                 /*  suggestionAddressList.forEach(suggestion_Element=> {
                    console.log(suggestion_Element); */
 
                 /*    }); */
-                suggestions_List.forEach(function callback(listItem_Element, index) {
-               //per ogni li in ul "suggestions_list innero i dati se esistenti e rendo visibile" 
-                    if (suggestionAddressList[index]) {
-                        listItem_Element.classList.remove('d-none')
-                        listItem_Element.innerHTML = suggestionAddressList[index].address.freeformAddress + ', ' + suggestionAddressList[index].address.country
-                    } else{
-                        listItem_Element.classList.add('d-none')
-                    }
-                });
+
             });
     }
 }
@@ -121,25 +123,25 @@ function getSuggestions(e) {
 
 function selectSuggestion(e) {
     console.log('CLICK- selectSuggestions')
-console.log(e.target)
-console.log(e.target.innerText)
-SearchImput_Element.value = e.target.innerText;
-suggestionAddressList.forEach(suggestion => {
-    if(suggestion.address.freeformAddress + ', ' + suggestion.address.country===SearchImput_Element.value){
-console.log("scelta=",suggestion);
-latitude_Element.value=suggestion.position.lat;
-longitude_Element.value=suggestion.position.lon;
-console.log(latitude_Element, longitude_Element)
-    }
-    suggestionAddressList = [];
+    console.log(e.target)
+    console.log(e.target.innerText)
+    SearchImput_Element.value = e.target.innerText;
+    suggestionAddressList.forEach(suggestion => {
+        if (suggestion.address.freeformAddress + ', ' + suggestion.address.country === SearchImput_Element.value) {
+            console.log("scelta=", suggestion);
+            latitude_Element.value = suggestion.position.lat;
+            longitude_Element.value = suggestion.position.lon;
+            console.log(latitude_Element, longitude_Element)
+        }
+        suggestionAddressList = [];
 
-    suggestions_List.forEach(listItem_Element => {
-        listItem_Element.innerText="";
-        listItem_Element.classList.add('d-none')
+        suggestions_List.forEach(listItem_Element => {
+            listItem_Element.innerText = "";
+            listItem_Element.classList.add('d-none')
 
+        });
     });
-});
-  /*   selectded_Element.value = e.target.innerText; */
+    /*   selectded_Element.value = e.target.innerText; */
 }
 function createElementFromObject(tagEl, classes) {
 
