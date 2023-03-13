@@ -23,9 +23,23 @@
             @endif
          </div>
 
-         <div class="img-container rounded-4 overflow-hidden">
+         <div class="py-4 img-container w-75 m-auto rounded-4 overflow-hidden">
+            <div class="col-8 m-auto">
 
-            @if (count($apartment->images))
+            @if ($apartment->cover_img)
+               <div class="row">
+                  <div class="col">
+                     <img class="img-fluid w-100 rounded-4 pb-2" src="{{ asset('storage/' . $apartment->cover_img  ) }}" alt="" />
+                  </div>
+               </div>
+               <div class="row g-1">
+                  @foreach ($apartment->images as $img)
+                     <div class="col">
+                        <img src="{{ $img->image }}" alt="" class="img-fluid h-100 rounded-3"
+                           style="object-fit:cover">
+                     </div>
+                  @endforeach
+               @elseif (count($apartment->images))
                <div class="row">
                   <div class="col">
                      <img class="img-fluid w-100 rounded-4 pb-2" src="{{ $apartment->images[0]->image }}" alt="" />
@@ -38,15 +52,17 @@
                            style="object-fit:cover">
                      </div>
                   @endforeach
-               @else
+                  @else
                   <div class="row">
                      <div class="col">
                         <img class="img-fluid mx-auto d-block" src="{{ asset('storage/placeholder-image.png') }}"
                            alt="" />
                      </div>
                   </div>
-            @endif
 
+            @endif
+         </div>
+               </div>
          </div>
 
          <div class="row">
