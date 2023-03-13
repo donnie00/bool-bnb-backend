@@ -49,7 +49,7 @@ class ApartmentController extends Controller
 
 
         // reupero coordinate da campi create con TomTom API
-        $fetch_coordinates = Http::get("https://api.tomtom.com/search/2/structuredGeocode.json?", [
+       /*  $fetch_coordinates = Http::get("https://api.tomtom.com/search/2/structuredGeocode.json?", [
             "key" => "OwsqVQlIWGAZAkomcYI0rDYG2tDpmRPE",
             // "countryCode" => $data["countryCode"],
             "limit" => 1,
@@ -72,11 +72,11 @@ class ApartmentController extends Controller
         // dati del nuovo appartamento
         $newApartment = [
             ...$data,
-            //"address" => $complete_address,
+            "address" => $complete_address,
             "user_id" => $id,
-            "latitude" => $fetch_coordinates["lat"],
-            "longitude" => $fetch_coordinates["lon"],
-        ];
+         /*    "latitude" => $fetch_coordinates["lat"],
+            "longitude" => $fetch_coordinates["lon"], */
+        //];
 
         if (key_exists("cover_img", $data)) {
             $path = Storage::put("apartments_images", $data["cover_img"]);

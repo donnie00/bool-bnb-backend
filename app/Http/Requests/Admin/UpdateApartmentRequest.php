@@ -23,20 +23,28 @@ class UpdateApartmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //'user_id' => 'required|exists:users,id',
+          // 'user_id' => 'required|exists:users,id',
             'title' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            // 'latitude' => 'required',
-            // 'longitude' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
             'cover_img' => 'file|image',
             'description' => 'string|max:1000',
             'rooms_qty' => 'required|integer',
             'beds_qty' => 'required|integer',
             'bathrooms_qty' => 'required|integer',
-            'mq' => 'integer',
+            'mq' => 'nullable|integer',
             'daily_price' => 'required|numeric',
             'visible' => 'nullable|boolean',
             'services' => 'required|array',
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'address.required' => '',
+            'latitude.required' => 'enter a valid address',
+            'longitude.required' => '',
         ];
     }
 }
