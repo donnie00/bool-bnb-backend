@@ -51,11 +51,11 @@ class ApartmentController extends Controller
         // reupero coordinate da campi create con TomTom API
         $fetch_coordinates = Http::get("https://api.tomtom.com/search/2/structuredGeocode.json?", [
             "key" => "OwsqVQlIWGAZAkomcYI0rDYG2tDpmRPE",
-            "countryCode" => $data["countryCode"],
+            // "countryCode" => $data["countryCode"],
             "limit" => 1,
-            "streetName" => $data["streetName"],
-            "streetNumber" => $data["streetNumber"],
-            "municipality" => $data["municipality"],
+            // "streetName" => $data["streetName"],
+            // "streetNumber" => $data["streetNumber"],
+            // "municipality" => $data["municipality"],            
 
         ])->json()["results"][0]["position"] ?? 'error';
 
@@ -67,12 +67,12 @@ class ApartmentController extends Controller
         }
 
         // Composizione stringa indirizzo da inserire a DB
-        $complete_address = $data["streetName"] . " " . $data["streetNumber"] . " " . $data["municipality"] . " " . $data["postalCode"] . " " . $data["countryCode"];
+        //$complete_address = $data["streetName"] . " " . $data["streetNumber"] . " " . $data["municipality"] . " " . $data["postalCode"] . " " . $data["countryCode"];
 
         // dati del nuovo appartamento
         $newApartment = [
             ...$data,
-            "address" => $complete_address,
+            //"address" => $complete_address,
             "user_id" => $id,
             "latitude" => $fetch_coordinates["lat"],
             "longitude" => $fetch_coordinates["lon"],

@@ -26,9 +26,9 @@ class StoreApartmentRequest extends FormRequest
 
         return [
             'title' => 'required|string|max:255',
-          /*   'address' => 'required|string|max:255', */
-            'latitude' => 'required',
-            'longitude' => 'required',
+            'address' => 'required|string|max:255',
+            // 'latitude' => 'required',
+            // 'longitude' => 'required',
             'cover_img' => 'nullable|file|image',
             'description' => 'string|max:1000',
             'rooms_qty' => 'required|integer',
