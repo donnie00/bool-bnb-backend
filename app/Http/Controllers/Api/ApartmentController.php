@@ -8,7 +8,7 @@ use App\Models\ApartmentSubscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Redirect;
 
 class ApartmentController extends Controller
 {
@@ -41,8 +41,13 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        $apartment->load('services', 'images');
+        if ($apartment->visible === 1) {
 
-        return response()->json($apartment);
+            $apartment->load('services', 'images');
+
+            return response()->json($apartment);
+        } else {
+            return response()->json('error');
+        }
     }
 }
