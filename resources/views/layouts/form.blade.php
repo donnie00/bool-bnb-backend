@@ -17,6 +17,7 @@
 
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
+    @vite(['resources/js/autocompleteDropdown.js'])
 </head>
 
 <body class="bg-primary">

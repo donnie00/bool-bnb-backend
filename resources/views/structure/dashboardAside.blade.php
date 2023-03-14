@@ -1,4 +1,5 @@
     <aside class="navigation top-0 bottom-0 start-0 d-flex">
+        @vite(['resources/js/dashboardAside.js'])
         {{--    @dump($backendURL)
         @dump($frontendURL)  --}}
 
@@ -82,7 +83,7 @@
 
     {{-- SET ACTIVE TO TOGGLE AND LIST ITEMS --}}
 
-    <script type="text/javascript">
+{{--     <script type="text/javascript">
         let menuToggle = document.querySelector('.toggle')
         let Navigation = document.querySelector('.navigation')
 
@@ -108,7 +109,7 @@
                 list[i].className = 'list active';
             }
         }
-    </script>
+    </script> --}}
 
 
     {{-- icone --}}
