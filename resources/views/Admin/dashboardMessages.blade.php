@@ -14,6 +14,16 @@
                   <p>Email: {{ $singleMessage['email'] }}</p>
                   <p>Subject: {{ $singleMessage['subject'] }}</p>
                   <p>Message: {{ $singleMessage['message'] }}</p>
+
+                  <div class="contacts-links">
+                     <a href="mailto:{{ $singleMessage['email'] }}" class="link-dark">
+                        Rispondi via mail
+                        <i class="fa-solid fa-envelope-open fs-2 mx-3"></i>
+                     </a>
+                     <a href="{{ route('messages.read', $singleMessage['id']) }}" class="btn btn-primary">
+                        Segna come letto
+                     </a>
+                  </div>
                </li>
             @endforeach
          </ol>
