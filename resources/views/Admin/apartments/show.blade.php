@@ -26,165 +26,169 @@
          <div class="py-4 img-container w-75 m-auto rounded-4 overflow-hidden">
             <div class="col-8 m-auto">
 
-            @if ($apartment->cover_img)
-               <div class="row">
-                  <div class="col">
-                     <img class="img-fluid w-100 rounded-4 pb-2" src="{{ asset('storage/' . $apartmet->cover_img  ) }}" alt="" />
-                  </div>
-               </div>
-               <div class="row g-1">
-                  @foreach ($apartment->images as $img)
-                     <div class="col">
-                        <img src="{{ $img->image }}" alt="" class="img-fluid h-100 rounded-3"
-                           style="object-fit:cover">
-                     </div>
-                  @endforeach
-               @elseif (count($apartment->images))
-               <div class="row">
-                  <div class="col">
-                     <img class="img-fluid w-100 rounded-4 pb-2" src="{{ $apartment->images[0]->image }}" alt="" />
-                  </div>
-               </div>
-               <div class="row g-1">
-                  @foreach ($apartment->images as $img)
-                     <div class="col">
-                        <img src="{{ $img->image }}" alt="" class="img-fluid h-100 rounded-3"
-                           style="object-fit:cover">
-                     </div>
-                  @endforeach
-                  @else
+               @if ($apartment->cover_img)
                   <div class="row">
                      <div class="col">
-                        <img class="img-fluid mx-auto d-block" src="{{ asset('storage/placeholder-image.png') }}"
+                        <img class="img-fluid w-100 rounded-4 pb-2" src="{{ asset('storage/' . $apartmet->cover_img) }}"
                            alt="" />
                      </div>
                   </div>
-
-            @endif
-         </div>
-               </div>
-         </div>
-
-         <div class="row">
-            <div class="col-6">
-               <h2 class="my-3">{{ ucfirst($apartment->address) }}</h2>
-               <hr>
-               <div class="d-flex mb-3 text-center">
-
-                  <div class="mx-1 px-3 py-1 rounded-3 bg-primary">
-                     Rooms: {{ $apartment->rooms_qty }}
-                  </div>
-
-                  <div class="mx-1 px-3 py-1 rounded-3 bg-primary"> Beds: {{ $apartment->beds_qty }}
-                  </div>
-
-                  <div class="mx-1 px-3 py-1 rounded-3 bg-primary"> Baths: {{ $apartment->bathrooms_qty }}
-                  </div>
-
-                  <div class="mx-1 px-3 py-1 rounded-3 bg-primary">
-                     MQ: {{ $apartment->mq }}
-                  </div>
-                  <div class="px-3 py-1 rounded-3 bg-primary"> &euro;/night {{ $apartment->daily_price }}
-                  </div>
-
-               </div>
-               <hr>
-               <div class="mb-2 mx-2">
-                  <p class="fs-4">{{ ucfirst($apartment->description) }}</p>
-               </div>
-               <hr>
-
-               <div class="mb-2 mx-2 col-8">
-                  <p class="fw-semibold">Cosa troverai: </p>
-
-                  @foreach ($apartment->services as $service)
-                     <ul>
-                        <li>
-                           <img width="40px" class="icons-services mx-1 my-2"
-                              src="{{ asset('services-icons/' . $service->icon) }}" alt="">
-                           <i class=" me-3">{{ $service->name }}</i>
-                        </li>
-                     </ul>
-                  @endforeach
-               </div>
-               <div class="d-flex gap-3 my-3">
-                  <a href="{{ route('Admin.apartments.index') }}" class="btn btn-info ms-2 text-light">Return to
-                     apartments
-                     list</a>
-
-                  <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class="btn btn-warning">Edit this
-                     apartment</a>
-                  <form action="{{ route('Admin.apartments.destroy', $apartment->id) }}" method="POST">
-                     @csrf
-                     @method('DELETE')
-                     <button class="btn btn-danger">Delete this apartment</button>
-                  </form>
-               </div>
-            </div>
-            <div class="col-6">
-               @if (count($apartment->subscriptions))
-                  <div class="row mb-3">
-                     <div class="col">
-                        <h2 class="mt-3">Sponsor attualmente attivo:</h2>
-                        @foreach ($apartment->subscriptions as $sub)
-                           <div @class([
-                               'p-3',
-                               'rounded-3',
-                               'col',
-                               'bg-success' => $sub->name == 'Diamond',
-                               'bg-warning' => $sub->name == 'Gold',
-                               'bg-secondary' => $sub->name == 'Silver',
-                           ])>
-                              <p class="fs-2">
-                                 {{ $sub->name }}
-                              </p>
-                              <p class="fs-4">Data di scadenza:
-                                 {{ date('d-m-Y', strtotime($sub->pivot->expiration_date)) }}
-                              </p>
+                  <div class="row g-1">
+                     @foreach ($apartment->images as $img)
+                        <div class="col">
+                           <img src="{{ $img->image }}" alt="" class="img-fluid h-100 rounded-3"
+                              style="object-fit:cover">
+                        </div>
+                     @endforeach
+                  @elseif (count($apartment->images))
+                     <div class="row">
+                        <div class="col">
+                           <img class="img-fluid w-100 rounded-4 pb-2" src="{{ $apartment->images[0]->image }}"
+                              alt="" />
+                        </div>
+                     </div>
+                     <div class="row g-1">
+                        @foreach ($apartment->images as $img)
+                           <div class="col">
+                              <img src="{{ $img->image }}" alt="" class="img-fluid h-100 rounded-3"
+                                 style="object-fit:cover">
                            </div>
                         @endforeach
-                     </div>
-                  </div>
-               @else
-                  <div class="row">
-                     <div class="col m-3 p-3 bg-info rounded-3">
-                        <a href="" class="text-decoration-none link-dark text-center">
-                           <h2 class="text-warning">Sponsorizza il tuo appartamento!</h2>
-                           <p class="fs-3 text-center">Avere un appartamento sponsorizzato permette di aumentarne la
-                              visibilità
-                              posizionandolo sempre in cima ai risultati di ricerca!
-                           </p>
-                           <p>Scopri di più</p>
-                        </a>
-                     </div>
-                  </div>
-               @endif
-               @if (count($apartment->messages))
-                  <div class="row mb-3">
-                     <div class="col">
-                        <h2>Messaggi ricevuti:</h2>
-                        <div class="card ps-3 rounded-3">
-                           <ul>
-                              @foreach ($apartment->messages as $message)
-                                 @if ($loop->index < 3)
-                                    <li class="p-3">
-                                       <span class="fw-bold fs-4 d-block">{{ $message['subject'] }}</span>
-                                       <span class="fw-semibold">{{ $message['sender'] }}</span>
-                                       <span class="text-muted">{{ '(' . $message['email'] . ')' }}</span>
-                                    </li>
-                                 @endif
-                              @endforeach
-                           </ul>
+                     @else
+                        <div class="row">
+                           <div class="col">
+                              <img class="img-fluid mx-auto d-block" src="{{ asset('storage/placeholder-image.png') }}"
+                                 alt="" />
+                           </div>
                         </div>
-                        <a href="{{ route('Admin.dashboard.messages') }}" class="btn btn-primary my-3 d-block">
-                           Show all messages
-                        </a>
-                     </div>
-                  </div>
                @endif
-
             </div>
          </div>
+      </div>
+
+      <div class="row">
+         <div class="col-6">
+            <h2 class="my-3">{{ ucfirst($apartment->address) }}</h2>
+            <hr>
+            <div class="d-flex mb-3 text-center">
+
+               <div class="mx-1 px-3 py-1 rounded-3 bg-primary">
+                  Rooms: {{ $apartment->rooms_qty }}
+               </div>
+
+               <div class="mx-1 px-3 py-1 rounded-3 bg-primary"> Beds: {{ $apartment->beds_qty }}
+               </div>
+
+               <div class="mx-1 px-3 py-1 rounded-3 bg-primary"> Baths: {{ $apartment->bathrooms_qty }}
+               </div>
+
+               <div class="mx-1 px-3 py-1 rounded-3 bg-primary">
+                  MQ: {{ $apartment->mq }}
+               </div>
+               <div class="px-3 py-1 rounded-3 bg-primary"> &euro;/night {{ $apartment->daily_price }}
+               </div>
+
+            </div>
+            <hr>
+            <div class="mb-2 mx-2">
+               <p class="fs-4">{{ ucfirst($apartment->description) }}</p>
+            </div>
+            <hr>
+
+            <div class="mb-2 mx-2 col-8">
+               <p class="fw-semibold">Cosa troverai: </p>
+
+               @foreach ($apartment->services as $service)
+                  <ul>
+                     <li>
+                        <img width="40px" class="icons-services mx-1 my-2"
+                           src="{{ asset('services-icons/' . $service->icon) }}" alt="">
+                        <i class=" me-3">{{ $service->name }}</i>
+                     </li>
+                  </ul>
+               @endforeach
+            </div>
+            <div class="d-flex gap-3 my-3">
+               <a href="{{ route('Admin.apartments.index') }}" class="btn btn-info ms-2 text-light">Return to
+                  apartments
+                  list</a>
+
+               <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class="btn btn-warning">Edit this
+                  apartment</a>
+               <form action="{{ route('Admin.apartments.destroy', $apartment->id) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button class="btn btn-danger">Delete this apartment</button>
+               </form>
+            </div>
+         </div>
+         <div class="col-6">
+            @if (count($apartment->subscriptions))
+               <div class="row mb-3">
+                  <div class="col">
+                     <h2 class="mt-3">Sponsor attualmente attivo:</h2>
+                     @foreach ($apartment->subscriptions as $sub)
+                        <div @class([
+                            'p-3',
+                            'rounded-3',
+                            'col',
+                            'bg-success' => $sub->name == 'Diamond',
+                            'bg-warning' => $sub->name == 'Gold',
+                            'bg-secondary' => $sub->name == 'Silver',
+                        ])>
+                           <p class="fs-2">
+                              {{ $sub->name }}
+                           </p>
+                           <p class="fs-4">Data di scadenza:
+                              {{ date('d-m-Y', strtotime($sub->pivot->expiration_date)) }}
+                           </p>
+                        </div>
+                     @endforeach
+                  </div>
+               </div>
+            @else
+               <div class="row">
+                  <div class="col m-3 p-3 bg-info rounded-3">
+                     <a href="" class="text-decoration-none link-dark text-center">
+                        <h2 class="text-warning">Sponsorizza il tuo appartamento!</h2>
+                        <p class="fs-3 text-center">Avere un appartamento sponsorizzato permette di aumentarne la
+                           visibilità
+                           posizionandolo sempre in cima ai risultati di ricerca!
+                        </p>
+                        <p>Scopri di più</p>
+                     </a>
+                  </div>
+               </div>
+            @endif
+            @if (count($apartment->messages))
+               <div class="row mb-3">
+                  <div class="col">
+                     <h2>Messaggi ricevuti:</h2>
+                     <div class="card ps-3 rounded-3">
+                        <ul>
+                           @foreach ($apartment->messages as $message)
+                              @if ($loop->index < 3)
+                                 <li class="p-3">
+                                    <span class="fw-bold fs-4 d-block">{{ $message['subject'] }}</span>
+                                    <span class="fw-semibold">{{ $message['sender'] }}</span>
+                                    <span class="text-muted">{{ '(' . $message['email'] . ')' }}</span>
+                                 </li>
+                              @endif
+                           @endforeach
+                        </ul>
+                     </div>
+                     <a href="{{ route('Admin.dashboard.messages') }}" class="btn btn-primary my-3 d-block">
+                        Show all messages
+                     </a>
+                  </div>
+               </div>
+            @endif
+
+            <a href="{{ route('messages.create', $apartment->id) }}" class="btn btn-dark">Send a
+               message</a>
+
+         </div>
+      </div>
       </div>
    </section>
 @endsection
