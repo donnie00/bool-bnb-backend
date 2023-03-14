@@ -26,10 +26,11 @@
          <div class="py-4 img-container w-75 m-auto rounded-4 overflow-hidden">
             <div class="col-8 m-auto">
 
+               
             @if ($apartment->cover_img)
                <div class="row">
                   <div class="col">
-                     <img class="img-fluid w-100 rounded-4 pb-2" src="{{ asset('storage/' . $apartment->cover_img  ) }}" alt="" />
+                     <img class="img-fluid w-100 rounded-4 pb-2" src="{{asset('storage/' . $apartment->cover_img) }}" alt="" />
                   </div>
                </div>
                <div class="row g-1">
@@ -53,9 +54,10 @@
                      </div>
                   @endforeach
                   @else
+                  {{-- @dd(asset('storage/apatments_images/placeholder-image.png')); --}}
                   <div class="row">
                      <div class="col">
-                        <img class="img-fluid mx-auto d-block" src="{{ asset('storage/placeholder-image.png') }}"
+                        <img class="img-fluid mx-auto d-block" src="{{ asset('storage/apartments_images/placeholder-image.png') }}"
                            alt="" />
                      </div>
                   </div>
@@ -131,9 +133,9 @@
                                'p-3',
                                'rounded-3',
                                'col',
-                               'bg-success' => $sub->name == 'Diamond',
+                               'bg-info' => $sub->name == 'Diamond',
                                'bg-warning' => $sub->name == 'Gold',
-                               'bg-secondary' => $sub->name == 'Silver',
+                               'bg-dark , text-white' => $sub->name == 'Silver',
                            ])>
                               <p class="fs-2">
                                  {{ $sub->name }}

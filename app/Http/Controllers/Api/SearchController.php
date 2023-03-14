@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\ApartmentService;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -116,7 +117,7 @@ class SearchController extends Controller
                 }
             }
 
-            if (in_array('services', $data) && count($data['services'])) {
+            if (array_key_exists('services', $data) && count($data['services'])) {
                 foreach ($data['services'] as $service) {
                     $dbApartments = ApartmentService::select('apartment_id')->whereIn('apartment_id', $nearby)->where('service_id', $service)->get()->pluck('apartment_id')->toArray();
                     array_merge($apartments, $dbApartments);
@@ -136,7 +137,7 @@ class SearchController extends Controller
         $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10);
 
         foreach ($nearApartments as $nearApartment) {
-            $nearApartment["distance"] = $distances[$nearApartment->id];
+            $nearApartment["distance"] = number_format( (float)$distances[$nearApartment->id], 2, ".");
         }
 
        // FUNZIONE ordinamento appartamenti per distanza  
@@ -161,6 +162,20 @@ class SearchController extends Controller
         }
 
         $nearApartmentsSorted = sort_apartments_by_distnace($nearApartments);
+
+        foreach ($nearApartments as $nearAp){
+            $services = ApartmentService::select("service_id")
+                ->where("apartment_id", $nearAp->id)
+                ->get()
+                ->pluck("service_id")
+                ->toArray();
+            $images = Image::where("apartment_id", $nearAp->id)
+                ->get()
+                ->toArray();
+            $nearAp["services"] = $services;
+            $nearAp["images"] = $images;
+
+        }
 
 
         return response()->json($nearApartmentsSorted);
