@@ -29,7 +29,7 @@
             @if ($apartment->cover_img)
                <div class="row">
                   <div class="col">
-                     <img class="img-fluid w-100 rounded-4 pb-2" src="{{ asset('storage/' . $apartmet->cover_img  ) }}" alt="" />
+                     <img class="img-fluid w-100 rounded-4 pb-2" src="{{ asset('storage/' . $apartment->cover_img  ) }}" alt="" />
                   </div>
                </div>
                <div class="row g-1">

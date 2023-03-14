@@ -101,6 +101,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
+        
         $apartment->load('subscriptions', 'messages');
         return view("Admin.apartments.show", compact("apartment"));
     }
