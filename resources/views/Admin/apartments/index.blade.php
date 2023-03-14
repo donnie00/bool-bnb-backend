@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
+@vite(['resources/js/deleteForm.js'])
     {{-- pezza perchè non lo recupera da dashboard layout?? --}}
     @php
         $frontendURL = env('MY_FRONTEND_URL');
@@ -64,6 +65,7 @@
                                     @method('DELETE')
                                     <button class="destroy-btn btn btn-danger">Delete</button>
                                 </form>
+
                                 <div>
                                     <a href="{{-- {{route('Admin.apartments.sponsored', $apartment->id) }} --}}" class="ms-4 btn btn-info rounded-4">Sponsor</a>
                                 </div>
