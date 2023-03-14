@@ -19,7 +19,7 @@
             </div>
             <div class="form-floating mb-3">
                <input type="text" class="form-control" name="subject" placeholder="name@example.com" />
-               <label for="floatingInput">Object</label>
+               <label for="floatingInput">Subject</label>
             </div>
          </div>
          <div class="col-6">
@@ -28,11 +28,18 @@
             </div>
          </div>
       </div>
-      <button type="reset" class="btn btn-secondary me-3">
-         Cancel
-      </button>
-      <button type="submit" class="btn btn-success">
-         Send
-      </button>
+      <div class="form-buttons d-flex justify-content-between">
+         <a href="{{ env('MY_FRONTEND_URL') . '/apartments/' . $apartmentId }}" class="me-3 btn btn-primary">
+            &leftarrow; Back to apartment
+         </a>
+         <div class="form-controls">
+            <button type="reset" class="btn btn-dark me-2">
+               Cancel
+            </button>
+            <button type="submit" class="btn btn-success">
+               Send
+            </button>
+         </div>
+      </div>
    </form>
 @endsection
