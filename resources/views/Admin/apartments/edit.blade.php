@@ -236,17 +236,15 @@
                 </div>
             </div>
 
-            <legend>MODIFY ADDRESS: </legend>
-
             {{-- address --------------------------------------------------------------- --}}
             <div class="input-container pb-2 col-12 ">
-                <label class="form-label fw-semibold " for="address">address:
+                <label class="form-label fw-semibold text-uppercase p-t-3" for="address">address:
                     <span class="text-danger ps-1">*</span>
 
-                      {{-- LAT E LON CON MANEGGIO PER MESSAGGIO  --}}
-                      <div>
-                        <input name="latitude" id="lat" class="SelectedAddress opacity-0" type="text" placeholder="lat"
-                            style="width:1px; margin-left:-5px" />
+                    {{-- LAT E LON CON MANEGGIO PER MESSAGGIO  --}}
+                    <div>
+                        <input name="latitude" id="lat" class="SelectedAddress opacity-0" type="text"
+                            placeholder="lat" style="width:1px; margin-left:-5px" />
 
                         <input name="longitude" id="lon" class="SelectedAddress opacity-0" type="text"
                             placeholder="lon" style="width:1px" />
@@ -258,11 +256,11 @@
                         class="form-control 
            @error('address') is-invalid @elseif(old('address')) is-valid @enderror"
                         name="address" id="search_input" value="{{ old('address', $apartment->address) }}">
-
+                    {{-- 
                     <button class="my-btn">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
-
+ --}}
                     <ul class="SuggestionAddressList  list-group list-group-flush"
                         v-if="suggestions && suggestions.length > 0">
                         <li class="suggestion-list-items  list-unstyled list-group-item-action list-group-item d-none">
@@ -295,15 +293,10 @@
 
                 {{-- opzioni --}}
                 <div class="p-3 text-end">
-                    <a href="{{ route('Admin.apartments.index') }}" class="btn btn-info text-light"> Back </a>
+                    <a href="{{ route('Admin.apartments.show', $apartment->id) }}" class="btn btn-info text-light"> Back </a>
                     <button class="btn btn-primary text-light">Update apartament</button>
                 </div>
                 </fieldset>
-
-                {{-- opzioni --}}
-                <div class="p-3">
-                    <a href="{{ route('Admin.apartments.show', $apartment->id) }}" class="btn btn-primary">Annulla</a>
-                    <button class="btn btn-secondary">update</button>
         </form>
     </div>
 

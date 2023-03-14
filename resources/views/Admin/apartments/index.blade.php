@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
+@vite(['resources/js/deleteForm.js'])
     {{-- pezza perchè non lo recupera da dashboard layout?? --}}
     @php
         $frontendURL = env('MY_FRONTEND_URL');
@@ -38,7 +39,7 @@
                                     alt="Card image cap">
                             </td>
                         @else
-                            <td><img src="{{ asset('storage/placeholder-image.png') }}"
+                            <td><img  class="img-fluid border" src="{{ asset('storage/placeholder-image.png') }}"
                                     style="width: 80px; height: 50px; object-fit:cover; object-position: top  "
                                     alt="Card image cap">
                             </td>
@@ -64,6 +65,7 @@
                                     @method('DELETE')
                                     <button class="destroy-btn btn btn-danger">Delete</button>
                                 </form>
+
                                 <div>
                                     <a href="{{-- {{route('Admin.apartments.sponsored', $apartment->id) }} --}}" class="ms-4 btn btn-info rounded-4">Sponsor</a>
                                 </div>
