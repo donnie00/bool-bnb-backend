@@ -13,17 +13,17 @@ class SearchController extends Controller
     public function search(Request $request)
     {
 
-        // $data = [
-        //     'lat' => 41.89056,
-        //     'lon' => 12.49427,
-        //     'radius' => 2.3,
-        //     'min_rooms' => 2,
-        //     'min_beds' => 4,
-        //     'services' => [1, 4, 6, 2, 7],
-        // ];
+        $data = [
+            'lat' => 41.89056,
+            'lon' => 12.49427,
+            'radius' => 2.3,
+            'min_rooms' => 2,
+            'min_beds' => 4,
+            'services' => [1, 4, 6, 2, 7],
+        ];
 
 
-        $data = $request->all();
+        //$data = $request->all();
 
         // Punto di partenza
         $searchCoord = [
@@ -130,7 +130,7 @@ class SearchController extends Controller
         }
 
         $nearApartments = Apartment::with('images')->where('visible', 1)->whereIn('id', $apartments)->paginate(10);
-
+        dd($nearApartments);
         return response()->json($nearApartments);
     }
 }
