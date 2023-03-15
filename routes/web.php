@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\apartments\ApartmentController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,3 +33,10 @@ Route::middleware(['auth', 'verified'])
         Route::get("/dashboard/messages", [DashboardController::class, 'userMessages'])->name('dashboard.messages');
         Route::resource("/apartments", ApartmentController::class);
     });
+
+// Route::post('apartment/message', [MessageController::class, 'create'])->name('apartment.message');
+// Route::resource('apartment/message', MessageController::class)->except('update', 'edit', 'index');
+// Route::get('apartment', [MessageController::class, 'checkRead'])->name('messages.read');
+Route::get('apartments/messages/{id}', [MessageController::class, 'create'])->name('messages.create');
+Route::post('apartments/messages/store/{id}', [MessageController::class, 'store'])->name('messages.store');
+Route::get('apartments/messages/{id}/read', [MessageController::class, 'checkRead'])->name('messages.read');

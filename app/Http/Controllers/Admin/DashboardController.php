@@ -56,7 +56,8 @@ class DashboardController extends Controller
         $userApartments = Apartment::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get()->toArray();
 
 
-        $messages = [];
+        $new_messages = [];
+        $read_messages = [];
 
 
         $count_total_messages = 0;
@@ -66,16 +67,24 @@ class DashboardController extends Controller
             $apartmentId = $apartment["id"];
 
 
-            $apartment_messages = Message::where('apartment_id', $apartmentId)->get()->toArray();
+            $new_apartment_messages = Message::where('apartment_id', $apartmentId)->where('read', 0)->get()->toArray();
+            $read_apartment_messages = Message::where('apartment_id', $apartmentId)->where('read', 1)->get()->toArray();
 
-            if ($apartment_messages) {
+            if ($new_apartment_messages) {
                 // array_push($messages, $apartment_messages);
 
-                $messages[$apartment['title'] . ' ' . strval($key)] = $apartment_messages;
-                $count_total_messages += count($apartment_messages);
+                $new_messages[$apartment['title'] . ' ' . strval($key)] = $new_apartment_messages;
+                $count_total_messages += count($new_apartment_messages);
+            }
+
+            if ($read_apartment_messages) {
+                // array_push($messages, $apartment_messages);
+
+                $read_messages[$apartment['title'] . ' ' . strval($key)] = $read_apartment_messages;
+                $count_total_messages += count($read_apartment_messages);
             }
         }
 
-        return view('Admin.dashboardMessages', compact('user', 'messages'));
+        return view('Admin.dashboardMessages', compact('user', 'new_messages', 'read_messages'));
     }
 }
