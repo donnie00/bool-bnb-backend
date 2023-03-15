@@ -47,6 +47,6 @@ class Apartment extends Model
     }
 
     public function subscriptions(){
-        return $this->belongsToMany(Subscription::class)->withPivot("expiration_date");
+        return $this->belongsToMany(Subscription::class)->withPivot(["expiration_date"])->withTimestamps();
     }
 }

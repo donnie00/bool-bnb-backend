@@ -128,9 +128,25 @@ class SearchController extends Controller
         } else {
             $apartments = $nearby;
         }
+        
+        
+        $nearApartments = Apartment::with('images',"subscriptions")->where('visible', 1)->whereIn('id', $apartments)->paginate(10);
+        //ordinamento subs per data di creazione di ogni appartamento in apartments
+        foreach($nearApartments as $apartment){
 
-        $nearApartments = Apartment::with('images')->where('visible', 1)->whereIn('id', $apartments)->paginate(10);
-        dd($nearApartments);
+            //per ogni sub recupero la data di creazione della tabella pivot e la inserisco in un  
+            //atttributo "sub_at" che viene aggiunto ad ogni sub dell'appartamento
+            foreach ($apartment->subscriptions as $apSub){
+                $apSub["sub_at"]=$apSub->getOriginal("pivot_created_at");
+                $apSub["sub_expiration"]=($apSub->getOriginal("pivot_expiration_date"));
+            }
+            // creo l'array di subs ordinato in base alla data di creazione  
+            $sortedSubscriptions = array_values( $apartment->subscriptions->sortBy("sub_at")->toArray());
+
+            //ad ogni appartamento aggiungo l'attributo "subs" che contiene
+            //tutte le sue subs ordinate per data di creazione
+            $apartment["subs"]= $sortedSubscriptions;
+        }
         return response()->json($nearApartments);
     }
 }
