@@ -182,10 +182,6 @@
                   </div>
                </div>
             @endif
-
-            <a href="{{ route('messages.create', $apartment->id) }}" class="btn btn-dark">Send a
-               message</a>
-
          </div>
       </div>
       </div>
