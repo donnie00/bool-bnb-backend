@@ -131,9 +131,9 @@
                             'p-3',
                             'rounded-3',
                             'col',
-                            'bg-success' => $sub->name == 'Diamond',
+                            'bg-info' => $sub->name == 'Diamond',
                             'bg-warning' => $sub->name == 'Gold',
-                            'bg-secondary' => $sub->name == 'Silver',
+                            'bg-dark , text-white' => $sub->name == 'Silver',
                         ])>
                            <p class="fs-2">
                               {{ $sub->name }}
@@ -182,6 +182,7 @@
                   </div>
                </div>
             @endif
+
          </div>
       </div>
       </div>

@@ -5,25 +5,29 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\ApartmentService;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
+
+
+
     public function search(Request $request)
     {
 
-        // $data = [
-        //     'lat' => 41.89056,
-        //     'lon' => 12.49427,
-        //     'radius' => 2.3,
-        //     'min_rooms' => 2,
-        //     'min_beds' => 4,
-        //     'services' => [1, 4, 6, 2, 7],
-        // ];
+        $data = [
+            'lat' => 41.89056,
+            'lon' => 12.49427,
+            'radius' => 20,
+            'min_rooms' => 4,
+            'min_beds' => 5,
+            'services' => [1, 4, 6, 7],
+        ];
 
 
-        $data = $request->all();
+        //$data = $request->all();
 
         // Punto di partenza
         $searchCoord = [
@@ -34,6 +38,8 @@ class SearchController extends Controller
 
         //Punto del mio appartamento da recuperare a database
         $apartmentsCoord = Apartment::select('id', 'latitude', 'longitude')->get();
+
+
 
         $dbCoord = [];
 
@@ -46,6 +52,8 @@ class SearchController extends Controller
 
         /*esempio  1:{123415,2344534} */
 
+
+
         $distances = [];
 
 
@@ -53,12 +61,12 @@ class SearchController extends Controller
 
             $distance = acos((sin($searchCoord['lat'])) * (sin($coord['lat'])) + (cos($searchCoord['lat'])) * (cos($coord['lat'])) * (cos($coord['lon'] - $searchCoord['lon']))) * 6373;
 
-            $distances[$key] = $distance;
+            $distances += [$key => $distance];
         }
 
-        asort($distances);
+        //asort($distances);
 
-        /*      dump($distances); */
+
 
 
         $nearby = [];
@@ -80,73 +88,106 @@ class SearchController extends Controller
                 array_push($nearby, $key);
             }
         }
-        /*
-        $apartments = $nearby; */
-        $apartments = [];
+
+        $apartments = $nearby;
+        // $apartments = [];
+        dump("appartamenti iniziali", $apartments);
+
+        if ($data["min_rooms"]) {
+            $apartments_filtered_rooms = DB::table("apartments")->select("id")
+                ->where("rooms_qty", ">=", $data["min_rooms"])
+                ->get()
+                ->pluck("id")
+                ->toArray();
+            $apartments = $apartments_filtered_rooms;
+
+            dump("app filtrati per rooms", $apartments);
+        }
+        if ($data["min_beds"]) {
+            $apartments_filtered_beds = DB::table("apartments")->select("id")
+                ->where("beds_qty", ">=", $data["min_beds"])
+                ->get()
+                ->pluck("id")
+                ->toArray();
+            foreach ($apartments as $apartment) {
+                if (!in_array($apartment, $apartments_filtered_beds)) {
+                    unset($apartments[array_search($apartment, $apartments)]);
+                    array_values($apartments);
+                }
+            }
+        }
+        dump("app filtrati per beds", $apartments);
+        dump($data["services"]);
+        if (!empty($data["services"])) {
+            $apartments_with_services = Apartment::with('services')->whereIn("id", $apartments)->get()->toArray();
+            dump($apartments_with_services);
+            foreach ($apartments_with_services as $apart) {
+                foreach ($apart["services"] as $services) {
+                    $arrayOfServicesId[] = $services["id"];
+                }
+                dump($arrayOfServicesId);
+                $checkCount = 0;
+                foreach ($arrayOfServicesId as $serviceId) {
+                    if (in_array($serviceId, $data["services"])) {
+                        $checkCount++;
+                    }
+                }
+                if (!($checkCount == count($data["services"]))) {
+                    unset($apartments[array_search($apartment, $apartments)]);
+                    array_values($apartments);
+                }
+            }
+        }
+
+        dd($apartments);
+
 
         /* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
 
-        if (array_key_exists('min_rooms', $data) || array_key_exists('min_beds', $data) || array_key_exists('services', $data)) {
 
-            if (array_key_exists('min_rooms', $data) && $data['min_rooms'] > 0) {
-                $dbApartments = DB::table("apartments")->select("id")
-                    ->whereIn("id", $nearby)
-                    ->where('rooms_qty', '>', $data['min_rooms'])
-                    ->get()
-                    ->pluck('id')
-                    ->toArray();
-                $apartments = $dbApartments;
-            }
+        $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10);
 
-            if (array_key_exists('min_beds', $data) &&  $data['min_beds'] > 1) {
+        foreach ($nearApartments as $nearApartment) {
+            $nearApartment["distance"] = number_format((float)$distances[$nearApartment->id], 2, ".");
+        }
 
-                $dbApartments = Apartment::select("id")->whereIn('id', $nearby)
-                    ->where('beds_qty', '>', $data['min_beds'])
-                    ->get()
-                    ->pluck('id')
-                    ->toArray();
+        // FUNZIONE ordinamento appartamenti per distanza
+        function sort_apartments_by_distnace($apts)
+        {
+            // prende il numero di appartamenti
+            $count = count($apts);
 
-                foreach ($apartments as $key => $apartment) {
-                    if (!in_array($apartment, $dbApartments)) {
-                        array_splice($apartments, $key, 1);
+            // Cicla gli appartamenti e confronta ognuno con  il successivo
+            for ($i = 0; $i < $count - 1; $i++) {
+                for ($j = $i + 1; $j < $count; $j++) {
+                    // se l'appartamento corrente ha distanza maggiore del successivo li scambia
+                    if ($apts[$i]["distance"] > $apts[$j]["distance"]) {
+                        $temp = $apts[$i];
+                        $apts[$i] = $apts[$j];
+                        $apts[$j] = $temp;
                     }
                 }
             }
 
-            if (in_array('services', $data) && count($data['services'])) {
-                foreach ($data['services'] as $service) {
-                    $dbApartments = ApartmentService::select('apartment_id')->whereIn('apartment_id', $nearby)->where('service_id', $service)->get()->pluck('apartment_id')->toArray();
-                    array_merge($apartments, $dbApartments);
-
-                    foreach ($apartments as $key => $apartment) {
-                        if (!in_array($apartment, $dbApartments)) {
-                            array_splice($apartments, $key, 1);
-                        }
-                    }
-                }
-            }
-        } else {
-            $apartments = $nearby;
+            return $apts;
         }
-        
-        
-        $nearApartments = Apartment::with('images',"subscriptions")->where('visible', 1)->whereIn('id', $apartments)->paginate(10);
-        //ordinamento subs per data di creazione di ogni appartamento in apartments
-        foreach($nearApartments as $apartment){
 
-            //per ogni sub recupero la data di creazione della tabella pivot e la inserisco in un  
-            //atttributo "sub_at" che viene aggiunto ad ogni sub dell'appartamento
-            foreach ($apartment->subscriptions as $apSub){
-                $apSub["sub_at"]=$apSub->getOriginal("pivot_created_at");
-                $apSub["sub_expiration"]=($apSub->getOriginal("pivot_expiration_date"));
-            }
-            // creo l'array di subs ordinato in base alla data di creazione  
-            $sortedSubscriptions = array_values( $apartment->subscriptions->sortBy("sub_at")->toArray());
+        $nearApartmentsSorted = sort_apartments_by_distnace($nearApartments);
 
-            //ad ogni appartamento aggiungo l'attributo "subs" che contiene
-            //tutte le sue subs ordinate per data di creazione
-            $apartment["subs"]= $sortedSubscriptions;
+        foreach ($nearApartments as $nearAp) {
+            $services = ApartmentService::select("service_id")
+                ->where("apartment_id", $nearAp->id)
+                ->get()
+                ->pluck("service_id")
+                ->toArray();
+            $images = Image::where("apartment_id", $nearAp->id)
+                ->get()
+                ->toArray();
+            $nearAp["services"] = $services;
+            $nearAp["images"] = $images;
         }
-        return response()->json($nearApartments);
+
+
+        return response()->json($nearApartmentsSorted);
     }
 }
