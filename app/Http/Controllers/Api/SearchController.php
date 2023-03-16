@@ -12,7 +12,7 @@ class SearchController extends Controller
 {
     public function search(Request $request)
     {
-
+      
         // $data = [
         //     'lat' => 41.89056,
         //     'lon' => 12.49427,
@@ -132,7 +132,8 @@ class SearchController extends Controller
         
         $nearApartments = Apartment::with('images',"subscriptions")->where('visible', 1)->whereIn('id', $apartments)->paginate(10);
         //ordinamento subs per data di creazione di ogni appartamento in apartments
-        foreach($nearApartments as $apartment){
+        //per non incasinare marika ma ringrazia
+      /*   foreach($nearApartments as $apartment){
 
             //per ogni sub recupero la data di creazione della tabella pivot e la inserisco in un  
             //atttributo "sub_at" che viene aggiunto ad ogni sub dell'appartamento
@@ -146,7 +147,7 @@ class SearchController extends Controller
             //ad ogni appartamento aggiungo l'attributo "subs" che contiene
             //tutte le sue subs ordinate per data di creazione
             $apartment["subs"]= $sortedSubscriptions;
-        }
+        } */
         return response()->json($nearApartments);
     }
 }
