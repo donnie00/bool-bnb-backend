@@ -129,7 +129,7 @@ class SearchController extends Controller
             $apartments = $nearby;
         }
 
-        $nearApartments = Apartment::with('images')->where('visible', 1)->whereIn('id', $apartments)->paginate(10);
+        $nearApartments = Apartment::with('images','subscriptions')->where('visible', 1)->whereIn('id', $apartments)->paginate(10);
 
         return response()->json($nearApartments);
     }

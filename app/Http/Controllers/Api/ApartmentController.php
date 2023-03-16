@@ -43,7 +43,7 @@ class ApartmentController extends Controller
     {
         if ($apartment->visible === 1) {
 
-            $apartment->load('services', 'images');
+            $apartment->load('services', 'images','subscriptions');
 
             return response()->json($apartment);
         } else {

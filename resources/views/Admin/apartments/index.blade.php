@@ -7,8 +7,6 @@
         $frontendURL = env('MY_FRONTEND_URL');
     @endphp
 
-
-
     <div class="container">
         <h1 class="my-3">Index</h1>
 
@@ -24,7 +22,6 @@
                 </tr>
             </thead>
             <tbody>
-
                 @foreach ($apartments as $apartment)
                     <tr>
                         <td>{{ $apartment->title }}</td>
@@ -69,14 +66,12 @@
                                 <div>
                                     <a href="{{-- {{route('Admin.apartments.sponsored', $apartment->id) }} --}}" class="ms-4 btn btn-info rounded-4">Sponsor</a>
                                 </div>
-
                             </div>
                         </td>
-
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
 @endsection
-@extends('layouts.dashboard')
+
