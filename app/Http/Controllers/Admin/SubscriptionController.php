@@ -67,7 +67,6 @@ class SubscriptionController extends Controller
 
             
             $apartment = Apartment::find($request->apartmentID);
-            dd($apartment);
             $apartment->subscriptions()->attach($subID);
 
             return back()->with('success_message', 'Transaction successful. The ID is:' . $transaction->id);
