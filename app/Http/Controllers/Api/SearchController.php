@@ -17,17 +17,18 @@ class SearchController extends Controller
     public function search(Request $request)
     {
 
-        $data = [
-            'lat' => 41.89056,
-            'lon' => 12.49427,
-            'radius' => 20,
-            'min_rooms' => 4,
-            'min_beds' => 5,
-            'services' => [1, 4, 6, 7],
-        ];
+        // $data = [
+        //     'lat' => 41.89056,
+        //     'lon' => 12.49427,
+        //     'radius' => 20,
+        //     'min_rooms' => 1,
+        //     'min_beds' => 1,
+        //     'services' => [1, 3, 6, 11]
+        // ];
 
 
-        //$data = $request->all();
+        $data = $request->all();
+
 
         // Punto di partenza
         $searchCoord = [
@@ -66,9 +67,6 @@ class SearchController extends Controller
 
         //asort($distances);
 
-
-
-
         $nearby = [];
 
         foreach ($distances as $key => $distance) {
@@ -91,7 +89,7 @@ class SearchController extends Controller
 
         $apartments = $nearby;
         // $apartments = [];
-        dump("appartamenti iniziali", $apartments);
+        // dump("appartamenti iniziali", $apartments);
 
         if ($data["min_rooms"]) {
             $apartments_filtered_rooms = DB::table("apartments")->select("id")
@@ -101,7 +99,7 @@ class SearchController extends Controller
                 ->toArray();
             $apartments = $apartments_filtered_rooms;
 
-            dump("app filtrati per rooms", $apartments);
+            // dump("app filtrati per rooms", $apartments);
         }
         if ($data["min_beds"]) {
             $apartments_filtered_beds = DB::table("apartments")->select("id")
@@ -116,36 +114,50 @@ class SearchController extends Controller
                 }
             }
         }
-        dump("app filtrati per beds", $apartments);
-        dump($data["services"]);
+        // dump("app filtrati per beds", $apartments);
+        // dump($data["services"]);
+
+        $apartWithSearchedServices = [];
+
         if (!empty($data["services"])) {
             $apartments_with_services = Apartment::with('services')->whereIn("id", $apartments)->get()->toArray();
-            dump($apartments_with_services);
+
+            // dump($apartments_with_services);
+
+
             foreach ($apartments_with_services as $apart) {
+
+                // id dei servizi di quell'appartamento
+                $arrayOfServicesId = [];
+
                 foreach ($apart["services"] as $services) {
-                    $arrayOfServicesId[] = $services["id"];
+
+                    if (!(in_array($services["id"], $arrayOfServicesId))) {
+                        array_push($arrayOfServicesId, $services["id"]);
+                    }
                 }
-                dump($arrayOfServicesId);
+
                 $checkCount = 0;
+
                 foreach ($arrayOfServicesId as $serviceId) {
                     if (in_array($serviceId, $data["services"])) {
                         $checkCount++;
                     }
                 }
-                if (!($checkCount == count($data["services"]))) {
-                    unset($apartments[array_search($apartment, $apartments)]);
-                    array_values($apartments);
+
+                if ($checkCount == count($data["services"])) {
+
+                    array_push($apartWithSearchedServices, $apart['id']);
                 }
             }
         }
 
-        dd($apartments);
+        if (array_key_exists('services', $data)) {
+            $nearApartments = Apartment::whereIn('id', $apartWithSearchedServices)->paginate(10);
+        } else {
+            $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10);
+        }
 
-
-        /* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
-
-
-        $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10);
 
         foreach ($nearApartments as $nearApartment) {
             $nearApartment["distance"] = number_format((float)$distances[$nearApartment->id], 2, ".");
