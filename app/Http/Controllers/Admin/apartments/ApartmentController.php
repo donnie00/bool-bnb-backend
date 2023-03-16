@@ -79,7 +79,7 @@ class ApartmentController extends Controller
         ];
 
         if (key_exists("cover_img", $data)) {
-            $path = Storage::put("/public/apartments_images", $data["cover_img"]);
+            $path = Storage::put("apartments_images", $data["cover_img"]);
         }
 
         // inserimento nuovo appartamento a DB
