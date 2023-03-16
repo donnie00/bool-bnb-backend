@@ -17,17 +17,17 @@ class SearchController extends Controller
     public function search(Request $request)
     {
 
-        // $data = [
-        //     'lat' => 41.89056,
-        //     'lon' => 12.49427,
-        //     'radius' => 2.3,
-        //     'min_rooms' => 2,
-        //     'min_beds' => 4,
-        //     'services' => [1, 4, 6, 2, 7],
-        // ];
+        $data = [
+            'lat' => 41.89056,
+            'lon' => 12.49427,
+            'radius' => 2.3,
+            'min_rooms' => 2,
+            'min_beds' => 4,
+            'services' => [1, 4, 6, 2, 7],
+        ];
 
 
-        $data = $request->all();
+        //$data = $request->all();
 
         // Punto di partenza
         $searchCoord = [
@@ -132,6 +132,11 @@ class SearchController extends Controller
         } else {
             $apartments = $nearby;
         }
+        
+        
+        $nearApartments = Apartment::with('images',"subscriptions")->where('visible', 1)->whereIn('id', $apartments)->paginate(10);
+        //ordinamento subs per data di creazione di ogni appartamento in apartments
+        foreach($nearApartments as $apartment){
 
         
         $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10);

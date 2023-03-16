@@ -33,7 +33,6 @@ Route::resource('/apartments', ApartmentController::class)->only(
 );
 
 Route::get('/search', [SearchController::class, 'search'])->name('apartments.search');
-Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 
 // Route::prefix('admin')
 //     ->name('admin.')

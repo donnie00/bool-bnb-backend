@@ -67,7 +67,7 @@
                                 </form>
 
                                 <div>
-                                    <a href="{{-- {{route('Admin.apartments.sponsored', $apartment->id) }} --}}" class="ms-4 btn btn-info rounded-4">Sponsor</a>
+                                    <a href="{{route("subs.form", $apartment->id)}}" class="ms-4 btn btn-info rounded-4">Sponsor</a>
                                 </div>
 
                             </div>
@@ -79,3 +79,4 @@
         </table>
     </div>
 @endsection
+
