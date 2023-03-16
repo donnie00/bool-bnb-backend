@@ -63,12 +63,15 @@ class SubscriptionController extends Controller
             $transaction = $result->transaction;
             // header("Location: transaction.php?id=" . $transaction->id);
             
-            $subID = DB::table("subscriptions")->select("id")->where("price", $request->amount)->get()[0]->id;
-
+            $sub = Subscription::where("price", $request->amount)->get();
+            $subDuration = $sub[0]->duration + 1;
+            
             
             $apartment = Apartment::find($request->apartmentID);
-            $apartment->subscriptions()->attach($subID);
+            
+            $exp_date = date("Y-m-d: H:i:s", strtotime("+{$subDuration} hours"));
 
+            $apartment->subscriptions()->attach($sub,["expiration_date"=>$exp_date]);
             return back()->with('success_message', 'Transaction successful. The ID is:' . $transaction->id);
         } else {
             $errorString = "";
