@@ -45,6 +45,9 @@
 
                <tbody>
                   @foreach ($message as $key => $singleMessage)
+                     @php
+                        $varId = rand() . '_' . $key;
+                     @endphp
                      <tr>
                         <td>
                            <span class="text-primary fs-4">{{ $singleMessage['sender'] }}</span>
@@ -52,12 +55,12 @@
                            <span class="text-light">{{ $singleMessage['email'] }}</span>
                         </td>
                         <td class="text-center w-50">
-                           <a class="fs-4" data-bs-toggle="collapse" href="#collapseMessage{{ $key }}"
+                           <a class="fs-4" data-bs-toggle="collapse" href="#collapseMessage{{ $varId }}"
                               role="button" aria-expanded="false" aria-controls="collapseExample">
 
                               <span>{{ $singleMessage['subject'] }}</span>
                            </a>
-                           <div class="collapse" id="collapseMessage{{ $key }}">
+                           <div class="collapse" id="collapseMessage{{ $varId }}">
                               <div class="text-center py-2">
                                  {{ $singleMessage['message'] }}
                               </div>
@@ -141,6 +144,9 @@
 
          <tbody>
             @foreach ($message as $key => $singleMessage)
+               @php
+                  $varId = rand() . '_' . $key;
+               @endphp
                <tr>
                   <td>
                      <span class="text-primary fs-4">{{ $singleMessage['sender'] }}</span>
@@ -148,12 +154,12 @@
                      <span class="text-light">{{ $singleMessage['email'] }}</span>
                   </td>
                   <td class="text-center w-50">
-                     <a class="fs-4" data-bs-toggle="collapse" href="#collapseMessage{{ $key }}" role="button"
+                     <a class="fs-4" data-bs-toggle="collapse" href="#collapseMessage{{ $varId }}" role="button"
                         aria-expanded="false" aria-controls="collapseExample">
 
                         <span>{{ $singleMessage['subject'] }}</span>
                      </a>
-                     <div class="collapse" id="collapseMessage{{ $key }}">
+                     <div class="collapse" id="collapseMessage{{ $varId }}">
                         <div class="text-center py-2">
                            {{ $singleMessage['message'] }}
                         </div>
@@ -188,9 +194,6 @@
                            <a href="mailto:{{ $singleMessage['email'] }}" class="btn btn-light w-auto">
                               Rispondi via mail
                               {{-- <i class="fa-solid fa-envelope-open fs-2 mx-3"></i> --}}
-                           </a>
-                           <a href="{{ route('messages.read', $singleMessage['id']) }}" class=" btn btn-primary w-auto">
-                              Segna come letto
                            </a>
                         </div>
                      </div>
