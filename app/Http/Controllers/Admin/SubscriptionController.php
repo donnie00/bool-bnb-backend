@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apartment;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Braintree\Gateway;
@@ -27,7 +28,7 @@ class SubscriptionController extends Controller
             ...$subs,
         ];
 
-        $apartmetnID = $id;
+        $apartmentID = $id;
 
         return view("subsForm", compact(["data","token","apartmentID"]));
     }
@@ -64,7 +65,10 @@ class SubscriptionController extends Controller
             
             $subID = DB::table("subscriptions")->select("id")->where("price", $request->amount)->get()[0]->id;
 
-            dd($request);
+            
+            $apartment = Apartment::find($request->apartmentID);
+            dd($apartment);
+            $apartment->subscriptions()->attach($subID);
 
             return back()->with('success_message', 'Transaction successful. The ID is:' . $transaction->id);
         } else {

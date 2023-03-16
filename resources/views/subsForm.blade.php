@@ -83,7 +83,7 @@
                    </div>
                @endforeach
            </div>
-           <input type="hidden" name="project" value="">
+           <input class="d-none" type="hidden" name="apartmentID" value="{{$apartmentID}}">
            <div class="text-center final-button">
                <button type="submit" class="d-none btn btn-success" id="invia">Confirm Payment</button>
            </div>
@@ -101,7 +101,7 @@
                 </div>
             </section>
 
-            <input id="nonce" name="payment_method_nonce" type="hidden" />
+            <input class="" id="nonce" name="payment_method_nonce" type="hidden" />
             <button class="button" type="submit"><span>Test Transaction</span></button>
         </form>
     </div>
