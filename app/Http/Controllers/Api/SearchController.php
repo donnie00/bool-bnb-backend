@@ -157,6 +157,14 @@ class SearchController extends Controller
         } else {
             $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10);
         }
+        
+        
+        $nearApartments = Apartment::with('images',"subscriptions")->where('visible', 1)->whereIn('id', $apartments)->paginate(10);
+        //ordinamento subs per data di creazione di ogni appartamento in apartments
+        foreach($nearApartments as $apartment){
+
+        
+        $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10);
 
 
         foreach ($nearApartments as $nearApartment) {

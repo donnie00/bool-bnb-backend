@@ -27,29 +27,34 @@
                <li class="nav-item d-flex flex-column align-items-center">
                   <a class="nav-link fs-5  pt-md-4 px-2
                     {{ Route::currentRouteName() === null ? 'active' : '' }}"
-                     {{--      href="{{ url('/') }}" --}} href="{{ $frontendURL }}">
-                     {{ __('Home') }}</a>
-                  <div class="link-underline m-3 mb-0"></div>
-               </li>
+                            {{--      href="{{ url('/') }}" --}} href="{{ env('MY_FRONTEND_URL') }}">
+                            {{ __('Home') }}</a>
+                        <div class="link-underline m-3 mb-0"></div>
+                    </li>
+                    <li class="nav-item  d-flex flex-column align-items-center">
+                        <a class="nav-link fs-5  pt-md-4 px-2"
+                            href="{{ env('MY_FRONTEND_URL')  . "/apartments"}}">{{-- ok redirect to client side --}}
+                            {{ __('Apartments') }}</a>
+                        <div class="link-underline m-3 mb-0"></div>
+                    </li>
 
-
-               <li class="nav-item  d-flex flex-column align-items-center">
-                  <a class="nav-link fs-5  pt-md-4 px-2" href="{{ $frontendURL }}/about">
-                     {{ __('About') }}</a>
-                  <div class="link-underline m-3 mb-0"></div>
-               </li>
-               <li class="nav-item  d-flex flex-column align-items-center">
-                  <a class="nav-link fs-5  pt-md-4 px-2" href="{{ $frontendURL }}/contact">
-                     {{ __('Contacts') }}</a>
-                  <div class="link-underline m-3 mb-0"></div>
-               </li>
-            </ul>
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ml-auto align-items-end">
-               <!-- Authentication Links -->
-               @guest
-                  <li class="nav-item  d-flex flex-column align-items-center">
-                     <a class="nav-link fs-5  pt-md-4 px-2
+                    <li class="nav-item  d-flex flex-column align-items-center">
+                        <a class="nav-link fs-5  pt-md-4 px-2" href="{{ env('MY_FRONTEND_URL'). "/abaut" }}  ">
+                            {{ __('About') }}</a>
+                        <div class="link-underline m-3 mb-0"></div>
+                    </li>
+                    <li class="nav-item  d-flex flex-column align-items-center">
+                        <a class="nav-link fs-5  pt-md-4 px-2" href="{{ env('MY_FRONTEND_URL') . "/contact" }}">
+                            {{ __('Contacts') }}</a>
+                        <div class="link-underline m-3 mb-0"></div>
+                    </li>
+                </ul>
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto align-items-end">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li class="nav-item  d-flex flex-column align-items-center">
+                            <a class="nav-link fs-5  pt-md-4 px-2
                          {{ Route::currentRouteName() === 'login' ? 'active' : '' }}"
                         href="{{ route('login') }}">{{ __('Login') }}</a>
                      <div class="link-underline m-3 mb-0"></div>

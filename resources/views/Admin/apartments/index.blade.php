@@ -59,14 +59,17 @@
                            <button class="destroy-btn btn btn-danger">Delete</button>
                         </form>
 
-                        <div>
-                           <a href="{{-- {{route('Admin.apartments.sponsored', $apartment->id) }} --}}" class="ms-4 btn btn-info rounded-4">Sponsor</a>
-                        </div>
-                     </div>
-                  </td>
-               </tr>
-            @endforeach
-         </tbody>
-      </table>
-   </div>
+                                <div>
+                                    <a href="{{route("subs.form", $apartment->id)}}" class="ms-4 btn btn-info rounded-4">Sponsor</a>
+                                </div>
+
+                            </div>
+                        </td>
+
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection
+
