@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\ApartmentService;
+use App\Models\ApartmentSubscription;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -170,7 +171,7 @@ class SearchController extends Controller
         }
 
         // FUNZIONE ordinamento appartamenti per distanza
-        function sort_apartments_by_distnace($apts)
+        function sort_apartments_by_distance($apts)
         {
             // prende il numero di appartamenti
             $count = count($apts);
@@ -190,8 +191,6 @@ class SearchController extends Controller
             return $apts;
         }
 
-        $nearApartmentsSorted = sort_apartments_by_distnace($nearApartments);
-
         foreach ($nearApartments as $nearAp) {
             $services = ApartmentService::select("service_id")
                 ->where("apartment_id", $nearAp->id)
@@ -201,10 +200,17 @@ class SearchController extends Controller
             $images = Image::where("apartment_id", $nearAp->id)
                 ->get()
                 ->toArray();
+            $subscriptions = ApartmentSubscription::select("subscription_id")
+                ->where("apartment_id", $nearAp->id)
+                ->get()
+                ->pluck("subscription_id")
+                ->toArray();
             $nearAp["services"] = $services;
             $nearAp["images"] = $images;
+            $nearAp["subscriptions"] = $subscriptions;
         }
 
+        $nearApartmentsSorted = sort_apartments_by_distance($nearApartments);
 
         return response()->json($nearApartmentsSorted);
     }
