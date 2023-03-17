@@ -67,8 +67,8 @@ class DashboardController extends Controller
             $apartmentId = $apartment["id"];
 
 
-            $new_apartment_messages = Message::where('apartment_id', $apartmentId)->where('read', 0)->get()->toArray();
-            $read_apartment_messages = Message::where('apartment_id', $apartmentId)->where('read', 1)->get()->toArray();
+            $new_apartment_messages = Message::where('apartment_id', $apartmentId)->where('read', 0)->orderBy('created_at', 'DESC')->get()->toArray();
+            $read_apartment_messages = Message::where('apartment_id', $apartmentId)->where('read', 1)->orderBy('created_at', 'DESC')->get()->toArray();
 
             if ($new_apartment_messages) {
                 // array_push($messages, $apartment_messages);
