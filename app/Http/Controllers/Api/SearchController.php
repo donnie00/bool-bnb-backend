@@ -23,7 +23,7 @@ class SearchController extends Controller
         //     'radius' => 20,
         //     'min_rooms' => 1,
         //     'min_beds' => 1,
-        //     'services' => [1, 3, 6, 11]
+        //     'services' => [1]
         // ];
 
 
@@ -67,6 +67,8 @@ class SearchController extends Controller
 
         //asort($distances);
 
+        // dump($distances);
+
         $nearby = [];
 
         foreach ($distances as $key => $distance) {
@@ -88,11 +90,15 @@ class SearchController extends Controller
         }
 
         $apartments = $nearby;
+
+        // dump($apartments);
+
         // $apartments = [];
         // dump("appartamenti iniziali", $apartments);
 
         if ($data["min_rooms"]) {
             $apartments_filtered_rooms = DB::table("apartments")->select("id")
+                ->whereIn('id', $apartments)
                 ->where("rooms_qty", ">=", $data["min_rooms"])
                 ->get()
                 ->pluck("id")
@@ -103,6 +109,7 @@ class SearchController extends Controller
         }
         if ($data["min_beds"]) {
             $apartments_filtered_beds = DB::table("apartments")->select("id")
+                ->whereIn('id', $apartments)
                 ->where("beds_qty", ">=", $data["min_beds"])
                 ->get()
                 ->pluck("id")
@@ -115,7 +122,6 @@ class SearchController extends Controller
             }
         }
         // dump("app filtrati per beds", $apartments);
-        // dump($data["services"]);
 
         $apartWithSearchedServices = [];
 
@@ -150,13 +156,14 @@ class SearchController extends Controller
                     array_push($apartWithSearchedServices, $apart['id']);
                 }
             }
-        }
-
-        if (array_key_exists('services', $data)) {
-            $nearApartments = Apartment::whereIn('id', $apartWithSearchedServices)->paginate(10);
         } else {
             $nearApartments = Apartment::whereIn('id', $apartments)->paginate(10);
         }
+
+        if (array_key_exists('services', $data) && !empty($data["services"])) {
+            $nearApartments = Apartment::whereIn('id', $apartWithSearchedServices)->paginate(10);
+        }
+
 
         foreach ($nearApartments as $nearApartment) {
             $nearApartment["distance"] = number_format((float)$distances[$nearApartment->id], 2, ".");
