@@ -167,7 +167,7 @@ class SearchController extends Controller
 
 
         foreach ($nearApartments as $nearApartment) {
-            $nearApartment["distance"] = number_format((float)$distances[$nearApartment->id], 2, ".");
+            $nearApartment["distance"] = number_format((float) $distances[$nearApartment->id], 2, ".");
         }
 
         // FUNZIONE ordinamento appartamenti per distanza
@@ -213,5 +213,8 @@ class SearchController extends Controller
         $nearApartmentsSorted = sort_apartments_by_distance($nearApartments);
 
         return response()->json($nearApartmentsSorted);
+
+
+        /*  $nearApartments = Apartment::with('images', "subscriptions")->where('visible', 1)->whereIn('id', $apartments)->paginate(10); */
     }
 }
