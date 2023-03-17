@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
    <a href="#top" class="position-fixed bottom-0 btn btn-info text-white  rounded-4 px-3 py-2 fs-4 text-center"
-      style="margin-left:-3.2rem; margin-bottom: 1rem;">
+      style="margin-left:-3.5rem; margin-right: 2rem; margin-bottom: 1rem;">
       <i class="fa-solid fa-up-long"></i>
    </a>
    @if (count($new_messages))
