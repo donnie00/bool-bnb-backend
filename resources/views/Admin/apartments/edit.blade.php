@@ -1,7 +1,7 @@
 @extends('layouts.form')
 @section('content')
    <div class="container">
-      <h1 class="text-uppercase">EDIT APARTMENT: # {{ $apartment->id }}</h1>
+      <h1 class="text-uppercase">Modifica Appartamento: # {{ $apartment->id }}</h1>
 
 
       {{-- rintraccia qualsiasi errore --}}
@@ -24,7 +24,7 @@
 
          {{-- title --------------------------------------------------------------- --}}
          <div class="input-container pb-2 col-12 ">
-            <label class="form-label fw-semibold " for="title">Title:
+            <label class="form-label fw-semibold " for="title">Titolo:
                <span class="text-danger ps-1">*</span>
             </label>
             <input type="text"
@@ -43,7 +43,7 @@
 
          {{-- price/night --------------------------------------------------------------- --}}
          <div class="input-container pb-2 col-12 col-md-5">
-            <label for="daily_price" class="form-label fw-semibold">price/night:
+            <label for="daily_price" class="form-label fw-semibold">Prezzo/Notte:
                <span class="text-danger ps-1">*</span>
             </label>
             <input type="number"
@@ -76,7 +76,7 @@
          {{-- visible ------------------------------------------------------------ --}}
          <div class="input-container pb-2 col-12  col-sm-4 col-md-2 ps-3 d-flex align-items-center justify-content-center">
             <div class="form-check form-switch p-0 text-uppercase">
-               <label class="form-check-label" for="visible">visible</label>
+               <label class="form-check-label" for="visible">visibile</label>
 
                <div class="form-check form-switch pt-2">
                   {{-- 2 imput per raccogliere true o false subito --}}
@@ -99,7 +99,7 @@
 
          {{-- cover_img ----------------------------------------------------------- --}}
          <div class="input-container pb-2">
-            <label class="form-label fw-semibold text-uppercase" for="cover_img">IMMAGINE</label>
+            <label class="form-label fw-semibold text-uppercase" for="cover_img">CARICA IMMAGINI</label>
             <input type="file" class="form-control
                 @error('cover_img') is-invalid  @enderror"
                name="cover_img" id="cover_img" value="{{ old('cover_img') }}">
@@ -110,7 +110,7 @@
             @enderror
          </div>
 
-         <button class="input-container pb-2 mt-2">PLACEOLDER add image (max 4)</button>
+         <button class="input-container pb-2 mt-2">Aggiungi immagini dell' appartamento (max 4)</button>
 
          {{-- description -------------------------------------------------- --}}
          <div class="input-container pb-2">
@@ -130,7 +130,7 @@
          {{-- ROOMS QTY ------------------------------------------------------------------ --}}
 
          <div class="input-container pb-2 col-4 ">
-            <label class="form-label fw-semibold" for="rooms_qty">rooms quantity
+            <label class="form-label fw-semibold" for="rooms_qty">Camere
                <span class="text-danger ps-1">*</span>
             </label>
             <select
@@ -156,7 +156,7 @@
          {{-- BEDROOMS QTY ------------------------------------------------------------------ --}}
 
          <div class="input-container pb-2 col-4 ">
-            <label class="form-label fw-semibold" for="beds_qty">bed quantity
+            <label class="form-label fw-semibold" for="beds_qty">Posti Letto
                <span class="text-danger ps-1">*</span>
             </label>
             <select
@@ -183,7 +183,7 @@
          {{-- BATHROOMS QTY ------------------------------------------------------------------ --}}
 
          <div class="input-container pb-2 col-4 ">
-            <label class="form-label fw-semibold" for="bathrooms_qty">bed quantity
+            <label class="form-label fw-semibold" for="bathrooms_qty">Bagni
                <span class="text-danger ps-1">*</span>
             </label>
             <select
@@ -212,7 +212,7 @@
          {{-- services ------------------------------------------------------------------ --}}
 
          <div class="input-container pb-2">
-            <label class="form-label fw-semibold d-block">SERVICES:
+            <label class="form-label fw-semibold d-block">SERVIZI:
                <span class="text-danger ps-1">*</span>
             </label>
             <div class="row">
@@ -237,7 +237,7 @@
 
          {{-- address --------------------------------------------------------------- --}}
          <div class="input-container pb-2 col-12 ">
-            <label class="form-label fw-semibold text-uppercase p-t-3" for="address">address:
+            <label class="form-label fw-semibold text-uppercase p-t-3" for="address">indirizzo:
                <span class="text-danger ps-1">*</span>
 
                {{-- LAT E LON CON MANEGGIO PER MESSAGGIO  --}}
@@ -292,8 +292,8 @@
 
             {{-- opzioni --}}
             <div class="p-3 text-end">
-               <a href="{{ route('Admin.apartments.show', $apartment->id) }}" class="btn btn-info text-light"> Back </a>
-               <button class="btn btn-primary text-light">Update apartament</button>
+               <a href="{{ route('Admin.apartments.show', $apartment->id) }}" class="btn btn-info text-light"> Torna indietro </a>
+               <button class="btn btn-primary text-light">Salva modifiche</button>
             </div>
             </fieldset>
       </form>

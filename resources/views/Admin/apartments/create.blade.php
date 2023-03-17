@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1 class="text-uppercase">create New Apartment:</h1>
+        <h1 class="text-uppercase">Crea nuovo Appartamento:</h1>
 
         @if (Session::get('error'))
             <div class="alert alert-danger">
@@ -29,7 +29,7 @@
 
             {{-- title --------------------------------------------------------------- --}}
             <div class="input-container pb-2 col-12 ">
-                <label class="form-label fw-semibold text-uppercase" for="title">Title:
+                <label class="form-label fw-semibold text-uppercase" for="title">Titolo:
                     <span class="text-danger ps-1">*</span>
                 </label>
                 <input type="text"
@@ -48,7 +48,7 @@
 
             {{-- price/night --------------------------------------------------------------- --}}
             <div class="input-container pb-2 col-12 col-md-5">
-                <label for="daily_price" class="form-label fw-semibold text-uppercase">price/night:
+                <label for="daily_price" class="form-label fw-semibold text-uppercase">Prezzo/Notte:
                     <span class="text-danger ps-1">*</span>
                 </label>
                 <input type="number" step="0.01"
@@ -82,7 +82,7 @@
             <div
                 class="input-container pb-2 col-12  col-sm-4 col-md-2 ps-3 d-flex align-items-center justify-content-center">
                 <div class="form-check form-switch p-0 text-uppercase">
-                    <label class="form-check-label" for="visible">visible</label>
+                    <label class="form-check-label" for="visible">Visibile</label>
 
                     <div class="form-check form-switch pt-2">
                         {{-- 2 imput per raccogliere true o false subito --}}
@@ -105,7 +105,7 @@
 
             {{-- cover_img ----------------------------------------------------------- --}}
             <div class="input-container pb-2">
-                <label class="form-label fw-semibold text-uppercase" for="cover_img">IMMAGINE</label>
+                <label class="form-label fw-semibold text-uppercase" for="cover_img">CARICA IMMAGINI</label>
                 <input type="file" class="form-control
                       @error('cover_img') is-invalid  @enderror"
                     name="cover_img" id="cover_img" value="{{ old('cover_img') }}">
@@ -116,7 +116,7 @@
                 @enderror
             </div>
 
-            <button class="input-container pb-2 mt-2">PLACEOLDER add image (max 4)</button>
+            <button class="input-container pb-2 mt-2">Aggiungi immagini dell' appartamento (max 4)</button>
 
             {{-- description -------------------------------------------------- --}}
             <div class="input-container pb-2">
@@ -136,7 +136,7 @@
             {{-- ROOMS QTY ------------------------------------------------------------------ --}}
 
             <div class="input-container pb-2 col-4 ">
-                <label class="form-label fw-semibold" for="rooms_qty">Rooms quantity
+                <label class="form-label fw-semibold" for="rooms_qty">Camere
                     <span class="text-danger ps-1">*</span>
                 </label>
                 <select
@@ -161,7 +161,7 @@
             {{-- BEDROOMS QTY ------------------------------------------------------------------ --}}
 
             <div class="input-container pb-2 col-4 ">
-                <label class="form-label fw-semibold" for="beds_qty">Bed quantity
+                <label class="form-label fw-semibold" for="beds_qty">Posti Letto
                     <span class="text-danger ps-1">*</span>
                 </label>
                 <select
@@ -187,7 +187,7 @@
             {{-- BATHROOMS QTY ------------------------------------------------------------------ --}}
 
             <div class="input-container pb-2 col-4 ">
-                <label class="form-label fw-semibold" for="bathrooms_qty">Bathrooms quantity
+                <label class="form-label fw-semibold" for="bathrooms_qty">Bagni
                     <span class="text-danger ps-1">*</span>
                 </label>
                 <select
@@ -215,7 +215,7 @@
             {{-- services ------------------------------------------------------------------ --}}
 
             <div class="input-container pb-2">
-                <label class="form-label fw-semibold d-block">SERVICES:
+                <label class="form-label fw-semibold d-block">SERVIZI:
 
                     <span class="text-danger ps-1">*</span>
                 </label>
@@ -246,7 +246,7 @@
 
             {{-- address --------------------------------------------------------------- --}}
             <div class="input-container pb-2 col-12 ">
-                <label class="form-label fw-semibold " for="address">address:
+                <label class="form-label fw-semibold " for="address">indirizzo:
                     <span class="text-danger ps-1">*</span>
 
 
@@ -261,7 +261,7 @@
 
                 </label>
                 <div class="position-relative">
-                    <input type="text" placeholder="Search Apartment"
+                    <input type="text" placeholder="Inserisci la Via del tuo Appartamento"
                         class="form-control 
             @error('address', 'latitude', 'longitude') is-invalid @elseif(old('address')) is-valid @enderror"
                 name="address" id="search_input"
@@ -286,19 +286,19 @@
                     </ul>
 
                     @error('address')
-                        <div class="invalid-feedback"> {{ $message }} / invalid address entred </div>
+                        <div class="invalid-feedback"> {{ $message }} / Indirizzo non valido </div>
                     @elseif(old('address'))
                         <div class="valid-feedback"> ok </div>
                     @enderror
 
                     @error('latitude')
-                        <div class="invalid-feedback"> {{ $message }} / invalid address entred </div>
+                        <div class="invalid-feedback"> {{ $message }} / Indirizzo non valido </div>
                     @elseif(old('latitude'))
                         <div class="valid-feedback"> ok </div>
                     @enderror
 
                     @error('longitude')
-                        <div class="invalid-feedback"> {{ $message }} / invalid address entred </div>
+                        <div class="invalid-feedback"> {{ $message }} / Indirizzo non valido </div>
                     @elseif(old('longitude'))
                         <div class="valid-feedback"> ok </div>
                     @enderror
@@ -306,8 +306,8 @@
 
                 {{-- opzioni --}}
                 <div class="p-3 text-end">
-                    <a href="{{ route('Admin.apartments.index') }}" class="btn btn-info text-light">Back</a>
-                    <button class="btn btn-primary text-light">Add +</button>
+                    <a href="{{ route('Admin.apartments.index') }}" class="btn btn-info text-light">Torna Indietro</a>
+                    <button class="btn btn-primary text-light">Crea Appartamento</button>
                 </div>
         </form>
     </div>
