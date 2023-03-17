@@ -73,19 +73,19 @@
                 <div class="d-flex mb-3 text-center">
 
                     <div class="mx-1 px-3 py-1 rounded-3 bg-primary">
-                        Rooms: {{ $apartment->rooms_qty }}
+                        Camere: {{ $apartment->rooms_qty }}
                     </div>
 
-                    <div class="mx-1 px-3 py-1 rounded-3 bg-primary"> Beds: {{ $apartment->beds_qty }}
+                    <div class="mx-1 px-3 py-1 rounded-3 bg-primary"> Letti: {{ $apartment->beds_qty }}
                     </div>
 
-                    <div class="mx-1 px-3 py-1 rounded-3 bg-primary"> Baths: {{ $apartment->bathrooms_qty }}
+                    <div class="mx-1 px-3 py-1 rounded-3 bg-primary"> Bagni: {{ $apartment->bathrooms_qty }}
                     </div>
 
                     <div class="mx-1 px-3 py-1 rounded-3 bg-primary">
                         MQ: {{ $apartment->mq }}
                     </div>
-                    <div class="px-3 py-1 rounded-3 bg-primary"> &euro;/night {{ $apartment->daily_price }}
+                    <div class="px-3 py-1 rounded-3 bg-primary"> &euro;/Notte {{ $apartment->daily_price }}
                     </div>
 
                 </div>
@@ -109,16 +109,13 @@
                     @endforeach
                 </div>
                 <div class="d-flex gap-3 my-3">
-                    <a href="{{ route('Admin.apartments.index') }}" class="btn btn-info ms-2 text-light">Return to
-                        apartments
-                        list</a>
+                    <a href="{{ route('Admin.apartments.index') }}" class="btn btn-info ms-2 text-light">Ritorna alla lista degli Appartamenti</a>
 
-                    <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class="btn btn-warning">Edit this
-                        apartment</a>
+                    <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class="btn btn-warning">Modifica Appartamento</a>
                     <form action="{{ route('Admin.apartments.destroy', $apartment->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger">Delete this apartment</button>
+                        <button class="btn btn-danger">elimina Appartamento</button>
                     </form>
                 </div>
             </div>
@@ -175,7 +172,7 @@
                                 </ul>
                             </div>
                             <a href="{{ route('Admin.dashboard.messages') }}" class="btn btn-primary my-3 d-block">
-                                Show all messages
+                                Guarda tutti i messaggi
                             </a>
                         </div>
                     </div>
