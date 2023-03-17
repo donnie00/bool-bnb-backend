@@ -13,7 +13,7 @@
             <div class="dropdown mx-3">
                <button class="btn btn-primary dropdown-toggle fs-5" type="button" data-bs-toggle="dropdown"
                   aria-expanded="false">
-                  Dropdown button
+                  Menù
                </button>
                <ul class="dropdown-menu">
                   @foreach ($new_messages as $apartment => $value)
@@ -61,7 +61,7 @@
                               <span>{{ $singleMessage['subject'] }}</span>
                            </a>
                            <div class="collapse" id="collapseMessage{{ $varId }}">
-                              <div class="text-center py-2">
+                              <div class="text-center fs-5  py-2">
                                  {{ $singleMessage['message'] }}
                               </div>
                            </div>
@@ -120,7 +120,7 @@
       <div class="dropdown mx-3">
          <button class="btn btn-primary dropdown-toggle fs-5" type="button" data-bs-toggle="dropdown"
             aria-expanded="false">
-            Dropdown button
+            Menù
          </button>
          <ul class="dropdown-menu">
             @foreach ($read_messages as $apartment => $value)

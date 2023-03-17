@@ -8,16 +8,14 @@
    @endphp
 
    <div class="container">
-      <h1 class="my-3">Index</h1>
-
-      <a class="btn btn-warning my-3" href="{{ route('Admin.apartments.create') }}">Add new Apartmet</a>
+      <a class="btn btn-warning my-3" href="{{ route('Admin.apartments.create') }}">Aggiungi nuovo Appartamento</a>
       <table class="table">
          <thead>
             <tr>
-               <th>Title</th>
-               <th>Cover</th>
-               <th>address</th>
-               <th>options</th>
+               <th>Titolo</th>
+               <th>Immagine</th>
+               <th>Indirizzo</th>
+               <th>Opzioni</th>
 
             </tr>
          </thead>
@@ -44,11 +42,11 @@
                   <td>
                      <div class="d-flex gap-2 ">
                         <div>
-                           <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class=" btn btn-success">Edit</a>
+                           <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class=" btn btn-success"><i class="fa-solid fa-pen"></i></a>
                         </div>
                         <div>
                            {{-- {{ route('Admin.apartments.show', $apartment->id) }} --}}
-                           <a href="{{ route('Admin.apartments.show', $apartment->id) }}" class=" btn btn-warning">Show</a>
+                           <a href="{{ route('Admin.apartments.show', $apartment->id) }}" class=" btn btn-warning"><i class="fa-solid fa-eye"></i></a>
                         </div>
 
 
@@ -56,11 +54,11 @@
                            method="POST">
                            @csrf
                            @method('DELETE')
-                           <button class="destroy-btn btn btn-danger">Delete</button>
+                           <button class="destroy-btn btn btn-danger text-dark"><i class="fa-regular fa-trash-can"></i></button>
                         </form>
 
                                 <div>
-                                    <a href="{{route("subs.form", $apartment->id)}}" class="ms-4 btn btn-info rounded-4">Sponsor</a>
+                                    <a href="{{route("subs.form", $apartment->id)}}" class="ms-4 btn btn-info rounded-4 px-4 "><i class="fa-brands fa-shopify"></i></a>
                                 </div>
 
                             </div>
