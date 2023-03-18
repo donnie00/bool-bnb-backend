@@ -23,27 +23,29 @@ class DashboardController extends Controller
 
         $userApartmentsCount = count($userApartments);
 
+        if ($userApartmentsCount) {
 
+            $lastApartments = [];
+            $totalMessages = 0;
 
-        $lastApartments = [];
-        $totalMessages = 0;
+            foreach ($userApartments as $apartment) {
 
-        foreach ($userApartments as $apartment) {
+                if (count($lastApartments) < 3) {
 
-            if (count($lastApartments) < 3) {
+                    $apartmentId = $apartment['id'];
 
-                $apartmentId = $apartment['id'];
+                    $apartmentTitle = $apartment['title'];
+                }
+                $apartment_messages = Message::where('apartment_id', $apartment["id"])->get()->toArray();
 
-                $apartmentTitle = $apartment['title'];
+                if ($apartment_messages) {
+                    $totalMessages += count($apartment_messages);
+                }
             }
-            $apartment_messages = Message::where('apartment_id', $apartment["id"])->get()->toArray();
-
-            if ($apartment_messages) {
-                $totalMessages += count($apartment_messages);
-            }
+            return view('Admin.dashboardUser', compact('user', 'userApartmentsCount', 'lastApartments', 'totalMessages'));
+        } else {
+            return view('Admin.dashboardUser', compact('user', 'userApartmentsCount'));
         }
-
-        return view('Admin.dashboardUser', compact('user', 'userApartmentsCount', 'lastApartments', 'totalMessages'));
     }
 
     public function userMessages()
