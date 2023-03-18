@@ -22,8 +22,8 @@
 
 <body class="bg-primary">
 
-    <div id="app" class="container w-75 h-75 border-4 bg-light shadow my-5 rounded-4 py-2 px-5">
-             <main class=" ps-5 p-4 overflow-x-hidden pt-5">
+    <div id="app" class="container w-75 h-75 border-4 bg-light shadow my-5 rounded-4 py-2 px-lg-5">
+             <main class=" ps-lg-5 p-lg-4 overflow-x-hidden pt-5">
                 {{-- qua ci starebbe l'if --}}
                 @yield('content')
             </main>

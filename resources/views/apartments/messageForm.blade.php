@@ -28,7 +28,7 @@
    <form action="{{ route('messages.store', $apartmentId) }}" method="POST">
       @csrf
       <div class="row">
-         <div class="col-6">
+         <div class="col-lg-6 col-sm-12">
             <div class="form-floating mb-3">
                <input type="text" class="form-control" name="sender" value="{{ $user->name ?? null }}"
                   placeholder="Enter your fulll name" />
@@ -44,7 +44,7 @@
                <label for="floatingInput">Oggetto</label>
             </div>
          </div>
-         <div class="col-6">
+         <div class="col-lg-6 col-sm-12">
             <div class="mb-3">
                <textarea class="form-control" name="message" rows="8" placeholder="Messaggio"></textarea>
             </div>
