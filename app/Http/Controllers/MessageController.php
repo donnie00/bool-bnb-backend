@@ -8,6 +8,7 @@ use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Events\MessageSent;
 
 class MessageController extends Controller
 {
@@ -43,7 +44,7 @@ class MessageController extends Controller
 
         $message = Message::create($data);
 
-        return Redirect::to(env('MY_FRONTEND_URL')  . '/apartments/' . $id, 302, ['confirm' => 'messaggio mandato con successo']);
+        return Redirect::to(env('MY_FRONTEND_URL')  . '/apartments/' . $id . '?confirm=messaggio mandato con successo', 302, ['confirm' => 'messaggio mandato con successo']);
     }
 
     public function checkRead($messageId)

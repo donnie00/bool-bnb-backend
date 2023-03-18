@@ -325,6 +325,20 @@ nav {
   }
 }
 
+.subsCards:hover{
+  box-shadow: 5px 5px 5px black;
+}
+
+.hoverBtnBackToApartment:hover{
+  background-color: #343a40;
+  color: white;
+}
+
+.hoverbtnPaga:hover{
+  color: white;
+  background-color: #28a745;
+}
+
 /* FORM CREATE EDIT SEARCH AUTOCOMPLETE */
 
 /* .my-btn {

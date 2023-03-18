@@ -6,14 +6,6 @@
             @csrf
             @method('POST')
         </form>
-        {{-- <div class="row">
-            <div class="col-10 offset-1 col-md-6 offset-md-3">
-                <div id="dropin-container"></div>
-                <div class="text-center final-button">
-                    <button id="submit-button" class="btn btn-secondary">Verify Payment Method</button>
-                </div>
-            </div>
-        </div> --}}
         @if (session('success_message'))
             <div class="alert alert-success">
                 {{ session('success_message') }}
@@ -49,24 +41,24 @@
 
 
                     @foreach ([0, 1, 2] as $i)
-                       
                         <div class="col-12 col-md-4  card-container ">
-                           <?php
-                           $class = '';
-                           
-                           switch ($i) {
-                               case 0:
-                                   $class = 'bg-dark text-white';
-                                   break;
-                               case 1:
-                                   $class = 'bg-warning';
-                                   break;
-                               case 2:
-                                   $class = 'bg-info';
-                                   break;
-                           }
-                           ?>
-                            <div style="cursor : pointer;" class="spn-card rounded py-4 mt-2 text-center <?php echo $class  ?>">
+                            <?php
+                            $class = '';
+                            
+                            switch ($i) {
+                                case 0:
+                                    $class = 'bg-dark text-white';
+                                    break;
+                                case 1:
+                                    $class = 'bg-warning';
+                                    break;
+                                case 2:
+                                    $class = 'bg-info';
+                                    break;
+                            }
+                            ?>
+                            <div style="cursor : pointer;"
+                                class="subsCards spn-card rounded py-4 mt-2 text-center <?php echo $class; ?>">
                                 <label style="cursor: pointer" class="d-block" for="{{ 'sub' . $i }}">
                                     <h3>{{ $data[$i]['name'] }}</h3>
                                     <h6 class="">prezzo <strong> {{ $data[$i]['price'] }} €</strong></h6>
@@ -96,8 +88,19 @@
                     </div>
                 </section>
 
+
                 <input class="" id="nonce" name="payment_method_nonce" type="hidden" />
-                <button class=" d-block button btn btn-success m-auto" type="submit"><span>PAY</span></button>
+                <div class="row">
+                    <div class="col-6 text-end p-0">
+                        <button class="hoverbtnPaga justify-item-end  button btn btn-success ms-5" type="submit"><span>PAGA</span></button>
+                    </div>
+                    <div class="col-6 text-end p-0">
+                        <a type="button" href="{{route("Admin.apartments.show", $apartmentID)}}" class="hoverBtnBackToApartment btn opacity-50">
+                            <i class="fa-solid fa-share"></i>
+                            vai al tuo appartamento
+                        </a>
+                    </div>
+                </div>
             </form>
         </div>
 
@@ -108,6 +111,7 @@
         var client_token = "{{ $token }}";
         braintree.dropin.create({
             authorization: client_token,
+            header: "paga con la carta",
             selector: '#bt-dropin',
             // paypal: {
             //     flow: 'vault'
