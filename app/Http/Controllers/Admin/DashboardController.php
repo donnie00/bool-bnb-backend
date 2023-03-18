@@ -23,27 +23,29 @@ class DashboardController extends Controller
 
         $userApartmentsCount = count($userApartments);
 
+        if ($userApartmentsCount) {
 
+            $lastApartments = [];
+            $totalMessages = 0;
 
-        $lastApartments = [];
-        $totalMessages = 0;
+            foreach ($userApartments as $apartment) {
 
-        foreach ($userApartments as $apartment) {
+                if (count($lastApartments) < 3) {
 
-            if (count($lastApartments) < 3) {
+                    $apartmentId = $apartment['id'];
 
-                $apartmentId = $apartment['id'];
+                    $apartmentTitle = $apartment['title'];
+                }
+                $apartment_messages = Message::where('apartment_id', $apartment["id"])->get()->toArray();
 
-                $apartmentTitle = $apartment['title'];
+                if ($apartment_messages) {
+                    $totalMessages += count($apartment_messages);
+                }
             }
-            $apartment_messages = Message::where('apartment_id', $apartment["id"])->get()->toArray();
-
-            if ($apartment_messages) {
-                $totalMessages += count($apartment_messages);
-            }
+            return view('Admin.dashboardUser', compact('user', 'userApartmentsCount', 'lastApartments', 'totalMessages'));
+        } else {
+            return view('Admin.dashboardUser', compact('user', 'userApartmentsCount'));
         }
-
-        return view('Admin.dashboardUser', compact('user', 'userApartmentsCount', 'lastApartments', 'totalMessages'));
     }
 
     public function userMessages()
@@ -67,8 +69,8 @@ class DashboardController extends Controller
             $apartmentId = $apartment["id"];
 
 
-            $new_apartment_messages = Message::where('apartment_id', $apartmentId)->where('read', 0)->get()->toArray();
-            $read_apartment_messages = Message::where('apartment_id', $apartmentId)->where('read', 1)->get()->toArray();
+            $new_apartment_messages = Message::where('apartment_id', $apartmentId)->where('read', 0)->orderBy('created_at', 'DESC')->get()->toArray();
+            $read_apartment_messages = Message::where('apartment_id', $apartmentId)->where('read', 1)->orderBy('created_at', 'DESC')->get()->toArray();
 
             if ($new_apartment_messages) {
                 // array_push($messages, $apartment_messages);
