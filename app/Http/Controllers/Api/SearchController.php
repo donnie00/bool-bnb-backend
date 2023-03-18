@@ -127,7 +127,7 @@ class SearchController extends Controller
         $apartWithSearchedServices = [];
 
         if (!empty($data["services"])) {
-            $apartments_with_services = Apartment::with('services')->whereIn("id", $apartments)->get()->toArray();
+            $apartments_with_services = Apartment::with('services','subscriptions')->whereIn("id", $apartments)->get()->toArray();
 
             // dump($apartments_with_services);
 
@@ -200,14 +200,14 @@ class SearchController extends Controller
             $images = Image::where("apartment_id", $nearAp->id)
                 ->get()
                 ->toArray();
-            $subscriptions = ApartmentSubscription::select("subscription_id")
-                ->where("apartment_id", $nearAp->id)
-                ->get()
-                ->pluck("subscription_id")
-                ->toArray();
+            // $subscriptions = ApartmentSubscription::select("subscription_id")
+            //     ->where("apartment_id", $nearAp->id)
+            //     ->get()
+            //     ->pluck("subscription_id")
+            //     ->toArray();
             $nearAp["services"] = $services;
             $nearAp["images"] = $images;
-            $nearAp["subscriptions"] = $subscriptions;
+            // $nearAp["subscriptions"] = $subscriptions;
         }
 
         $nearApartmentsSorted = sort_apartments_by_distance($nearApartments);

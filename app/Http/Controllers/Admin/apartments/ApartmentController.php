@@ -44,6 +44,7 @@ class ApartmentController extends Controller
      */
     public function store(StoreApartmentRequest $request)
     {
+        dd($request->all());
         $data = $request->validated();
         $id = Auth::id();
 
@@ -91,6 +92,9 @@ class ApartmentController extends Controller
         //aggiornamento relazione MOLTIaMOLTI services
         if ($request->has('services')) {
             $apartment->services()->attach($data["services"]);
+        }
+        if($request->had('images')){
+            $apartment->images()->attach($data["images"])
         }
 
         return redirect()->route('Admin.apartments.show', $apartment->id);

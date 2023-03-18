@@ -105,18 +105,27 @@
 
             {{-- cover_img ----------------------------------------------------------- --}}
             <div class="input-container pb-2">
-                <label class="form-label fw-semibold text-uppercase" for="cover_img">CARICA IMMAGINI</label>
+                <label class="form-label fw-semibold text-uppercase" for="cover_img">CARICA IMMAGINI </label>
+                <div>Immagine di copertina</div>
                 <input type="file" class="form-control
                       @error('cover_img') is-invalid  @enderror"
                     name="cover_img" id="cover_img" value="{{ old('cover_img') }}">
 
-
+               
                 @error('cover_img')
                     <div class="invalid-feedback">{{ $message }} </div>
                 @enderror
             </div>
-
-            <button class="input-container pb-2 mt-2">Aggiungi immagini dell' appartamento (max 4)</button>
+           
+            <div class="input-container pb-2">
+                <div>Ulteriori immaginin max(4)</div>
+                <input type="file" class="form-control @error('images') is-invalid  @enderror"
+                name="images[]" id="images" value="{{ old('images') }}" multiple>
+                @error("images")
+                    <div class="invalid-feedback">{{$message}}</div>
+                @enderror
+            </div>
+            {{-- <button class="input-container pb-2 mt-2">Aggiungi immagini dell' appartamento (max 4)</button> --}}
 
             {{-- description -------------------------------------------------- --}}
             <div class="input-container pb-2">
@@ -267,9 +276,9 @@
                 name="address" id="search_input"
                         value="{{ $errors->has('address') ? '' : old('address') }}">
 
-                    <button class="my-btn">
+                    {{-- <button class="my-btn">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
+                    </button> --}}
 
                     <ul class="SuggestionAddressList  list-group list-group-flush"
                         v-if="suggestions && suggestions.length > 0">
