@@ -6,7 +6,7 @@
    <form action="{{ route('messages.store', $apartmentId) }}" method="POST">
       @csrf
       <div class="row">
-         <div class="col-6">
+         <div class="col-lg-6 col-sm-12">
             <div class="form-floating mb-3">
                <input type="text" class="form-control" name="sender" value="{{ $user->name ?? null }}"
                   placeholder="Enter your fulll name" />
@@ -22,7 +22,7 @@
                <label for="floatingInput">Subject</label>
             </div>
          </div>
-         <div class="col-6">
+         <div class="col-lg-6 col-sm-12">
             <div class="mb-3">
                <textarea class="form-control" name="message" rows="8" placeholder="Message"></textarea>
             </div>
@@ -32,11 +32,11 @@
          <a href="{{ env('MY_FRONTEND_URL') . '/apartments/' . $apartmentId }}" class="me-3 btn btn-primary">
             &leftarrow; Back to apartment
          </a>
-         <div class="form-controls">
-            <button type="reset" class="btn btn-dark me-2">
+         <div class="form-controls d-flex gap-3 align-content-end">
+            <button type="reset" class="btn btn-dark">
                Cancel
             </button>
-            <button type="submit" class="btn btn-success">
+            <button type="submit" class="btn btn-success ">
                Send
             </button>
          </div>
