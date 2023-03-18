@@ -44,7 +44,7 @@ class MessageController extends Controller
 
         $message = Message::create($data);
 
-        return Redirect::to(env('MY_FRONTEND_URL')  . '/apartments/' . $id . '?confirm=messaggio mandato con successo', 302, ['confirm' => 'messaggio mandato con successo']);
+        return Redirect::to(env('MY_FRONTEND_URL')  . '/apartments/' . $id . '?confirm=messaggio inviato con successo', 302, ['confirm' => 'messaggio mandato con successo']);
     }
 
     public function checkRead($messageId)
