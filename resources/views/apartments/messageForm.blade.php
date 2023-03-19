@@ -51,7 +51,7 @@
          </div>
       </div>
       <div class="form-buttons d-flex justify-content-between">
-         <a href="{{ env('MY_FRONTEND_URL') . '/apartments/' . $apartmentId }}" class="me-3 btn btn-primary">
+         <a href="{{ env('MY_FRONTEND_URL') . '/apartments/' . $apartmentId }}" class="me-3 btn btn-primary d-flex align-items-center">
             &leftarrow; Torna all'appartamento
          </a>
          <div class="form-controls d-flex flex-sm-row flex-column gap-1">
