@@ -37,6 +37,8 @@ class UpdateApartmentRequest extends FormRequest
             'daily_price' => 'required|numeric',
             'visible' => 'nullable|boolean',
             'services' => 'required|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images' => 'max:4',
         ];
     }
 }

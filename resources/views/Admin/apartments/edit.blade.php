@@ -97,9 +97,10 @@
          </div>
 
 
-         {{-- cover_img ----------------------------------------------------------- --}}
+         {{-- imges ----------------------------------------------------------- --}}
          <div class="input-container pb-2">
             <label class="form-label fw-semibold text-uppercase" for="cover_img">CARICA IMMAGINI</label>
+            <div>Immagine di copertina</div>
             <input type="file" class="form-control
                 @error('cover_img') is-invalid  @enderror"
                name="cover_img" id="cover_img" value="{{ old('cover_img') }}">
@@ -110,7 +111,16 @@
             @enderror
          </div>
 
-         <button class="input-container pb-2 mt-2">Aggiungi immagini dell' appartamento (max 4)</button>
+         <div class="input-container pb-2">
+            <div>Ulteriori immaginin max(4)</div>
+            <input type="file" class="form-control @error('images') is-invalid  @enderror"
+            name="images[]" id="images" value="{{ old('images') }}" multiple>
+            @error("images")
+                <div class="invalid-feedback">{{$message}}</div>
+            @enderror
+        </div>
+
+         {{-- <button class="input-container pb-2 mt-2">Aggiungi immagini dell' appartamento (max 4)</button> --}}
 
          {{-- description -------------------------------------------------- --}}
          <div class="input-container pb-2">

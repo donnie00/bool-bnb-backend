@@ -144,6 +144,22 @@ class ApartmentController extends Controller
             }
         }
 
+        $paths = [];
+        if(key_exists("images",$data)){
+            $i=0;
+            foreach($data["images"] as $img){ 
+                if ($apartment->images) {
+                    Storage::delete($apartment->images[$i]->image);
+                    $firstImage = Image::find($apartment->images[$i]->id);
+                    $firstImage->delete();
+                    $i++;
+                }
+                $pathImage= Storage::put("apartments_images",$img);
+                $newImage = new Image(["image"=>$pathImage, "apartment_id"=>$apartment->id]);
+                $newImage->save();
+            }
+        }
+
         $apartment->update(
             [
                 ...$data,

@@ -103,7 +103,7 @@
             </div>
 
 
-            {{-- cover_img ----------------------------------------------------------- --}}
+            {{-- imges ----------------------------------------------------------- --}}
             <div class="input-container pb-2">
                 <label class="form-label fw-semibold text-uppercase" for="cover_img">CARICA IMMAGINI </label>
                 <div>Immagine di copertina</div>
