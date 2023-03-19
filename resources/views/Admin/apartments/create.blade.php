@@ -230,13 +230,13 @@
                 </label>
                 <div class="row">
                     @foreach ($services as $service)
-                        <div class="col d-flex align-items-center @error('services') is-invalid @enderror ">
-                            <input class="form-check @error('services') is-invalid @enderror" type="checkbox"
+                        <div style="white-space: nowrap;" class="col d-flex align-items-center @error('services') is-invalid @enderror " >
+                            <input class="form-check  @error('services') is-invalid @enderror" type="checkbox"
                                 value="{{ $service->id }}" id="service_{{ $loop->index }}" name="services[]"
-                                {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}>
+                                {{ in_array($service->id, old('services', [])) ? 'checked' : '' }} >
                             {{-- ICONE che si coloran con over --++++++++++++++++++++++++++++++++++++++++++++++++++++ ++ + + --}}
                             <label
-                                for="service_{{ $loop->index }}">{{ $service->name == 'Aria Condizionata' ? 'Clima' : $service->name }}</label>
+                                for="service_{{ $loop->index }}" >{{ $service->name == 'Aria Condizionata' ? 'Clima' : $service->name }}</label>
                         </div>
                     @endforeach
 
@@ -314,7 +314,7 @@
                 </div>
 
                 {{-- opzioni --}}
-                <div class="p-3 text-end">
+                <div class="gap-3 pt-3 d-flex justify-content-between justify-content-md-start">
                     <a href="{{ route('Admin.apartments.index') }}" class="btn btn-info text-light">Torna Indietro</a>
                     <button class="btn btn-primary text-light">Crea Appartamento</button>
                 </div>

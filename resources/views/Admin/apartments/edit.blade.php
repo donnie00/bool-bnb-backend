@@ -301,7 +301,7 @@
             </div>
 
             {{-- opzioni --}}
-            <div class="p-3 text-end">
+            <div class="gap-3 pt-3 d-flex justify-content-between justify-content-md-start">
                <a href="{{ route('Admin.apartments.show', $apartment->id) }}" class="btn btn-info text-light"> Torna indietro </a>
                <button class="btn btn-primary text-light">Salva modifiche</button>
             </div>
