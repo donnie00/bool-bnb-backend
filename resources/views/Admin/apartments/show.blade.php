@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
     @vite(['resources/js/getSponsorizedTime.js']);
+    @vite(['resources/js/carousel.js'])
+    
     <section id="ds-Show-Apartment" class="px-xxl-5  mx-3 mx-sm-5 mx-lg-5">
         <div class=" container.fluid  px-md-3 px-xl-5">
             <!--Apartments Show -->
@@ -28,14 +30,14 @@
                     @if ($apartment->cover_img && $apartment->images)
                         <div class="row">
                             <div class="col">
-                                <img class="img-fluid w-100 rounded-4 pb-2" src="{{asset('storage/' . $apartment->cover_img) }}"
+                                <img class="main-img img-fluid w-100 rounded-4 pb-2" src="{{asset('storage/' . $apartment->cover_img) }}"
                                     alt="" />
                             </div>
                         </div>
                         <div class="row g-1">
-                            @foreach ($apartment->images as $img)
+                            @foreach ($apartment->images as $key => $img)
                                 <div class="col">
-                                    <img src="{{asset('storage/' . $img->image) }}" alt="" class="img-fluid h-100 rounded-3"
+                                    <img src="{{asset('storage/' . $apartment->images[$key]->image) }}" alt="" class="thumb-img  img-fluid h-100 rounded-3"
                                         style="object-fit:cover">
                                 </div>
                             @endforeach
@@ -195,5 +197,8 @@
         </div>
         </div>
     </section>
+<script>
+  
 
+</script>
 @endsection
