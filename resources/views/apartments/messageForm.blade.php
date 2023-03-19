@@ -54,8 +54,8 @@
          <a href="{{ env('MY_FRONTEND_URL') . '/apartments/' . $apartmentId }}" class="me-3 btn btn-primary">
             &leftarrow; Torna all'appartamento
          </a>
-         <div class="form-controls">
-            <button type="reset" class="btn btn-dark me-2">
+         <div class="form-controls d-flex flex-sm-row flex-column gap-1">
+            <button type="reset" class="btn btn-dark">
                Cancella
             </button>
             <button type="submit" class="btn btn-success">
