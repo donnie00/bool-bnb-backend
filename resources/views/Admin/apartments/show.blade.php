@@ -83,22 +83,23 @@
          <div class="col-6">
             <h2 class="my-3">{{ ucfirst($apartment->address) }}</h2>
             <hr>
-            <div class="d-flex mb-3 text-center">
+            
+            <div class="row  gap-1 gap-md-3 mb-3 text-center">
 
-               <div class="mx-1 px-3 py-1 rounded-3 bg-primary">
+               <div class="col  py-1 rounded-3 bg-primary">
                   Camere: {{ $apartment->rooms_qty }}
                </div>
 
-               <div class="mx-1 px-3 py-1 rounded-3 bg-primary"> Letti: {{ $apartment->beds_qty }}
+               <div class="col  py-1 rounded-3 bg-primary"> Letti: {{ $apartment->beds_qty }}
                </div>
 
-               <div class="mx-1 px-3 py-1 rounded-3 bg-primary"> Bagni: {{ $apartment->bathrooms_qty }}
+               <div class=" col  py-1 rounded-3 bg-primary"> Bagni: {{ $apartment->bathrooms_qty }}
                </div>
 
-               <div class="mx-1 px-3 py-1 rounded-3 bg-primary">
+               <div class="col  py-1 rounded-3 bg-primary">
                   MQ: {{ $apartment->mq }}
                </div>
-               <div class="px-3 py-1 rounded-3 bg-primary"> &euro;/Notte {{ $apartment->daily_price }}
+               <div class="col  py-1 rounded-3 bg-primary"> &euro;/Notte {{ $apartment->daily_price }}
                </div>
 
             </div>
