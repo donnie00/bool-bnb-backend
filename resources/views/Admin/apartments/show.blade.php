@@ -3,7 +3,10 @@
     @vite(['resources/js/getSponsorizedTime.js']);
     <section id="ds-Show-Apartment" class="px-xxl-5  mx-3 mx-sm-5 mx-lg-5">
         <div class=" container.fluid  px-md-3 px-xl-5">
+<<<<<<< HEAD
             @dump($apartment)
+=======
+>>>>>>> main
             <!--Apartments Show -->
             <h1 class="mb-4 d-inline">{{ $apartment->title }}</h1>
             <div class="my-3">
@@ -26,26 +29,25 @@
 
             <div class="py-4 img-container w-75 m-auto rounded-4 overflow-hidden">
                 <div class="col-8 m-auto">
-
-                    @if ($apartment->cover_img)
+                    @if ($apartment->cover_img && $apartment->images)
                         <div class="row">
                             <div class="col">
-                                <img class="img-fluid w-100 rounded-4 pb-2"
-                                    src="{{ asset('storage/' . $apartment->cover_img) }}" alt="" />
+                                <img class="img-fluid w-100 rounded-4 pb-2" src="{{asset('storage/' . $apartment->cover_img) }}"
+                                    alt="" />
                             </div>
-                            <div class="row g-1">
-                                @foreach ($apartment->images as $img)
-                                    <div class="col">
-                                        <img src="{{ $img->image }}" alt="" class="img-fluid h-100 rounded-3"
-                                            style="object-fit:cover">
-                                    </div>
-                                @endforeach
-                            @elseif (count($apartment->images))
-                                <div class="row">
-                                    <div class="col">
-                                        <img class="img-fluid w-100 rounded-4 pb-2" src="{{ $apartment->images[0]->image }}"
-                                            alt="" />
-                                    </div>
+                        </div>
+                        <div class="row g-1">
+                            @foreach ($apartment->images as $img)
+                                <div class="col">
+                                    <img src="{{asset('storage/' . $img->image) }}" alt="" class="img-fluid h-100 rounded-3"
+                                        style="object-fit:cover">
+                                </div>
+                            @endforeach
+                        @elseif ($apartment->cover_img)
+                            <div class="row">
+                                <div class="col">
+                                    <img class="img-fluid w-100 rounded-4 pb-2"
+                                        src="{{ asset('storage/' . $apartment->cover_img) }}" alt="" />
                                 </div>
                                 <div class="row g-1">
                                     @foreach ($apartment->images as $img)
@@ -54,13 +56,27 @@
                                                 style="object-fit:cover">
                                         </div>
                                     @endforeach
-                                @else
+                                @elseif (count($apartment->images))
                                     <div class="row">
                                         <div class="col">
-                                            <img class="img-fluid mx-auto d-block"
-                                                src="{{ asset('storage/placeholder-image.png') }}" alt="" />
+                                            <img class="img-fluid w-100 rounded-4 pb-2"
+                                                src="{{ $apartment->images[0]->image }}" alt="" />
                                         </div>
                                     </div>
+                                    <div class="row g-1">
+                                        @foreach ($apartment->images as $img)
+                                            <div class="col">
+                                                <img src="{{ $img->image }}" alt=""
+                                                    class="img-fluid h-100 rounded-3" style="object-fit:cover">
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="row">
+                                            <div class="col">
+                                                <img class="img-fluid mx-auto d-block"
+                                                    src="{{ asset('storage/placeholder-image.png') }}" alt="" />
+                                            </div>
+                                        </div>
                     @endif
                 </div>
             </div>
@@ -109,9 +125,11 @@
                     @endforeach
                 </div>
                 <div class="d-flex gap-3 my-3">
-                    <a href="{{ route('Admin.apartments.index') }}" class="btn btn-info ms-2 text-light">Ritorna alla lista degli Appartamenti</a>
+                    <a href="{{ route('Admin.apartments.index') }}" class="btn btn-info ms-2 text-light">Ritorna alla lista
+                        degli Appartamenti</a>
 
-                    <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class="btn btn-warning">Modifica Appartamento</a>
+                    <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class="btn btn-warning">Modifica
+                        Appartamento</a>
                     <form action="{{ route('Admin.apartments.destroy', $apartment->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
@@ -181,5 +199,5 @@
         </div>
         </div>
     </section>
-    
+
 @endsection
