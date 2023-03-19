@@ -3,7 +3,7 @@
     @vite(['resources/js/getSponsorizedTime.js']);
     <section id="ds-Show-Apartment" class="px-xxl-5  mx-3 mx-sm-5 mx-lg-5">
         <div class=" container.fluid  px-md-3 px-xl-5">
-
+            @dump($apartment)
             <!--Apartments Show -->
             <h1 class="mb-4 d-inline">{{ $apartment->title }}</h1>
             <div class="my-3">

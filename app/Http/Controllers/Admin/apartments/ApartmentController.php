@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\UpdateApartmentRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Apartment;
+use App\Models\Image;
 use App\Models\Service;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -44,10 +45,8 @@ class ApartmentController extends Controller
      */
     public function store(StoreApartmentRequest $request)
     {
-        dd($request->all());
         $data = $request->validated();
         $id = Auth::id();
-
 
         // reupero coordinate da campi create con TomTom API
         // $fetch_coordinates = Http::get("https://api.tomtom.com/search/2/structuredGeocode.json?", [
@@ -89,14 +88,19 @@ class ApartmentController extends Controller
             'cover_img' => $path ?? null
         ]);
 
+        if($request->has('images')){
+            $paths = [];
+            foreach($data["images"] as $image){ 
+                $pathImage= Storage::put("apartments_images",$image);
+                $newImage = new Image(["image"=>$pathImage]);
+                $apartment->images()->save($newImage);
+            }
+        }
+
         //aggiornamento relazione MOLTIaMOLTI services
         if ($request->has('services')) {
             $apartment->services()->attach($data["services"]);
         }
-        if($request->had('images')){
-            $apartment->images()->attach($data["images"])
-        }
-
         return redirect()->route('Admin.apartments.show', $apartment->id);
     }
 
@@ -106,7 +110,7 @@ class ApartmentController extends Controller
     public function show(Apartment $apartment)
     {
         
-        $apartment->load('subscriptions', 'messages');
+        $apartment->load('subscriptions', 'messages',"images");
         return view("Admin.apartments.show", compact("apartment"));
     }
 
