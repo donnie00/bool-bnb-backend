@@ -50,14 +50,11 @@
             </div>
          </div>
       </div>
-      <div class="form-buttons d-flex justify-content-between">
+      <div class="form-buttons d-flex justify-content-between justify-content-md-start ">
          <a href="{{ env('MY_FRONTEND_URL') . '/apartments/' . $apartmentId }}" class="me-3 btn btn-primary d-flex align-items-center">
-            &leftarrow; Torna all'appartamento
+            &leftarrow; Indietro
          </a>
-         <div class="form-controls d-flex flex-sm-row flex-column gap-1">
-            <button type="reset" class="btn btn-dark">
-               Cancella
-            </button>
+         <div class="form-controls">
             <button type="submit" class="btn btn-success">
                Invia
             </button>
