@@ -3,6 +3,7 @@
 @section('content')
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+
         @media (max-width: 767px) {
             .table {
                 display: none;
@@ -30,6 +31,7 @@
         <div class="small">
             <ul style="margin-left: -20px" class="p-0">
                 @foreach ($apartments as $apartment)
+                    {{-- <div class="">{{ $apartment->title }}</div> --}}
                     <li style="list-style: none;">
                         <div class="row">
                             <div class="col-6">
@@ -78,7 +80,7 @@
                         </div>
 
                     </li>
-                    <hr class="m-1">
+                    <hr style="border: 2px solid white" class="my-2">
                 @endforeach
 
             </ul>
