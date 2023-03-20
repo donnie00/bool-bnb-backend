@@ -11,7 +11,7 @@
             {{-- @dump($apartment->subscriptions) --}}
             <a href="{{ route('Admin.apartments.show', $apartment->id) }}" class="text-decoration-none text-dark">
 
-               <div class="card mb-3">
+               <div class="card mb-3 w-75 m-auto">
                   <div class="row g-0">
                      <div class="col-md-4">
                         @if ($apartment->cover_img)
@@ -87,6 +87,7 @@
          <a href="{{ route('Admin.dashboard.messages') }}" class="py-3">Mostra tutti i messaggi</a>
       </h3>
    @else
-      <h1>Non hai appartamenti da mostrare!</h1>
+      <h1 class="text-center">Non hai appartamenti da mostrare!</h1>
+      <h2 class="text-center">Aggiungine subito di nuovi dalla sezione appartamenti</h2>
    @endif
 @endsection
