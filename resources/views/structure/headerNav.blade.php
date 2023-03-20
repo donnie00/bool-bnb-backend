@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-primary shadow-sm  p-0">
     <div class="container-fluid px-md-5 d-flex align-items-md-end">
-        <a class="navbar-brand d-flex align-items-center" href="{{ env('MY_FRONTEND_URL') }}">
+        <a class="align-self-start navbar-brand d-flex align-items-center" href="{{ env('MY_FRONTEND_URL') }}">
 
             <div class="logo pt-2 {{-- all'espansione del burger deve allargarsi e avvicinarsi alle voci del menu --}}">
 
@@ -23,10 +23,10 @@
          {{--   @dump(Route::getCurrentRoute()) --}}
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                <!-- Left Side Of Navbar -->
-            <ul class="navbar nav me-md-auto align-items-end py-0">
+            <ul class="navbar nav flex-column flex-md-row me-md-auto align-items-end py-0  fw-semibold ">
                    <li class="nav-item d-flex flex-column align-items-center">
                       <a class="nav-link fs-5  pt-md-4 px-2
-                    {{ Route::currentRouteName() === null ? 'active' : '' }}"
+                d    {{ Route::currentRouteName() === null ? 'active' : '' }}"
                             href="{{ env('MY_FRONTEND_URL') }}">
                             {{ __('Home') }}</a>
                         <div class="link-underline m-3 mb-0"></div>
@@ -45,11 +45,14 @@
                     </li>
                 </ul>
                 <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto align-items-end">
+                <ul class="navbar-nav ml-auto align-items-end fw-semibold ">
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item  d-flex flex-column align-items-center">
+                         
                             <a class="nav-link fs-5  pt-md-4 px-2
+
+                          
                          {{ Route::currentRouteName() === 'login' ? 'active' : '' }}"
                                 href="{{ route('login') }}">{{ __('Login') }}</a>
                             <div class="link-underline m-3 mb-0"></div>
@@ -70,10 +73,10 @@
                                 {{ Auth::user()->name }}
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item fs-5"
                                     href="{{ url('/Admin/dashboard') }}">{{ __('Profilo') }}</a>
-                                <a class="dropdown-item fs-5" href="{{ route('logout') }}"
+                                <a class="dropdown-item fs-5 " href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}

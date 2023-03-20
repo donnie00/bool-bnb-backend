@@ -91,14 +91,13 @@ font-family: 'UnifrakturMaguntia', cursive; */
 
 /********************************************/
 body {
-  /*    font-family: 'Raleway', sans-serif;
-   color: $light_color; */
+   font-family: 'Poppins', sans-serif;
 }
 
 /***** NAVBAR ******/
 nav {
   .nav-logo {
-    height: 60px;
+    height: 70px;
   }
 
   .nav-item {
@@ -116,7 +115,7 @@ nav {
       &:hover,
       &:active,
       &.active {
-        color: saturate($primary_color, 20%);
+        color: saturate($primary_color, 20%) !important;
 
         &+.link-underline {
           background-color: saturate($primary_color, 20%);
