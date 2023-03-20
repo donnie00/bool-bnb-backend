@@ -83,66 +83,57 @@
          <div class="col-6">
             <h2 class="my-3">{{ ucfirst($apartment->address) }}</h2>
             <hr>
-            <div class="d-flex mb-3 text-center">
+            
+            <div class="row  gap-1 gap-md-3 mb-3 text-center">
 
-               <div class="mx-1 px-3 py-1 rounded-3 bg-primary">
+               <div class="col  py-1 rounded-3 bg-primary">
                   Camere: {{ $apartment->rooms_qty }}
                </div>
 
-               <div class="mx-1 px-3 py-1 rounded-3 bg-primary"> Letti: {{ $apartment->beds_qty }}
+               <div class="col  py-1 rounded-3 bg-primary"> Letti: {{ $apartment->beds_qty }}
                </div>
 
-               <div class="mx-1 px-3 py-1 rounded-3 bg-primary"> Bagni: {{ $apartment->bathrooms_qty }}
+               <div class=" col  py-1 rounded-3 bg-primary"> Bagni: {{ $apartment->bathrooms_qty }}
                </div>
 
-               <div class="mx-1 px-3 py-1 rounded-3 bg-primary">
+               <div class="col  py-1 rounded-3 bg-primary">
                   MQ: {{ $apartment->mq }}
                </div>
-               <div class="px-3 py-1 rounded-3 bg-primary"> &euro;/Notte {{ $apartment->daily_price }}
+               <div class="col  py-1 rounded-3 bg-primary"> &euro;/Notte {{ $apartment->daily_price }}
                </div>
 
             </div>
             <hr>
             <div class="mb-2 mx-2">
-               <p class="fs-4">{{ ucfirst($apartment->description) }}</p>
+               <p class="fs-6">{{ ucfirst($apartment->description) }}</p>
             </div>
             <hr>
 
             <div class="mb-2 mx-2 col-8">
                <p class="fw-semibold">Cosa troverai: </p>
-
+                  <ul class="row g-3">
                @foreach ($apartment->services as $service)
-                  <ul>
-                     <li>
-                        <img width="40px" class="icons-services mx-1 my-2"
+                  
+                     <li class="col-12 col-lg-6">
+                        <img width="25px" class="icons-services "
                            src="{{ asset('services-icons/' . $service->icon) }}" alt="">
                         <i class=" me-3">{{ $service->name }}</i>
                      </li>
-                  </ul>
+                  
                @endforeach
+               </ul>
             </div>
-            <div class="d-flex gap-3 my-3">
-               <a href="{{ route('Admin.apartments.index') }}" class="btn btn-info ms-2 text-light">Ritorna alla lista
-                  degli Appartamenti</a>
-
-               <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class="btn btn-warning">Modifica
-                  Appartamento</a>
-               <form class="delete-form" action="{{ route('Admin.apartments.destroy', $apartment->id) }}" method="POST">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger">elimina Appartamento</button>
-               </form>
-            </div>
+            
          </div>
 
          <div class="col-6 ">
-            <div id="sub-infos-container" class="row mb-3 text-center m-2 rounded-2">
+            <div id="sub-infos-container" class="row mb-3 text-center ms-2 rounded-2">
                <div class="col  ">
                   <div id="subscription-bg-container" class="border border-3 m-4">
                      <div>
 
                      </div class="mt-4">
-                     <h2 class="subscription-true text-uppercase">Promozione Attiva!</h2>
+                     <h5 class="fs-5 subscription-true text-uppercase">Promo Attiva!</h5>
                      <h1 class="text-uppercase " id="subscription-title"></h1>
                      {{--    {{ $sub->name }} --}}
 
@@ -159,7 +150,7 @@
             <div class="row">
                <div class="col m-3 p-3 bg-info rounded-3">
                   <a href="{{ route("subs.form", $apartment->id)}}" class="text-decoration-none link-dark text-center">
-                     <h2 id="bunner-sponsor-title" class="text-warning">Sponsorizza il tuo appartamento!</h2>
+                     <h2 id="bunner-sponsor-title" class="fs5 text-warning">Sponsorizza il tuo appartamento!</h2>
                      <p class="fs-3 text-center">Avere un appartamento sponsorizzato permette di aumentarne la
                         visibilità
                         posizionandolo sempre in cima ai risultati di ricerca!
@@ -169,7 +160,21 @@
                </div>
             </div>
             {{--     @endif --}}
-            @if (count($apartment->messages))
+            
+         </div>
+      </div>
+      <div class="d-flex gap-lg-4 gap-1 gap-md-3 my-3 col-12 col-md-6 col-lg-6">
+         <a href="{{ route('Admin.apartments.index') }}" class="col btn btn-info text-light">Torna agli Appartamenti</a>
+
+         <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class="col btn btn-warning">Modifica
+            Appartamento</a>
+         <form class="delete-form " action="{{ route('Admin.apartments.destroy', $apartment->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger ">Elimina Appartamento</button>
+         </form>
+      </div>
+      @if (count($apartment->messages))
                <div class="row mb-3">
                   <div class="col">
                      <h2>Messaggi ricevuti:</h2>
@@ -192,8 +197,6 @@
                   </div>
                </div>
             @endif
-         </div>
-      </div>
       </div>
    </section>
 

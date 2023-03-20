@@ -7,7 +7,7 @@
       $frontendURL = env('MY_FRONTEND_URL');
    @endphp
 
-   <div class="container">
+   <div class="container" style="margin-left: 20px">
       <a class="btn btn-warning my-3" href="{{ route('Admin.apartments.create') }}">Aggiungi nuovo Appartamento</a>
       <table class="table">
          <thead>
@@ -40,7 +40,7 @@
                   <td>{{ $apartment->address }}</td>
 
                   <td>
-                     <div class="d-flex gap-2 ">
+                     <div class="d-flex gap-lg-3 gap-md-2  gap-1 ">
                         <div>
                            <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class=" btn btn-success"><i class="fa-solid fa-pen"></i></a>
                         </div>
@@ -57,9 +57,9 @@
                            <button class="destroy-btn btn btn-danger text-dark"><i class="fa-regular fa-trash-can"></i></button>
                         </form>
 
-                                <div>
-                                    <a href="{{route("subs.form", $apartment->id)}}" class="ms-4 btn btn-info rounded-4 px-4 "><i class="fa-brands fa-shopify"></i></a>
-                                </div>
+                           <div>
+                               <a href="{{route("subs.form", $apartment->id)}}" class=" ms-2  ms-lg-3  btn btn-info rounded-4 px-2 px-lg-4 "><i class="fa-brands fa-shopify"></i></a>
+                           </div>
 
                             </div>
                         </td>
