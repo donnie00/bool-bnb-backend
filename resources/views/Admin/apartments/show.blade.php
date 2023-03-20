@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
    @vite(['resources/js/deleteForm.js'])
-   @vite(['resources/js/getSponsorizedTime.js']);
-   <section id="ds-Show-Apartment" class="px-xxl-5  mx-3 mx-sm-5 mx-lg-5">
-      <div class=" container.fluid  px-md-3 px-xl-5">
+   @vite(['resources/js/getSponsorizedTime.js'])
+   <section id="ds-Show-Apartment" class="px-xxl-5   mx-lg-5">
+      <div class=" container-fluid  px-md-3 px-xl-5">
          <!--Apartments Show -->
          <h1 class="mb-4 d-inline">{{ $apartment->title }}</h1>
          <div class="my-3">
@@ -105,45 +105,35 @@
             </div>
             <hr>
             <div class="mb-2 mx-2">
-               <p class="fs-4">{{ ucfirst($apartment->description) }}</p>
+               <p class="fs-6">{{ ucfirst($apartment->description) }}</p>
             </div>
             <hr>
 
             <div class="mb-2 mx-2 col-8">
                <p class="fw-semibold">Cosa troverai: </p>
-
+                  <ul class="row g-3">
                @foreach ($apartment->services as $service)
-                  <ul>
-                     <li>
-                        <img width="40px" class="icons-services mx-1 my-2"
+                  
+                     <li class="col-12 col-lg-6">
+                        <img width="25px" class="icons-services "
                            src="{{ asset('services-icons/' . $service->icon) }}" alt="">
                         <i class=" me-3">{{ $service->name }}</i>
                      </li>
-                  </ul>
+                  
                @endforeach
+               </ul>
             </div>
-            <div class="d-flex gap-3 my-3">
-               <a href="{{ route('Admin.apartments.index') }}" class="btn btn-info ms-2 text-light">Ritorna alla lista
-                  degli Appartamenti</a>
-
-               <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class="btn btn-warning">Modifica
-                  Appartamento</a>
-               <form class="delete-form" action="{{ route('Admin.apartments.destroy', $apartment->id) }}" method="POST">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger">elimina Appartamento</button>
-               </form>
-            </div>
+            
          </div>
 
          <div class="col-6 ">
-            <div id="sub-infos-container" class="row mb-3 text-center m-2 rounded-2">
+            <div id="sub-infos-container" class="row mb-3 text-center ms-2 rounded-2">
                <div class="col  ">
                   <div id="subscription-bg-container" class="border border-3 m-4">
                      <div>
 
                      </div class="mt-4">
-                     <h2 class="subscription-true text-uppercase">Promozione Attiva!</h2>
+                     <h5 class="fs-5 subscription-true text-uppercase">Promo Attiva!</h5>
                      <h1 class="text-uppercase " id="subscription-title"></h1>
                      {{--    {{ $sub->name }} --}}
 
@@ -158,19 +148,32 @@
             </div>
             {{--    @else --}}
             <div class="row">
-               <div class="col m-3 p-3 bg-info rounded-3">
+               <div class="col bg-info rounded-3">
                   <a href="" class="text-decoration-none link-dark text-center">
-                     <h2 id="bunner-sponsor-title" class="text-warning">Sponsorizza il tuo appartamento!</h2>
-                     <p class="fs-3 text-center">Avere un appartamento sponsorizzato permette di aumentarne la
-                        visibilità
-                        posizionandolo sempre in cima ai risultati di ricerca!
+                     <h2 id="bunner-sponsor-title" class="fs-5 text-warning">Sponsorizza il tuo appartamento!</h2>
+                     <p >Avere un appartamento sponsorizzato permette di aumentarne la
+                        visibilità posizionandolo sempre in cima ai risultati di ricerca!
                      </p>
                      <p>Scopri di più</p>
                   </a>
                </div>
             </div>
             {{--     @endif --}}
-            @if (count($apartment->messages))
+            
+         </div>
+      </div>
+      <div class="d-flex gap-lg-4 gap-1 gap-md-3 my-3 col-12 col-md-6 col-lg-6">
+         <a href="{{ route('Admin.apartments.index') }}" class="col btn btn-info text-light">Torna agli Appartamenti</a>
+
+         <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class="col btn btn-warning">Modifica
+            Appartamento</a>
+         <form class="delete-form " action="{{ route('Admin.apartments.destroy', $apartment->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger ">Elimina Appartamento</button>
+         </form>
+      </div>
+      @if (count($apartment->messages))
                <div class="row mb-3">
                   <div class="col">
                      <h2>Messaggi ricevuti:</h2>
@@ -193,8 +196,6 @@
                   </div>
                </div>
             @endif
-         </div>
-      </div>
       </div>
    </section>
 
