@@ -112,7 +112,7 @@
          </div>
 
          <div class="input-container pb-2">
-            <div>Ulteriori immaginin max(4)</div>
+            <div>Ulteriori immagini max(4)</div>
             <input type="file" class="form-control @error('images') is-invalid  @enderror"
             name="images[]" id="images" value="{{ old('images') }}" multiple>
             @error("images")
@@ -227,8 +227,8 @@
             </label>
             <div class="row">
                @foreach ($services as $service)
-                  <div class="col d-flex align-items-center @error('services') is-invalid @enderror ">
-                     <input class="form-check @error('services') is-invalid @enderror" type="checkbox"
+                  <div class=" col-6 col-md-4 overflow-hidden col-xl-2 d-flex align-items-center @error('services') is-invalid @enderror " style="white-space: nowrap;">
+                     <input class="me-2 form-check @error('services') is-invalid @enderror" type="checkbox"
                         value="{{ $service->id }}" id="service_{{ $loop->index }}" name="services[]"
                         {{ $apartment->services->contains('id', $service->id) ? 'checked' : '' }}>
                      {{-- ICONE che si coloran con over --++++++++++++++++++++++++++++++++++++++++++++++++++++ ++ + + --}}
