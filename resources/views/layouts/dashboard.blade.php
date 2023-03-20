@@ -18,7 +18,7 @@
    @vite(['resources/js/app.js'])
 </head>
 
-<body class=" dashboard-container bg-secondary">
+<body class=" dashboard-container">
 
    <div id="app" class="">
       <div class="dashboard-container d-flex justify-content-end">
