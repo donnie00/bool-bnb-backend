@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-primary shadow-sm  p-0">
+<nav class="navbar navbar-expand-md navbar-primary shadow-sm  p-0 bg-light">
     <div class="container-fluid px-md-5 d-flex align-items-md-end">
         <a class="align-self-start navbar-brand d-flex align-items-center" href="{{ env('MY_FRONTEND_URL') }}">
 

@@ -50,7 +50,7 @@ font-family: 'UnifrakturMaguntia', cursive; */
 
 
 /* visualizzare */
-.aa {
+*{
   border: 1px solid rgb(216, 127, 228);
 
   @include media-breakpoint-up(xs) {
@@ -95,7 +95,10 @@ font-family: 'UnifrakturMaguntia', cursive; */
 /********************************************/
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: $secondary_color_light;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(0deg, rgba(255, 255, 255, 1) 22%, saturate($secondary_color_light, 10%) 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 /***** NAVBAR ******/

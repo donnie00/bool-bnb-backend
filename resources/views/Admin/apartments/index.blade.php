@@ -16,7 +16,6 @@
                 display: none;
                 list-style: none;
             }
-
         }
     </style>
     @vite(['resources/js/deleteForm.js'])
