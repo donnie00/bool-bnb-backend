@@ -25,10 +25,10 @@
          $frontendURL = env('MY_FRONTEND_URL');
       @endphp
 
-
+      
       {{-- MAVBAR --}}
       @include('structure.headerNav')
-
+   
       <main class="">
          @yield('content')
       </main>

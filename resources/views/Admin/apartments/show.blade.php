@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
    @vite(['resources/js/deleteForm.js'])
-   @vite(['resources/js/getSponsorizedTime.js']);
+   @vite(['resources/js/getSponsorizedTime.js'])
    <section id="ds-Show-Apartment" class="px-xxl-5  mx-3 mx-sm-5 mx-lg-5">
       <div class=" container.fluid  px-md-3 px-xl-5">
          <!--Apartments Show -->
@@ -35,7 +35,7 @@
                   </div>
                   <div class="row g-1">
                      @foreach ($apartment->images as $img)
-                        <div class="col">
+                        <div class="col m-auto">
                            <img src="{{ asset('storage/' . $img->image) }}" alt=""
                               class="img-fluid h-100 rounded-3" style="object-fit:cover">
                         </div>
@@ -62,7 +62,7 @@
                            </div>
                            <div class="row g-1">
                               @foreach ($apartment->images as $img)
-                                 <div class="col">
+                                 <div class="col m-auto ">
                                     <img src="{{ $img->image }}" alt="" class="img-fluid h-100 rounded-3"
                                        style="object-fit:cover">
                                  </div>

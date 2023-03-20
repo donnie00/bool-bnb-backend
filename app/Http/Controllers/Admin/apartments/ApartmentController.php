@@ -74,7 +74,7 @@ class ApartmentController extends Controller
             ...$data,
             //"address" => $complete_address,
             "user_id" => $id,
-         /*    "latitude" => $fetch_coordinates["lat"],
+            /*    "latitude" => $fetch_coordinates["lat"],
             "longitude" => $fetch_coordinates["lon"], */
         ];
 
@@ -88,11 +88,11 @@ class ApartmentController extends Controller
             'cover_img' => $path ?? null
         ]);
 
-        if($request->has('images')){
+        if ($request->has('images')) {
             $paths = [];
-            foreach($data["images"] as $image){ 
-                $pathImage= Storage::put("apartments_images",$image);
-                $newImage = new Image(["image"=>$pathImage]);
+            foreach ($data["images"] as $image) {
+                $pathImage = Storage::put("apartments_images", $image);
+                $newImage = new Image(["image" => $pathImage]);
                 $apartment->images()->save($newImage);
             }
         }
@@ -109,8 +109,8 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        
-        $apartment->load('subscriptions', 'messages',"images");
+
+        $apartment->load('subscriptions', 'messages', "images");
         return view("Admin.apartments.show", compact("apartment"));
     }
 
@@ -145,17 +145,19 @@ class ApartmentController extends Controller
         }
 
         $paths = [];
-        if(key_exists("images",$data)){
-            $i=0;
-            foreach($data["images"] as $img){ 
+        if (key_exists("images", $data)) {
+            $i = 0;
+            foreach ($data["images"] as $img) {
                 if ($apartment->images) {
-                    Storage::delete($apartment->images[$i]->image);
-                    $firstImage = Image::find($apartment->images[$i]->id);
-                    $firstImage->delete();
-                    $i++;
+                    if ($i < count($apartment->images)) {
+                        Storage::delete($apartment->images[$i]->image);
+                        $firstImage = Image::find($apartment->images[$i]->id);
+                        $firstImage->delete();
+                        $i++;
+                    }
                 }
-                $pathImage= Storage::put("apartments_images",$img);
-                $newImage = new Image(["image"=>$pathImage, "apartment_id"=>$apartment->id]);
+                $pathImage = Storage::put("apartments_images", $img);
+                $newImage = new Image(["image" => $pathImage, "apartment_id" => $apartment->id]);
                 $newImage->save();
             }
         }
