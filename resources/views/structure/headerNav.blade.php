@@ -7,25 +7,24 @@
                 {{-- AIRBNB-logo ------------------------------------da modificare --}}
                 <img src="/images/BoolBnB_logo.png" alt="LOGO" class="header nav-logo pb-2 mb-2">
             </div>
-
         </a>
 
         <div class="flex-fill ps-3 pe-2 pe-lg-3 text-end">
 
             {{-- hamburger-menu --}}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-               data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-               aria-label="{{ __('Toggle navigation') }}">
-               <span class="navbar-toggler-icon"></span>
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
             </button>
 
             {{-- funzione per recuperare il nome della rotta ----------------!!!!!!}}
          {{--   @dump(Route::getCurrentRoute()) --}}
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-               <!-- Left Side Of Navbar -->
-            <ul class="navbar nav flex-column flex-md-row me-md-auto align-items-end py-0  fw-semibold ">
-                   <li class="nav-item d-flex flex-column align-items-center">
-                      <a class="nav-link fs-5  pt-md-4 px-2
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar nav flex-column flex-md-row me-md-auto align-items-end py-0  fw-semibold ">
+                    <li class="nav-item d-flex flex-column align-items-center">
+                        <a class="nav-link fs-5  pt-md-4 px-2
                 d    {{ Route::currentRouteName() === null ? 'active' : '' }}"
                             href="{{ env('MY_FRONTEND_URL') }}">
                             {{ __('Home') }}</a>
@@ -49,7 +48,7 @@
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item  d-flex flex-column align-items-center">
-                         
+
                             <a class="nav-link fs-5  pt-md-4 px-2
 
                           
@@ -74,8 +73,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item fs-5"
-                                    href="{{ url('/Admin/dashboard') }}">{{ __('Profilo') }}</a>
+                                <a class="dropdown-item fs-5" href="{{ url('/Admin/dashboard') }}">{{ __('Profilo') }}</a>
                                 <a class="dropdown-item fs-5 " href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
