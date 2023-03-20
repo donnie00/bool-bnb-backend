@@ -53,7 +53,7 @@
 
                           
                          {{ Route::currentRouteName() === 'login' ? 'active' : '' }}"
-                                href="{{ route('login') }}">{{ __('Login') }}</a>
+                                href="{{ route('login') }}">{{ __('Accedi') }}</a>
                             <div class="link-underline m-3 mb-0"></div>
                         </li>
 
