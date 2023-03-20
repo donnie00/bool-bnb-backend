@@ -88,7 +88,6 @@
                     </div>
                 </section>
 
-
                 <input class="" id="nonce" name="payment_method_nonce" type="hidden" />
                 <div class="row">
                     <div class="col-6 text-end p-0">
