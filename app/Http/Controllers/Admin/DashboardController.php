@@ -19,30 +19,47 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         //Recupera tutti gli appartamenti di quell'utente e lo converte in array
-        $userApartments = Apartment::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get()->toArray();
+        $userApartments = Apartment::where('user_id', $user->id)->with('subscriptions')->orderBy('created_at', 'DESC')->get();
+
+        // dd($userApartments);
 
         $userApartmentsCount = count($userApartments);
 
         if ($userApartmentsCount) {
 
             $lastApartments = [];
-            $totalMessages = 0;
+            $lastMessages = [];
+            $toReadMessages = [];
 
             foreach ($userApartments as $apartment) {
 
+                //ordina tutti i messaggi di quell'appartamento
+                $lastMessagesDB = Message::where('apartment_id', $apartment->id)->orderBy('created_at', 'DESC')->get()->toArray();
+
+                $lastMessages = array_merge($lastMessages, $lastMessagesDB);
+
                 if (count($lastApartments) < 3) {
-
-                    $apartmentId = $apartment['id'];
-
-                    $apartmentTitle = $apartment['title'];
-                }
-                $apartment_messages = Message::where('apartment_id', $apartment["id"])->get()->toArray();
-
-                if ($apartment_messages) {
-                    $totalMessages += count($apartment_messages);
+                    array_push($lastApartments, $apartment);
                 }
             }
-            return view('Admin.dashboardUser', compact('user', 'userApartmentsCount', 'lastApartments', 'totalMessages'));
+
+            // $msgSorted = asort($lastMessages);
+
+            //ordina l'array dei messaggi in base alla data di creazione
+            $creationDate = array_column($lastMessages, 'created_at');
+            array_multisort($creationDate, SORT_DESC, $lastMessages);
+
+            foreach ($lastMessages as $message) {
+
+                array_push($creationDate, $message['created_at']);
+                if (!$message['read']) {
+                    array_push($toReadMessages, $message);
+                }
+            }
+
+            $lastMsgToShow = array_slice($lastMessages, 0, 3);
+
+            return view('Admin.dashboardUser', compact('user', 'userApartmentsCount', 'lastApartments', 'toReadMessages', 'lastMsgToShow'));
         } else {
             return view('Admin.dashboardUser', compact('user', 'userApartmentsCount'));
         }
