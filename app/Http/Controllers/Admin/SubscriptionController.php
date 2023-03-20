@@ -65,7 +65,7 @@ class SubscriptionController extends Controller
             $transaction = $result->transaction;
             // header("Location: transaction.php?id=" . $transaction->id);
 
-            $new_exp_date = ""; 
+            $new_exp_date = "";
             $sub = Subscription::where("price", $request->amount)->get();
             $subDuration = $sub[0]->duration + 1;
 
@@ -78,7 +78,7 @@ class SubscriptionController extends Controller
                 //Recuperi la data di sub più recente
                 $lastSubExpDate = $subs[0]->expiration_date;
 
-                $today = date("Y-m-d");
+                $today = date("Y-m-d H:i:s",  strtotime("+1 hours"));
                 $today_dt = new DateTime($today);
                 $expire_dt = new DateTime($lastSubExpDate);
 
