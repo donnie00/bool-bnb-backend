@@ -9,7 +9,6 @@
                 display: none;
             }
 
-            .layout {}
         }
 
         @media (min-width: 768px) {
