@@ -8,7 +8,7 @@ $primary_color_light: lighten(saturate($primary_color, 20%), 10%);
 $primary_color_dark: darken($primary_color, 15%);
 
 $secondary_color: #64a3ba;
- $secondary_color_light: #aacedb; 
+$secondary_color_light: #aacedb;
 $secondary_color_dark: #3f7d94;
 $info_color: #ced1d1;
 
@@ -76,22 +76,26 @@ font-family: 'UnifrakturMaguntia', cursive; */
 
 /** UTILITIES ****************************************/
 
-.bg-gold{
-  background: rgb(255,247,189);
-  background: radial-gradient(circle, rgba(255,247,189,1) 20%, rgba(210,176,35,1) 89%); }
-.bg-silver{
-  background: rgb(255,255,255);
-  background: radial-gradient(circle, rgba(255,255,255,1) 4%, rgba(239,255,254,1) 20%, rgba(155,160,184,1) 89%, rgba(110,128,156,1) 100%);
+.bg-gold {
+  background: rgb(255, 247, 189);
+  background: radial-gradient(circle, rgba(255, 247, 189, 1) 20%, rgba(210, 176, 35, 1) 89%);
 }
-.bg-diamond{
-  background: rgb(255,255,255);
-  background: radial-gradient(circle, rgba(255,255,255,1) 4%, rgba(239,255,254,1) 20%, rgba(141,200,250,1) 89%, rgba(97,148,228,1) 100%);
+
+.bg-silver {
+  background: rgb(255, 255, 255);
+  background: radial-gradient(circle, rgba(255, 255, 255, 1) 4%, rgba(239, 255, 254, 1) 20%, rgba(155, 160, 184, 1) 89%, rgba(110, 128, 156, 1) 100%);
+}
+
+.bg-diamond {
+  background: rgb(255, 255, 255);
+  background: radial-gradient(circle, rgba(255, 255, 255, 1) 4%, rgba(239, 255, 254, 1) 20%, rgba(141, 200, 250, 1) 89%, rgba(97, 148, 228, 1) 100%);
 }
 
 
 /********************************************/
 body {
-   font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  background-color: $secondary_color_light;
 }
 
 /***** NAVBAR ******/
@@ -131,13 +135,11 @@ nav {
 .dashboard-container {
   height: 100vh;
   width: 100vw;
-  background: linear-gradient(180deg, $secondary_color, desaturate($secondary_color_light, 15%), saturate(white, 10%));
 
   /* MAIN ***********************/
   main.dashboard {
     margin-left: 90px;
     width: 100%;
-    background: $secondary_color;
 
     /* APARTMENT SHOW  ***********************/
     #ds-Show-Apartment {
@@ -183,7 +185,7 @@ nav {
     border-bottom-right-radius: 10px;
     box-sizing: initial;
     border-left: 5px solid $primary_color;
-    border-right: 10px solid $secondary_color_light;
+    border-right: 10px solid $light_color;
     background: $primary_color;
     transition: 0.5s;
     overflow-x: hidden;
@@ -213,7 +215,7 @@ nav {
         button {
           display: block;
           display: flex;
-          color: $secondary_color_light;
+          color: $light_color;
 
           .icon {
             position: relative;
@@ -231,7 +233,7 @@ nav {
         }
 
         &.active {
-          background: $secondary_color_light;
+          background: $light_color;
           font-weight: bold;
 
           a {
@@ -252,7 +254,7 @@ nav {
             top: -20px;
             height: 20px;
             width: 100%;
-            background: $secondary_color_light;
+            background: $light_color;
             display: none;
 
             &::before {
@@ -272,7 +274,7 @@ nav {
             bottom: -20px;
             height: 20px;
             width: 100%;
-            background: $secondary_color_light;
+            background: $light_color;
             display: none;
 
             &::before {
@@ -328,16 +330,16 @@ nav {
   }
 }
 
-.subsCards:hover{
+.subsCards:hover {
   box-shadow: 5px 5px 5px black;
 }
 
-.hoverBtnBackToApartment:hover{
+.hoverBtnBackToApartment:hover {
   background-color: #343a40;
   color: white;
 }
 
-.hoverbtnPaga:hover{
+.hoverbtnPaga:hover {
   color: white;
   background-color: #28a745;
 }
