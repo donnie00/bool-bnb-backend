@@ -158,7 +158,7 @@
             {{--    @else --}}
             <div class="row">
                <div class="col m-3 p-3 bg-info rounded-3">
-                  <a href="" class="text-decoration-none link-dark text-center">
+                  <a href="{{ route("subs.form", $apartment->id)}}" class="text-decoration-none link-dark text-center">
                      <h2 id="bunner-sponsor-title" class="text-warning">Sponsorizza il tuo appartamento!</h2>
                      <p class="fs-3 text-center">Avere un appartamento sponsorizzato permette di aumentarne la
                         visibilità

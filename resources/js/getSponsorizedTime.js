@@ -136,7 +136,8 @@ function getSponsorizedFrame() {
    for (let index = apartment.subscriptions.length - 1; index >= 0; index--) {
     const subscription = apartment.subscriptions[index];
     if (index === apartment.subscriptions.length - 1) {
-
+      
+     console.log(this.fromDateToMillisecond(subscription.pivot.created_at)) ;
      let startSubscription = this.fromDateToMillisecond(subscription.pivot.created_at);
      let endSubscription = this.fromDateToMillisecond(subscription.pivot.expiration_date);
      duration = endSubscription - startSubscription;

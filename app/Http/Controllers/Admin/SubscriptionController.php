@@ -65,6 +65,7 @@ class SubscriptionController extends Controller
             $transaction = $result->transaction;
             // header("Location: transaction.php?id=" . $transaction->id);
 
+            $new_exp_date = ""; 
             $sub = Subscription::where("price", $request->amount)->get();
             $subDuration = $sub[0]->duration + 1;
 
@@ -87,7 +88,7 @@ class SubscriptionController extends Controller
                     //Per qualche motivo misterioso bisogna togliere un'ora
                     $subDuration -= 1;
 
-                    $new_exp_date = date("Y-m-d: H:i:s", strtotime($lastSubExpDate . "+{$subDuration} hours"));
+                    $new_exp_date = date("Y-m-d: H:i:s", strtotime("+{$subDuration} hours", strtotime($lastSubExpDate)));
                 } else {
                     //Se la data dell'ultima sub è passata, creo la nuova data sommando la durata alla data attuale
                     $new_exp_date = date("Y-m-d: H:i:s", strtotime("+{$subDuration} hours"));
