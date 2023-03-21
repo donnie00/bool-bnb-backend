@@ -13,21 +13,21 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    
+
 
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
     @vite(['resources/js/autocompleteDropdown.js'])
 </head>
 
-<body class="bg-primary">
+<body class="">
 
-    <div id="app" class="container w-75 h-75 border-4 bg-light shadow my-5 rounded-4 py-2 px-lg-5">
-             <main class=" ps-lg-5 p-lg-4 overflow-x-hidden pt-5">
-                {{-- qua ci starebbe l'if --}}
-                @yield('content')
-            </main>
-        </div>
+    <div id="app" class="container w-75 h-75 border-4 shadow my-5 rounded-4 py-2 px-lg-5 form-container ">
+        <main class=" ps-lg-5 p-lg-4 overflow-x-hidden pt-5">
+
+            @yield('content')
+        </main>
+    </div>
     </div>
 
 </body>

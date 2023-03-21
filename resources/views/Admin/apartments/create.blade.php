@@ -1,7 +1,7 @@
 @extends('layouts.form')
 
 @section('content')
-    <div class="container">
+    <div class="container ">
         <h1 class="text-uppercase">Crea nuovo Appartamento:</h1>
 
         @if (Session::get('error'))
@@ -314,9 +314,14 @@
                 </div>
 
                 {{-- opzioni --}}
-                <div class="gap-3 pt-3 d-flex justify-content-between justify-content-md-start">
-                    <a href="{{ route('Admin.apartments.index') }}" class="btn btn-info text-light">Torna Indietro</a>
-                    <button class="btn btn-primary text-light">Crea Appartamento</button>
+                <div class="gap-3 pt-3 d-flex justify-content-between justify-content-md-start mt-3">
+                    <a href="{{ route('Admin.apartments.index') }}" class="btn btn-outline-primary ">
+                        <i class="fa-solid fa-reply px-2"></i>
+                        Torna Indietro</a>
+                    <button class="btn btn-primary text-light">Crea Appartamento
+
+                        <i class="fa-solid fa-plus px-2"></i>
+                    </button>
                 </div>
         </form>
     </div>
