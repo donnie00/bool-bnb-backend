@@ -33,7 +33,7 @@
 
 
                     <li class="nav-item  d-flex flex-column align-items-center">
-                        <a class="nav-link fs-5  pt-md-4 px-2" href="{{ env('MY_FRONTEND_URL') . '/abaut' }}  ">
+                        <a class="nav-link fs-5  pt-md-4 px-2" href="{{ env('MY_FRONTEND_URL') . '/about' }}  ">
                             {{ __('Chi Siamo') }}</a>
                         <div class="link-underline m-3 mb-0"></div>
                     </li>
