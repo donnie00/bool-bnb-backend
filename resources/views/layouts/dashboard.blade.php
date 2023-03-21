@@ -34,7 +34,7 @@
 
          <main class="dashboard w-100 ps-5 p-4 overflow-x-hidden">
 
-            <h1 class="text-center text-lg-start">Ciao {{ $user->name }}</h1>
+            <h1 class="text-center text-lg-start title-cursive ">Ciao <span class="title-focus"> {{ $user->name }}</span></h1>
             {{-- @dump(Route::currentRouteName()) --}}
             @yield('content', 'frontendURL')
          </main>

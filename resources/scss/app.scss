@@ -13,7 +13,7 @@ $secondary_color_dark: #3f7d94;
 $info_color: #ced1d1;
 
 $success_color: #28a745;
-$warning_color: #fbd126e3;
+$warning_color: #ffc800;
 $danger_color: #dc3545;
 $light_color: #f8f9fa;
 $dark_color: #343a40;
@@ -41,6 +41,9 @@ font-family: 'UnifrakturMaguntia', cursive; */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=UnifrakturMaguntia&display=swap%27');
 
+
+
+
 /*******  MIXIN ********************************************/
 
 /***** MEDIA  QUERIES *****************************************/
@@ -50,7 +53,7 @@ font-family: 'UnifrakturMaguntia', cursive; */
 
 
 /* visualizzare */
-*{
+.aa{
   border: 1px solid rgb(216, 127, 228);
 
   @include media-breakpoint-up(xs) {
@@ -75,6 +78,35 @@ font-family: 'UnifrakturMaguntia', cursive; */
 }
 
 /** UTILITIES ****************************************/
+.title-cursive {
+  font-size: 40px;
+  padding-top: 40px;
+  color: $dark_color;
+
+  .title-focus {
+    color: saturate($primary_color, 20%);
+    font-size: 50px;
+  }
+}
+
+.btn-outline-primary {
+
+  &:hover,
+  &:active {
+    color: $light_color !important;
+    background-color: $primary_color_light !important;
+  }
+}
+
+.form-container {
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.3px);
+  -webkit-backdrop-filter: blur(6.3px);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  z-index: 5000000;
+  position: sticky;
+}
 
 .bg-gold {
   background: rgb(255, 247, 189);
