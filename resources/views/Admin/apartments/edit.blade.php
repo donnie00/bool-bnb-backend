@@ -250,15 +250,6 @@
             <label class="form-label fw-semibold text-uppercase p-t-3" for="address">indirizzo:
                <span class="text-danger ps-1">*</span>
 
-               {{-- LAT E LON CON MANEGGIO PER MESSAGGIO  --}}
-               {{-- <div>
-                  <input name="latitude" id="lat" class="SelectedAddress opacity-0" type="text"
-                     placeholder="lat" style="width:1px; margin-left:-5px" />
-
-                  <input name="longitude" id="lon" class="SelectedAddress opacity-0" type="text"
-                     placeholder="lon" style="width:1px" />
-               </div> --}}
-
                <input name="latitude" id="lat" class="SelectedAddress opacity-0" type="text"
                   placeholder="lat" value="{{ old('latitude', $apartment->latitude) }}"
                   style="width:1px; margin-left:-5px" />
@@ -273,11 +264,7 @@
                   class="form-control
            @error('address') is-invalid @elseif(old('address')) is-valid @enderror"
                   name="address" id="search_input" value="{{ old('address', $apartment->address) }}">
-               {{--
-                    <button class="my-btn">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
- --}}
+             
                <ul class="SuggestionAddressList  list-group list-group-flush"
                   v-if="suggestions && suggestions.length > 0">
                   <li class="suggestion-list-items  list-unstyled list-group-item-action list-group-item d-none">
@@ -302,7 +289,9 @@
 
             {{-- opzioni --}}
             <div class="gap-3 pt-3 d-flex justify-content-between justify-content-md-start">
-               <a href="{{ route('Admin.apartments.show', $apartment->id) }}" class="btn btn-info text-light"> Torna indietro </a>
+               <a href="{{ route('Admin.apartments.show', $apartment->id) }}" class="btn btn-outline-primary"> 
+                  <i class="fa-solid fa-reply px-2"></i>Torna indietro </a>
+
                <button class="btn btn-primary text-light">Salva modifiche</button>
             </div>
             </fieldset>

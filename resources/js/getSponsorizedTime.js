@@ -51,7 +51,7 @@ axios
    activeSub_elements.forEach(element => {
     element.classList.toggle("d-none", true)
 
-    SubContainer_element.classList.toggle("bg-warning", true);
+    SubContainer_element.classList.toggle("bg-transparent", true);
     SubBg_element.classList.toggle("border-dark", true);
     SubContainer_element.classList.toggle("text-dark", true);
     SubTitle_element.innerHTML = "Non hai promozioni attive!"

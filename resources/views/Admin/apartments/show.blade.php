@@ -2,10 +2,11 @@
 @section('content')
     @vite(['resources/js/deleteForm.js'])
     @vite(['resources/js/getSponsorizedTime.js'])
-    <section id="ds-Show-Apartment" class="px-xxl-5  mx-3 mx-sm-5 mx-lg-5">
-        <div class=" container-fluid  px-md-3 px-xl-5">
+    <section id="ds-Show-Apartment" class="px-xxl-5  mx-3 mx-sm-5 mx-lg-5 pb-5">
+
+        <div class=" container-fluid  px-md-3 px-xl-5 text-center" style="margin-top: 60px ">
             <!--Apartments Show -->
-            <h1 class="mb-4 d-inline">{{ $apartment->title }}</h1>
+            <h1 class="mb-4 d-inline ">{{ $apartment->title }}</h1>
             <div class="my-3">
                 @if ($apartment->visible)
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" style="width:35px">
@@ -86,20 +87,21 @@
 
             <div class="row  gap-1 gap-md-3 mb-3 text-center">
 
-                <div class="col  py-1 rounded-3 bg-primary">
+                <div class="col  py-1 rounded-3 border-secondary text-secondary">
                     Camere: {{ $apartment->rooms_qty }}
                 </div>
 
-                <div class="col  py-1 rounded-3 bg-primary"> Letti: {{ $apartment->beds_qty }}
+                <div class="col  py-1 rounded-3 border-secondary text-secondary"> Letti: {{ $apartment->beds_qty }}
                 </div>
 
-                <div class=" col  py-1 rounded-3 bg-primary"> Bagni: {{ $apartment->bathrooms_qty }}
+                <div class=" col  py-1 rounded-3 border-secondary text-secondary"> Bagni: {{ $apartment->bathrooms_qty }}
                 </div>
 
-                <div class="col  py-1 rounded-3 bg-primary">
+                <div class="col  py-1 rounded-3 border-secondary text-secondary">
                     MQ: {{ $apartment->mq }}
                 </div>
-                <div class="col  py-1 rounded-3 bg-primary"> &euro;/Notte {{ $apartment->daily_price }}
+                <div class="col  py-1 rounded-3 border-secondary text-secondary"> &euro;/Notte
+                    {{ $apartment->daily_price }}
                 </div>
 
             </div>
@@ -110,78 +112,95 @@
             <hr>
 
             <div class="mb-4 mx-2 w-75 m-auto">
-                <p class="fw-semibold">Cosa troverai: </p>
-                <ul class="row g-3">
-                    @foreach ($apartment->services as $service)
-                        <li class="col-12 col-md-6">
-                            <img width="25px" class="icons-services "
-                                src="{{ asset('services-icons/' . $service->icon) }}" alt="">
-                            <i class=" me-3">{{ $service->name }}</i>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-
-        </div>
-        <div class="w-75 m-auto">
-        <div class="row">
-            <div class="col-12  col-md-6 ">
-                <div id="sub-infos-container" class=" mb-3  text-center  rounded-2">
-
-                    <div id="subscription-bg-container" class="border border-3  pt-3 pb-2">
+                @if (count($apartment->services))
+                    <p class="fw-semibold">Servizi inclusi: </p>
 
 
-                        <h5 class="fs-5 subscription-true text-uppercase">Promo Attiva!</h5>
-                        <h1 class="text-uppercase " id="subscription-title"></h1>
-                        {{-- {{ $sub->name }} --}}
-                        <p class="fs-4 subscription-true">scade il:
-                        <p class="text-uppercase fw-bold p-0" id="expiration-date"></p>
-                        </p>
-
-                    </div>
-                </div>
-            </div>
-            {{-- @else --}}
-
-            <div class="col-12  col-md-6 py-3 bg-info rounded-3">
-                <a href="{{ route('subs.form', $apartment->id) }}" class="text-decoration-none link-dark text-center">
-                    <h4 id="bunner-sponsor-title" class="fs5 text-warning">Sponsorizza il tuo appartamento!</h4>
-                    <p class="fs-6 text-center p-1">Avere un appartamento sponsorizzato permette di aumentarne la
-                        visibilità
-                        posizionandolo sempre in cima ai risultati di ricerca!
-                    </p>
-                    <p>Scopri di più</p>
-                </a>
+                    <ul class="row g-3">
+                        @foreach ($apartment->services as $service)
+                            <li class="col-12 col-md-6">
+                                <img width="25px" class="icons-services "
+                                    src="{{ asset('services-icons/' . $service->icon) }}" alt="">
+                                <i class=" me-3">{{ $service->name }}</i>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
             </div>
         </div>
-      </div>
-        {{-- @endif --}}
+        {{-- options --}}
+        <div class="row w-75 m-auto mt-3 g-2 pb-3 mb-3 justify-content-md-around">
 
-        
-
-
-        <div class="row w-75 m-auto mt-3 g-2 py-2 mb-3 justify-content-md-around">
-
-            <a href="{{ route('Admin.apartments.index') }}" class="col-12 col-md-3 btn btn-info text-light">Torna agli
+            <a href="{{ route('Admin.apartments.index') }}" class="col-12 col-md-3 btn btn-outline-primary">
+                <i class="fa-solid fa-reply"></i>
+                Torna agli
                 Appartamenti</a>
 
-            <a href="{{ route('Admin.apartments.edit', $apartment->id) }}" class="col-12 col-md-3 btn btn-warning">Modifica
+            <a href="{{ route('Admin.apartments.edit', $apartment->id) }}"
+                class="col-12 col-md-3 btn btn-primary text-light">Modifica
                 Appartamento</a>
-            <form class="delete-form col-12 col-md-3" action="{{ route('Admin.apartments.destroy', $apartment->id) }}" method="POST">
+            <form class="delete-form col-12 col-md-3" action="{{ route('Admin.apartments.destroy', $apartment->id) }}"
+                method="POST">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-danger w-100 ">Elimina Appartamento</button>
             </form>
         </div>
+
+        <div class="w-75 m-auto">
+            <div class="row align-items-center p-3 rounded-3 form-container m-5 shadow"
+                style="background-color:rgb(253, 253, 189); ">
+                <div class="col-12  col-xl-5 ">
+                    <div id="sub-infos-container" class=" mb-3  text-center  rounded-2">
+
+                        <div id="subscription-bg-container" class=" pt-3 pb-2">
+
+
+                            <h5 class="fs-5 subscription-true text-uppercase ">Promo Attiva!</h5>
+                            <h1 class="text-uppercase " id="subscription-title"></h1>
+                            <p class="fs-4 subscription-true">scade il:
+                            <p class="text-uppercase fw-bold p-0" id="expiration-date"></p>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12  col-xl-7 py-3 rounded-3 ">
+                    <a href="{{ route('subs.form', $apartment->id) }}"
+                        class="text-decoration-none link-dark text-center">
+                        <h4 id="bunner-sponsor-title" class="fw-bold text-secondary text-uppercase">Sponsorizza il tuo
+                            appartamento!</h4>
+                        <p class="fs-5 fw-semibold text-primary text-center p-1">Avere un appartamento sponsorizzato
+                            permette di aumentarne la
+                            visibilità
+                            posizionandolo sempre in cima ai risultati di ricerca!
+                        </p>
+                        <button class="btn btn-secondary text-dark text-uppercase w-75 py-2 position-relative fw-bold">
+                            Scopri di più!
+                            <i class="fa-solid fa-hand-pointer fs-5 px-2 position-absolute  text-dark "
+                                style="transform: rotate(-20deg) translateY(20px) translateX(10px) scale(300%)"></i>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{-- @endif --}}
+
+
+
+
+
         @if (count($apartment->messages))
-            <div class="row col-12 col-md-10 col-lg-8 m-auto mb-3">
+            <div class="row col-12 col-md-10 col-lg-8 m-auto mb-5">
                 <div class="col">
                     <h2>Messaggi ricevuti:</h2>
-                    <div class="card ps-1 rounded-3">
-                        <ul>
+                    <div class="ps-1 rounded-3">
+                        <ul class="list-group">
                             @foreach ($apartment->messages as $message)
                                 @if ($loop->index < 3)
-                                    <li class="p-2">
+                                    <li class="p-2 list-group-item ">
                                         <span class="fw-bold fs-6 d-block">{{ $message['subject'] }}</span>
                                         <span class="fw-semibold">{{ $message['sender'] }}</span>
                                         <span class="text-justify">{{ '(' . $message['email'] . ')' }}</span>
@@ -190,7 +209,7 @@
                             @endforeach
                         </ul>
                     </div>
-                    <a href="{{ route('Admin.dashboard.messages') }}" class="btn btn-primary my-3 d-block">
+                    <a href="{{ route('Admin.dashboard.messages') }}" class="btn btn-primary text-light my-3 d-block">
                         Guarda tutti i messaggi
                     </a>
                 </div>

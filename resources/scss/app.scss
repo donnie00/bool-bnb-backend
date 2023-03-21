@@ -13,7 +13,7 @@ $secondary_color_dark: #3f7d94;
 $info_color: #ced1d1;
 
 $success_color: #28a745;
-$warning_color: #fbd126e3;
+$warning_color: #ffc800;
 $danger_color: #dc3545;
 $light_color: #f8f9fa;
 $dark_color: #343a40;
@@ -41,6 +41,9 @@ font-family: 'UnifrakturMaguntia', cursive; */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=UnifrakturMaguntia&display=swap%27');
 
+
+
+
 /*******  MIXIN ********************************************/
 
 /***** MEDIA  QUERIES *****************************************/
@@ -50,7 +53,7 @@ font-family: 'UnifrakturMaguntia', cursive; */
 
 
 /* visualizzare */
-*{
+.aa{
   border: 1px solid rgb(216, 127, 228);
 
   @include media-breakpoint-up(xs) {
@@ -75,6 +78,35 @@ font-family: 'UnifrakturMaguntia', cursive; */
 }
 
 /** UTILITIES ****************************************/
+.title-cursive {
+  font-size: 40px;
+  padding-top: 40px;
+  color: $dark_color;
+
+  .title-focus {
+    color: saturate($primary_color, 20%);
+    font-size: 50px;
+  }
+}
+
+.btn-outline-primary {
+
+  &:hover,
+  &:active {
+    color: $light_color !important;
+    background-color: $primary_color_light !important;
+  }
+}
+
+.form-container {
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.3px);
+  -webkit-backdrop-filter: blur(6.3px);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  z-index: 5000000;
+  position: sticky;
+}
 
 .bg-gold {
   background: rgb(255, 247, 189);
@@ -89,6 +121,11 @@ font-family: 'UnifrakturMaguntia', cursive; */
 .bg-diamond {
   background: rgb(255, 255, 255);
   background: radial-gradient(circle, rgba(255, 255, 255, 1) 4%, rgba(239, 255, 254, 1) 20%, rgba(141, 200, 250, 1) 89%, rgba(97, 148, 228, 1) 100%);
+}
+
+
+.sub-plan-input:checked + .sub-plan-label{
+  color:saturate($primary_color,  50%) !important;
 }
 
 
@@ -346,46 +383,3 @@ nav {
   color: white;
   background-color: #28a745;
 }
-
-/* FORM CREATE EDIT SEARCH AUTOCOMPLETE */
-
-/* .my-btn {
-  border-radius: 50%;
-  border: none;
-  position: absolute;
-  background-color: white;
-  top: 10px;
-  right: 5px;
-}
-
-.search {
-  &__input {
-    width: 100%;
-    padding: 12px 24px;
-
-    background-color: transparent;
-    transition: transform 250ms ease-in-out;
-    font-size: 14px;
-    line-height: 18px;
-
-    color: #575756;
-    background-color: transparent;
-    //        background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg); 
-
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-size: 18px 18px;
-    background-position: 95% center;
-    border-radius: 50px;
-    border: 1px solid #575756;
-    transition: all 250ms ease-in-out;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-
-    &::placeholder {
-      color: color(#575756 a(0.8));
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-  }
-} */

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="container my-5">
+    <div class="container my-5 py-5">
         <form action="#" method="post">
             @csrf
             @method('POST')
@@ -39,6 +39,8 @@
                 @csrf
                 <div class="row payment-row">
 
+                    <h1 class="text-uppercase text-center mt-5 mb-4">Scegli una Promozione:</h1>
+
 
                     @foreach ([0, 1, 2] as $i)
                         <div class="col-12 col-md-4  card-container ">
@@ -47,25 +49,36 @@
                             
                             switch ($i) {
                                 case 0:
-                                    $class = 'bg-dark text-white';
+                                    $class = 'bg-silver';
+                                    $icon='fa-regular fa-star ';
                                     break;
                                 case 1:
-                                    $class = 'bg-warning';
+                                    $class = 'bg-gold';
+                                    $icon='fa-regular fa-sun';
                                     break;
                                 case 2:
-                                    $class = 'bg-info';
+                                    $class = 'bg-diamond';
+                                    $icon='fa-regular fa-gem';
                                     break;
                             }
                             ?>
                             <div style="cursor : pointer;"
                                 class="subsCards spn-card rounded py-4 mt-2 text-center <?php echo $class; ?>">
-                                <label style="cursor: pointer" class="d-block" for="{{ 'sub' . $i }}">
+
+{{-- input --}}
+                                <input id="{{ 'sub' . $i }}" class="sub-plan-input opacity-0" type="radio" name="amount"
+                                    value="{{ $data[$i]['price'] }}">
+
+
+                                <label style="cursor: pointer" class="d-block sub-plan-label" for="{{ 'sub' . $i }}">
                                     <h3>{{ $data[$i]['name'] }}</h3>
+                                    
+
+
+                                    <i class="{{$icon}} mt-3 mb-5" style="transform:scale(300%)"></i>
                                     <h6 class="">prezzo <strong> {{ $data[$i]['price'] }} €</strong></h6>
                                     <p class=""> durata <strong> {{ $data[$i]['duration'] }}h</strong></p>
                                 </label>
-                                <input id="{{ 'sub' . $i }}" class="" type="radio" name="amount"
-                                    value="{{ $data[$i]['price'] }}">
                             </div>
                         </div>
                     @endforeach
@@ -89,12 +102,12 @@
                 </section>
 
                 <input class="" id="nonce" name="payment_method_nonce" type="hidden" />
-                <div class="row">
-                    <div class="col-6 text-end p-0">
-                        <button class="hoverbtnPaga justify-item-end  button btn btn-success ms-5" type="submit"><span>PAGA</span></button>
+                <div class="row  ">
+                    <div class="col-7 text-end p-0">
+                        <button class="hoverbtnPaga justify-item-end  button btn btn-secondary text-light  ms-5 px-5" type="submit"><span class="px-5">PAGA</span></button>
                     </div>
-                    <div class="col-6 text-end p-0">
-                        <a type="button" href="{{route("Admin.apartments.show", $apartmentID)}}" class="hoverBtnBackToApartment btn opacity-50">
+                    <div class="col text-end p-0">
+                        <a type="button" href="{{route("Admin.apartments.show", $apartmentID)}}" class="hoverBtnBackToApartment btn btn-outline-primary opacity-50 me-3">
                             <i class="fa-solid fa-share"></i>
                             vai al tuo appartamento
                         </a>
