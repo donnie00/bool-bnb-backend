@@ -124,6 +124,11 @@ font-family: 'UnifrakturMaguntia', cursive; */
 }
 
 
+.sub-plan-input:checked + .sub-plan-label{
+  color:saturate($primary_color,  50%) !important;
+}
+
+
 /********************************************/
 body {
   font-family: 'Poppins', sans-serif;
