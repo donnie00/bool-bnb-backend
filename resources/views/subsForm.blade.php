@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="container my-5 py-5">
+    <div class="container form-container px-5 rounded-5 my-5 py-5">
         <form action="#" method="post">
             @csrf
             @method('POST')
@@ -103,11 +103,11 @@
 
                 <input class="" id="nonce" name="payment_method_nonce" type="hidden" />
                 <div class="row  ">
-                    <div class="col-7 text-end p-0">
-                        <button class="hoverbtnPaga justify-item-end  button btn btn-secondary text-light  ms-5 px-5" type="submit"><span class="px-5">PAGA</span></button>
+                    <div class="col-8 text-end p-0 ">
+                        <button class="hoverbtnPaga justify-item-end  button btn btn-danger py-2 fs-4  mt-4 text-light  ms-5 px-5" type="submit"><span class="px-5">SPONSORIZZA!</span></button>
                     </div>
                     <div class="col text-end p-0">
-                        <a type="button" href="{{route("Admin.apartments.show", $apartmentID)}}" class="hoverBtnBackToApartment btn btn-outline-primary opacity-50 me-3">
+                        <a type="button" href="{{route("Admin.apartments.show", $apartmentID)}}" class="hoverBtnBackToApartment btn btn-outline-primary opacity-50 me-3 mt-4">
                             <i class="fa-solid fa-share"></i>
                             vai al tuo appartamento
                         </a>
