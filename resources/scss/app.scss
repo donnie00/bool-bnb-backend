@@ -105,34 +105,46 @@ font-family: 'UnifrakturMaguntia', cursive; */
   -webkit-backdrop-filter: blur(6.3px);
   border: 1px solid rgba(255, 255, 255, 0.32);
   position: sticky;
-  z-index: -1;
-  & i {
 
-    &.fa-pen{
-      color: $primary_color;
-    }
-    &.fa-trash-can{
-      color: $danger_color;
-    }
-    &.fa-shopify{
-      color: $secondary_color;
-    }
-    &.fa-eye{
-      color: $primary_color_light;
-    }
 
-  }
-  &.index-container{
-    @include media-breakpoint-up(md) {
-      z-index:auto;
-  
-      & i:not(.fa-pen){
-        color: $light_color
+  &.index-container {
+    z-index: -1;
+
+    & i {
+
+      &.fa-pen {
+        color: $primary_color;
       }
+
+      &.fa-trash-can {
+        color: $danger_color;
+      }
+
+      &.fa-shopify {
+        color: $secondary_color;
+      }
+
+      &.fa-eye {
+        color: $primary_color_light;
+      }
+
     }
 
+    & {
+      @include media-breakpoint-up(md) {
+        z-index: auto;
+
+        & i:not(.fa-pen) {
+          color: $light_color
+        }
+      }
+
+    }
   }
-  
+
+
+
+
 }
 
 .bg-gold {
