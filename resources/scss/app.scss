@@ -122,13 +122,17 @@ font-family: 'UnifrakturMaguntia', cursive; */
     }
 
   }
-  @include media-breakpoint-up(md) {
-    z-index:auto;
-
-    & i:not(.fa-pen){
-      color: $light_color
+  &.index-container{
+    @include media-breakpoint-up(md) {
+      z-index:auto;
+  
+      & i:not(.fa-pen){
+        color: $light_color
+      }
     }
+
   }
+  
 }
 
 .bg-gold {
