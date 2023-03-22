@@ -77,8 +77,8 @@
             <ul>
                 @foreach ($lastMsgToShow as $message)
                     <li class="py-3">
-                        <h3 class="text-primary">{{ $message['subject'] }}</h3>
-                        <span>Mittente:
+                        <h3 class="text-primary fs-5 fs-md-3">{{ $message['subject'] }}</h3>
+                        <span class="small"> Mittente:
                             <span class="fw-bold">{{ $message['sender'] }}</span>
                             <span class="text-muted">{{ '(' . $message['email'] . ')' }}</span>
                         </span>
