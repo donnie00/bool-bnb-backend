@@ -53,7 +53,7 @@ font-family: 'UnifrakturMaguntia', cursive; */
 
 
 /* visualizzare */
-.aa{
+.aa {
   border: 1px solid rgb(216, 127, 228);
 
   @include media-breakpoint-up(xs) {
@@ -104,8 +104,31 @@ font-family: 'UnifrakturMaguntia', cursive; */
   backdrop-filter: blur(6.3px);
   -webkit-backdrop-filter: blur(6.3px);
   border: 1px solid rgba(255, 255, 255, 0.32);
-  z-index: 5000000;
   position: sticky;
+  z-index: -1;
+  & i {
+
+    &.fa-pen{
+      color: $primary_color;
+    }
+    &.fa-trash-can{
+      color: $danger_color;
+    }
+    &.fa-shopify{
+      color: $secondary_color;
+    }
+    &.fa-eye{
+      color: $primary_color_light;
+    }
+
+  }
+  @include media-breakpoint-up(md) {
+    z-index:auto;
+
+    & i:not(.fa-pen){
+      color: $light_color
+    }
+  }
 }
 
 .bg-gold {
@@ -124,8 +147,8 @@ font-family: 'UnifrakturMaguntia', cursive; */
 }
 
 
-.sub-plan-input:checked + .sub-plan-label{
-  color:saturate($primary_color,  50%) !important;
+.sub-plan-input:checked+.sub-plan-label {
+  color: saturate($primary_color, 50%) !important;
 }
 
 
@@ -173,6 +196,7 @@ nav {
 
 /* DASHBOARD */
 .dashboard-container {
+
   height: 100vh;
   width: 100vw;
 
@@ -226,10 +250,10 @@ nav {
     box-sizing: initial;
     border-left: 5px solid $primary_color;
     border-right: 10px solid $light_color;
-    background: rgb(255,0,110);
-    background: linear-gradient(0deg, rgba(255,0,110,1) 0%, rgba(247,100,95,1) 43%, rgba(247,100,95,1) 100%);
+    background: rgb(255, 0, 110);
+    background: linear-gradient(0deg, rgba(255, 0, 110, 1) 0%, rgba(247, 100, 95, 1) 43%, rgba(247, 100, 95, 1) 100%);
     overflow-x: hidden;
-  
+
 
     .nav-title {
       color: white;
