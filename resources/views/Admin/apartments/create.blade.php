@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.app')
 
 @section('content')
-    <div class="container ">
+    <div class="container form-container p-5 rounded-5 mt-4 ">
         <h1 class="text-uppercase">Crea nuovo Appartamento:</h1>
 
         @if (Session::get('error'))

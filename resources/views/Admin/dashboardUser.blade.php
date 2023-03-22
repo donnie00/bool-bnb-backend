@@ -13,7 +13,7 @@
                     {{-- @dump($apartment->subscriptions) --}}
                     <a href="{{ route('Admin.apartments.show', $apartment->id) }}" class="text-decoration-none text-dark">
 
-                        <div class="card mb-3  m-auto">
+                        <div class="card bg-transparent mb-3  m-auto">
                             <div class="row g-0">
                                 <div class="col-md-4">
                                     @if ($apartment->cover_img)
@@ -37,7 +37,7 @@
                      </td>
                   @endif --}}
                                 </div>
-                                <div class="col-md-8 d-flex flex-column">
+                                <div class="col-md-8 d-flex flex-column form-container">
                                     <div class="card-body flex-grow-1">
                                         <h1 class="card-title text-primary">{{ $apartment->title }}</h1>
                                         <p class="card-text text-muted">{{ $apartment->address }}</p>

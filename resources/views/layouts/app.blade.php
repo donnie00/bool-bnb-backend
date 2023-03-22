@@ -29,10 +29,11 @@
       {{-- MAVBAR --}}
       @include('structure.headerNav')
    
-      <main class="">
+      <main class="pt-5">
          @yield('content')
       </main>
 
+      @include('structure.footer')
    </div>
 </body>
 

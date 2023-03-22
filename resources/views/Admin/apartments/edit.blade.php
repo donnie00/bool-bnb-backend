@@ -1,6 +1,6 @@
-@extends('layouts.form')
+@extends('layouts.app')
 @section('content')
-   <div class="container">
+   <div class="container form-container rounded-5 p-5 mt-4">
       <h1 class="text-uppercase">Modifica Appartamento: # {{ $apartment->id }}</h1>
 
 
