@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Apartment;
 use App\Models\Image;
 use App\Models\Service;
+use App\Models\Subscription;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
@@ -111,7 +112,9 @@ class ApartmentController extends Controller
     {
 
         $apartment->load('subscriptions', 'messages', "images");
-        return view("Admin.apartments.show", compact("apartment"));
+        $subscriptions = Subscription::all();
+
+        return view("Admin.apartments.show", compact("apartment","subscriptions"));
     }
 
     /**

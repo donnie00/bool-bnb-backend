@@ -1,5 +1,5 @@
 /*****  BOOTSTRAP  *****************************************/
-/* @use "@fortawesome/fontawesome-free/css/all.min.css"; */
+
 
 //VARIABLES (bootstrap)
 $primary_color: #f7645f;
@@ -16,7 +16,7 @@ $warning_color: #ebbc58;
 $danger_color: #fe086d;
 $light_color: #f8f9fa;
 $dark_color: #343a40;
-$icon_color:linear-gradient(0deg, #cbe0e2 0%, #ffffff 100%);
+$icon_color: linear-gradient(0deg, #cbe0e2 0%, #ffffff 100%);
 
 @use "bootstrap/scss/bootstrap" with ($primary: $primary_color,
   $secondary: $secondary_color,
@@ -42,7 +42,7 @@ $icon_color:linear-gradient(0deg, #cbe0e2 0%, #ffffff 100%);
 
 
 /* visualizzare */
-.aa {
+.aa{
   border: 1px solid rgb(216, 127, 228);
 
   @include media-breakpoint-up(xs) {
@@ -140,6 +140,22 @@ $icon_color:linear-gradient(0deg, #cbe0e2 0%, #ffffff 100%);
   }
 }
 
+
+#ds-Show-Apartment {
+  #subs-container {
+ .card {
+  transform: scale(50%) translateX(40%) translateY(-50%);
+  @include media-breakpoint-up(md) {
+    transform: scale(60%) translateX(25%) translateY(-34%);
+  }
+  @include media-breakpoint-up(xl) {
+    transform: scale(70%) translateX(10%) translateY(-22%);
+  }
+
+    }
+  }
+}
+
 //SUBSCRIPTION FORM
 #subs-container {
 
@@ -210,7 +226,7 @@ $icon_color:linear-gradient(0deg, #cbe0e2 0%, #ffffff 100%);
     border-bottom-left-radius: 100px;
     border-bottom-right-radius: 100px;
     box-shadow: 0 15px 0 rgba(0, 0, 0, 0.1),
-      inset 0 -8px 0  #fff;
+      inset 0 -8px 0 #fff;
     z-index: 100;
     display: flex;
     justify-content: center;
@@ -310,8 +326,8 @@ $icon_color:linear-gradient(0deg, #cbe0e2 0%, #ffffff 100%);
   }
 }
 
-.sub-plan-input:checked+.sub-plan-label{
-transform: scale(110%);
+.sub-plan-input:checked+.sub-plan-label {
+  transform: scale(110%);
 }
 
 /********************************************/
@@ -402,7 +418,7 @@ nav {
     }
   }
 
- 
+
 
   /* ASIDE ^^^^^^^^^^^^^^^^^^^^^*/
   aside.navigation {
