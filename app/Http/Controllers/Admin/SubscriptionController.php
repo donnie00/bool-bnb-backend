@@ -66,22 +66,29 @@ class SubscriptionController extends Controller
             // header("Location: transaction.php?id=" . $transaction->id);
 
             $new_exp_date = "";
+
             $sub = Subscription::where("price", $request->amount)->get();
+
             $subDuration = $sub[0]->duration + 1;
 
             $apartment = Apartment::find($request->apartmentID);
 
+            //dalla data di creazione più recente alla meno recente
             $subs = ApartmentSubscription::where('apartment_id', $apartment->id)->orderBy('created_at', 'DESC')->get();
 
+            /*  @dd($subs); */
             //controlli se l'appartamento ha mai avuto delle subs
-            if (count($subs)) {
+
+
+
+            //se ha almeno 1 eleento
+            if (count($subs) > 0) {
                 //Recuperi la data di sub più recente
                 $lastSubExpDate = $subs[0]->expiration_date;
+                $today = date("Y-m-d H:i:s", strtotime("+1 hours"));
 
-                $today = date("Y-m-d H:i:s",  strtotime("+1 hours"));
                 $today_dt = new DateTime($today);
                 $expire_dt = new DateTime($lastSubExpDate);
-
                 //controllo che la data sia maggiore della data di oggi per vedere se è scaduta
                 if ($expire_dt >= $today_dt) {
                     //Sommo la durata della sub alla data più recente per cumularla
@@ -89,6 +96,7 @@ class SubscriptionController extends Controller
                     $subDuration -= 1;
 
                     $new_exp_date = date("Y-m-d: H:i:s", strtotime("+{$subDuration} hours", strtotime($lastSubExpDate)));
+   
                 } else {
                     //Se la data dell'ultima sub è passata, creo la nuova data sommando la durata alla data attuale
                     $new_exp_date = date("Y-m-d: H:i:s", strtotime("+{$subDuration} hours"));

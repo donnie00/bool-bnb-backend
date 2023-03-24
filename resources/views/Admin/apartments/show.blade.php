@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     @vite(['resources/js/deleteForm.js'])
-    @vite(['resources/js/getSponsorizedTime.js'])
+
     <section id="ds-Show-Apartment" class="px-xxl-5  mx-3 mx-sm-5 mx-lg-5 pb-5">
 
         <div class=" container-fluid  px-md-3 px-xl-5 text-center" style="margin-top: 60px ">
@@ -24,6 +24,54 @@
                     <span class="fw-bold">Questo appartamento è nascosto al pubblico</span>
                 @endif
             </div>
+
+            {{-- subscription --}}
+
+
+
+
+
+            @if (count($apartment->subscriptions))
+                <h1>count si</h1>
+                @php
+                    $today = date('Y-m-d H:i:s', strtotime('+1 hours'));
+                    $lastExp = $apartment->subscriptions[0]->pivot->expiration_date;
+                    
+                @endphp
+
+                @dump('LAST EXP   ' . $lastExp);
+
+                @dump('TODAY   ' . $today);
+
+                @if ($lastExp >= $today)
+                    <h1>promozione attiva fino al {{ $lastExp }}</h1>
+
+                    <div id="subs-container">
+                        <div class="card-container">
+                            <div class="card border-0">
+                                <div class="icon">
+                                    <ion-icon class="" style="color:" name="">
+                                    </ion-icon>
+                                </div>
+                                <div class="content text-light">
+                                    <h1 class="text-uppercase">
+                                        </h2>
+                                        <span class="m-2">visibilità garantita per</span>
+                                        <h2 class="p-1" style="font-size:50px"> ore
+                                        </h2>
+                                        <h3> €</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <h1>promozione scaduta</h1>
+                @endif
+            @else
+                <h1>nessuna promozione attiva!</h1>
+            @endif
+
+
 
             <div class="py-4 img-container w-75 m-auto rounded-4 overflow-hidden">
                 <div class="col-8 m-auto">
@@ -147,9 +195,12 @@
             </form>
         </div>
 
+
+        {{-- sub vecchie --}}
         <div class="w-75 m-auto">
             <div class="row align-items-center p-3 rounded-3 form-container m-5 shadow"
                 style="background-color:rgb(253, 253, 189); ">
+
                 <div class="col-12  col-xl-5 ">
                     <div id="sub-infos-container" class=" mb-3  text-center  rounded-2">
 
