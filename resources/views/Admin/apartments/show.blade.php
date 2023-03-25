@@ -6,7 +6,7 @@
 
         <div class=" container-fluid  px-md-3 px-xl-5 row" style="margin-top: 60px ">
             <!--Apartments Show -->
-            <h1 class="mb-4 d-inline ">{{ $apartment->title }}</h1>
+            <h1 class="mb-4 d-inline text-capitalize fw-bold">{{ $apartment->title }}</h1>
 
             {{-- subscription --}}
 
@@ -18,51 +18,72 @@
                     $diff = round($diff / (60 * 60));
                     
                 @endphp
-                {{--     @dump($apartment->subscriptions)
-                @dump('LAST EXP   ' . $lastExp)
-                @dump('TODAY   ' . $today)
-                @dump(strtotime($lastExp) - strtotime($today))
-                @dump($diff . ' ore')
- --}}
+
                 @if ($lastExp >= $today)
                     @if ($diff <= $subscriptions[0]->duration)
                         <?php
                         $title = 'Promo Attiva!';
-                        $class = 'bg-silver';
+                        $class = 'bg-silver text-light';
+                        $classSubTrue = '';
                         $icon = 'flash-outline';
                         $iconColor = 'text-secondary';
+                        $expeditDate = $lastExp;
+                        $hoursRemaining = $diff;
                         ?>
                     @elseif($diff > $subscriptions[0]->duration && $diff <= $subscriptions[1]->duration)
                         <?php
-                        $class = 'bg-gold';
+                        $class = 'bg-gold text-light';
+                        $classSubTrue = '';
                         $icon = 'diamond-outline';
                         $title = 'Promo Attiva!';
                         $iconColor = 'text-warning';
+                        $expeditDate = $lastExp;
+                        $hoursRemaining = $diff;
                         ?>
                     @elseif($diff > $subscriptions[1]->duration)
                         <?php
-                        $class = 'bg-diamond';
+                        $class = 'bg-diamond text-light';
+                        $classSubTrue = '';
                         $icon = 'rocket-outline';
                         $title = 'Promo Attiva!';
                         $iconColor = 'text-danger';
+                        $expeditDate = $lastExp;
+                        $hoursRemaining = $diff;
                         ?>
                     @endif
         </div>
     @else
-        <h1>promozione scaduta</h1>
+        <?php
+        $class = 'bg-end text-danger ';
+        $classSubTrue = 'd-none';
+        $icon = 'alert-outline';
+        $title = 'Promo Scaduta!';
+        $iconColor = 'text-danger';
+        $expeditDate = 'il: ' . $lastExp;
+        $hoursRemaining = '';
+        ?>
         @endif
     @else
-        <h1>nessuna promozione attiva!</h1>
+        <?php
+        $class = 'bg-end text-light';
+        $classSubTrue = 'd-none';
+        $icon = 'alert-outline';
+        $title = 'nessuna promozione attiva!';
+        $iconColor = 'text-danger';
+        $expeditDate = '';
+        $hoursRemaining = '';
+        ?>
         @endif
 
 
-
+        {{-- IMG --}}
         <div class="py-4 img-container col-12  m-auto rounded-4 overflow-hidden position-relative row">
 
 
             {{-- IMG --}}
-            <div class="col-12 col-lg-8 m-auto">
+            <div class="col-12 col-lg-7 m-auto">
 
+                {{-- VISIBLE --}}
                 <div class="my-3 visible span rounded-5 position-absolute ps-3">
                     @if ($apartment->visible)
                         <button type="button" class="btn btn-light rounded-5" data-toggle="tooltip" data-placement="bottom"
@@ -74,7 +95,7 @@
                             </svg>
                         </button>
                     @else
-                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom"
+                        <button type="button" class="btn btn-light rounded-5" data-toggle="tooltip" data-placement="bottom"
                             title="Questo appartamento è nascosto al pubblico">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" style="width:35px">
                                 <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -93,12 +114,13 @@
                             <ion-icon class="<?php echo $iconColor; ?> " style="color:" name="<?php echo $icon; ?>">
                             </ion-icon>
                         </div>
-                        <div class="content text-light">
-                            <h1 class="text-uppercase pb-2" style="transform:scale(110%)">{{ $title }}</h2>
-                                <span class="m-2">visibilità garantita fino al:</span>
-                                <h5 class="p-1 "> {{ $lastExp }} </h5>
-                                <h2 class="p-1 pb-1" style="font-size:50px">{{ $diff }}<span style="font-size:40px">
-                                        ore</span> </h2>
+                        <div class="content">
+                            <h1 class="text-uppercase pb-2" style="transform:scale(110%)">{{ $title }}</h1>
+                            <span class="sub-true <?php echo $classSubTrue; ?> ">visibilità garantita fino al: </span>
+                            <h5 class="p-1 "> {{ $expeditDate }} </h5>
+                            <h2 class="p-1 pb-1" style="font-size:50px">{{ $hoursRemaining }}<span style="font-size:40px"
+                                    class="sub-true <?php echo $classSubTrue; ?>">
+                                    ore</span> </h2>
                         </div>
                     </div>
                 </div>
@@ -155,14 +177,14 @@
             </div>
 
         </div>
-        <div class="col-12 col-xl-4">
+        <div class="col-12  col-lg-5 ">
+
             {{-- SPONSOR CONTAINER --}}
-            <div class="promo-container rounded-4 row" style="background-color: #fdfdbd">
 
-
+            <div class="promo-container row" style="background-color: #fdfdbd">
 
                 {{-- bunner --}}
-                <div class="col-6 col-xl-12  py-3 rounded-3 ">
+                <div class="col-12 py-3 ">
                     <a href="{{ route('subs.form', $apartment->id) }}" class="text-decoration-none link-dark text-center">
                         <h4 id="bunner-sponsor-title" class="fw-bold text-secondary text-uppercase">Sponsorizza il tuo
                             appartamento!</h4>
@@ -171,48 +193,83 @@
                             visibilità
                             posizionandolo sempre in cima ai risultati di ricerca!
                         </p>
-                        <button class="btn btn-secondary text-dark text-uppercase w-75 py-2 position-relative fw-bold">
+                        <button class="btn btn-secondary text-dark text-uppercase w-100 py-2 position-relative fw-bold">
                             Scopri di più!
                             <i class="fa-solid fa-hand-pointer fs-5 px-2 position-absolute  text-dark "
                                 style="transform: rotate(-20deg) translateY(20px) translateX(10px) scale(300%)"></i>
                         </button>
                     </a>
                 </div>
-
             </div>
+
+            {{-- options --}}
+            <div class="flex-fill row m-auto mt-3 pb-3 mb-3 justify-content-md-around gap-2">
+
+                <a href="{{ route('Admin.apartments.index') }}" class="col-12 col-md-3 col-lg-12 btn btn-outline-primary ">
+                    <i class="fa-solid fa-reply"></i>
+                    Torna agli
+                    Appartamenti</a>
+
+                <a href="{{ route('Admin.apartments.edit', $apartment->id) }}"
+                    class="col-12 col-md-3 col-lg-12 btn btn-primary text-light d-flex align-items-center justify-content-center">Modifica
+                    Appartamento</a>
+                <form class="delete-form col-12 col-md-3 col-lg-12  p-0 d-flex align-items-center justify-content-center"
+                    action="{{ route('Admin.apartments.destroy', $apartment->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger w-100 text-light h-100">Elimina Appartamento</button>
+                </form>
+            </div>
+
+
+
+            <div class="apartment-infos form-container rounded-3 p-3">
+                <h2 class="p-3">Riepilogo:</h2>
+                <div class="row  gap-1 gap-md-3 mb-3 text-center p-3 border-bottom">
+
+                    <div class="col  py-1 rounded-3 border-secondary text-secondary">
+                        Camere
+                        <div>
+                            {{ $apartment->rooms_qty }}
+                        </div>
+                        
+                    </div>
+
+                    <div class="col  py-1 rounded-3 border-secondary text-secondary"> Letti
+                        <div>
+                            {{ $apartment->beds_qty }}
+                        </div>
+
+                    </div>
+
+                    <div class=" col  py-1 rounded-3 border-secondary text-secondary"> Bagni:
+                        {{ $apartment->bathrooms_qty }}
+                    </div>
+
+                    <div class="col  py-1 rounded-3 border-secondary text-secondary">
+                        MQ: {{ $apartment->mq }}
+                    </div>
+                    <div class="col  py-1 rounded-3 border-secondary text-secondary"> &euro;/Notte
+                        {{ $apartment->daily_price }}
+                    </div>
+
+                </div>
+            </div>
+
+
         </div>
         </div>
 
 
-        <div class="w-75 m-auto">
+        <div class=" m-auto">
             <h2 class="my-3">{{ ucfirst($apartment->address) }}</h2>
             <hr>
 
-            <div class="row  gap-1 gap-md-3 mb-3 text-center">
 
-                <div class="col  py-1 rounded-3 border-secondary text-secondary">
-                    Camere: {{ $apartment->rooms_qty }}
-                </div>
-
-                <div class="col  py-1 rounded-3 border-secondary text-secondary"> Letti: {{ $apartment->beds_qty }}
-                </div>
-
-                <div class=" col  py-1 rounded-3 border-secondary text-secondary"> Bagni: {{ $apartment->bathrooms_qty }}
-                </div>
-
-                <div class="col  py-1 rounded-3 border-secondary text-secondary">
-                    MQ: {{ $apartment->mq }}
-                </div>
-                <div class="col  py-1 rounded-3 border-secondary text-secondary"> &euro;/Notte
-                    {{ $apartment->daily_price }}
-                </div>
-
-            </div>
             <hr>
             <div class="mb-2 mx-2">
                 <p class="fs-6">{{ ucfirst($apartment->description) }}</p>
             </div>
-            <hr>
 
             <div class="mb-4 mx-2 w-75 m-auto">
                 @if (count($apartment->services))
@@ -230,24 +287,6 @@
                     </ul>
                 @endif
             </div>
-        </div>
-        {{-- options --}}
-        <div class="row w-75 m-auto mt-3 g-2 pb-3 mb-3 justify-content-md-around">
-
-            <a href="{{ route('Admin.apartments.index') }}" class="col-12 col-md-3 btn btn-outline-primary">
-                <i class="fa-solid fa-reply"></i>
-                Torna agli
-                Appartamenti</a>
-
-            <a href="{{ route('Admin.apartments.edit', $apartment->id) }}"
-                class="col-12 col-md-3 btn btn-primary text-light">Modifica
-                Appartamento</a>
-            <form class="delete-form col-12 col-md-3" action="{{ route('Admin.apartments.destroy', $apartment->id) }}"
-                method="POST">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger w-100 ">Elimina Appartamento</button>
-            </form>
         </div>
 
 
