@@ -3,12 +3,10 @@
 @section('content')
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-
         @media (max-width: 767px) {
             .table {
                 display: none;
             }
-
         }
 
         @media (min-width: 768px) {
@@ -18,16 +16,18 @@
             }
         }
     </style>
+
+
     @vite(['resources/js/deleteForm.js'])
     {{-- pezza perchè non lo recupera da dashboard layout?? --}}
     @php
         $frontendURL = env('MY_FRONTEND_URL');
     @endphp
 
-    <div class="container m-auto text-center form-container index-container rounded-4 mt-3 px-5 py-3" style="margin-left: 20px;">
-        <a class="btn btn-primary text-light my-3 fs-4 py-2 px-3" href="{{ route('Admin.apartments.create') }}">Aggiungi nuovo Appartamento
-        <i class="fa fa-plus"></i>
-        
+    <div class="my-2 me-4 text-center form-container index-container rounded-4 mt-4 px-5 py-3">
+        <a class="btn btn-primary text-light my-3 fs-4 py-2 px-3" href="{{ route('Admin.apartments.create') }}">Aggiungi nuovo
+            Appartamento
+            <i class="fa fa-plus"></i>
         </a>
         <div class="small">
             <ul style="margin-left: -20px" class="p-0">
