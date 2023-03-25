@@ -77,7 +77,7 @@
 
 
         {{-- IMG --}}
-        <div class="py-4 img-container col-12  m-auto rounded-4 overflow-hidden position-relative row">
+        <div class="py-4 img-container col-12  m-auto  rounded-4 overflow-hidden position-relative row">
 
 
             {{-- IMG --}}
@@ -123,6 +123,7 @@
                                     ore</span> </h2>
                         </div>
                     </div>
+                    
                 </div>
 
                 @if ($apartment->cover_img && $apartment->images)
@@ -176,12 +177,80 @@
                 @endif
             </div>
 
+
+            <div class=" m-auto my-5">
+
+                <div class="apartment-infos form-container rounded-3 p-5 ">
+    
+                    <h3 class=" pb-3 text-primary">{{ ucfirst($apartment->address) }}</h3>
+    
+                    <div class="border-bottom">
+                        <p class="fs-6">{{ ucfirst($apartment->description) }}</p>
+                    </div>
+    
+                    <div class="row row-cols-1 row-cols-md-6 gap-1 gap-md-3 mb-3 text-md-center  border-bottom">
+    
+                        <div class="col  py-1 rounded-3 border-secondary text-secondary">
+                            Camere
+                            <div class="d-inline d-sm-block">
+                                {{ $apartment->rooms_qty }}
+                            </div>
+                        </div>
+    
+                        <div class="col  py-1 rounded-3 border-secondary text-secondary"> Letti
+                            <div class="d-inline d-md-block">
+                                {{ $apartment->beds_qty }}
+                            </div>
+                        </div>
+    
+                        <div class=" col  py-1 rounded-3 border-secondary text-secondary"> Bagni
+                            <div class="d-inline d-md-block">
+                                {{ $apartment->bathrooms_qty }}
+                            </div>
+                        </div>
+    
+                        <div class="col  py-1 rounded-3 border-secondary text-secondary">
+                            MQ
+                            <div class="d-inline d-md-block">
+                                {{ $apartment->mq }}
+                            </div>
+                        </div>
+                        <div class="col  py-1 rounded-3 border-secondary text-secondary"> &euro;/Notte
+                            <div class="d-inline d-md-block">
+                                {{ $apartment->daily_price }}
+                            </div>
+                        </div>
+                    </div>
+    
+    
+    
+                    <div class="mb-4 mx-2 m-auto">
+                        @if (count($apartment->services))
+                            <p class="fw-semibold">Servizi inclusi: </p>
+    
+    
+                            <ul class="row gap-4 align-items-end justify-items-between">
+                                @foreach ($apartment->services as $service)
+                                    <li class="col-12  col-md-3 col-lg-2 col-xl-1 list-group-item d-flex me-4 ">
+                                        <img width="25px" class="icons-services d-inline pe-2"
+                                            src="{{ asset('services-icons/' . $service->icon) }}" alt="">
+                                        <i
+                                            class="">{{ $service->name === 'Aria Condizionata' ? 'Clima' : $service->name }}</i>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </div>
+                </div>
+            </div>
+    
+
         </div>
         <div class="col-12  col-lg-5 ">
 
             {{-- SPONSOR CONTAINER --}}
 
-            <div class="promo-container row" style="background-color: #fdfdbd">
+            <div class="promo-container row  mt-3 mb-5" style="background-color: #fdfdbd">
 
                 {{-- bunner --}}
                 <div class="col-12 py-3 ">
@@ -222,97 +291,35 @@
             </div>
 
 
-
-            <div class="apartment-infos form-container rounded-3 p-3">
-                <h2 class="p-3">Riepilogo:</h2>
-                <div class="row  gap-1 gap-md-3 mb-3 text-center p-3 border-bottom">
-
-                    <div class="col  py-1 rounded-3 border-secondary text-secondary">
-                        Camere
-                        <div>
-                            {{ $apartment->rooms_qty }}
-                        </div>
-                        
-                    </div>
-
-                    <div class="col  py-1 rounded-3 border-secondary text-secondary"> Letti
-                        <div>
-                            {{ $apartment->beds_qty }}
-                        </div>
-
-                    </div>
-
-                    <div class=" col  py-1 rounded-3 border-secondary text-secondary"> Bagni:
-                        {{ $apartment->bathrooms_qty }}
-                    </div>
-
-                    <div class="col  py-1 rounded-3 border-secondary text-secondary">
-                        MQ: {{ $apartment->mq }}
-                    </div>
-                    <div class="col  py-1 rounded-3 border-secondary text-secondary"> &euro;/Notte
-                        {{ $apartment->daily_price }}
-                    </div>
-
-                </div>
-            </div>
-
-
-        </div>
-        </div>
-
-
-        <div class=" m-auto">
-            <h2 class="my-3">{{ ucfirst($apartment->address) }}</h2>
-            <hr>
-
-
-            <hr>
-            <div class="mb-2 mx-2">
-                <p class="fs-6">{{ ucfirst($apartment->description) }}</p>
-            </div>
-
-            <div class="mb-4 mx-2 w-75 m-auto">
-                @if (count($apartment->services))
-                    <p class="fw-semibold">Servizi inclusi: </p>
-
-
-                    <ul class="row g-3">
-                        @foreach ($apartment->services as $service)
-                            <li class="col-12 col-md-6">
-                                <img width="25px" class="icons-services "
-                                    src="{{ asset('services-icons/' . $service->icon) }}" alt="">
-                                <i class=" me-3">{{ $service->name }}</i>
-                            </li>
+            
+        {{-- messaggi ricevuti --}}
+        @if (count($apartment->messages))
+        <div class="row  m-auto mb-5">
+            <div class="col">
+                <h2>Messaggi ricevuti:</h2>
+                <div class="ps-1 rounded-3">
+                    <ul class="list-group">
+                        @foreach ($apartment->messages as $message)
+                            @if ($loop->index < 3)
+                                <li class="p-2 list-group-item ">
+                                    <span class="fw-bold fs-6 d-block">{{ $message['subject'] }}</span>
+                                    <span class="fw-semibold">{{ $message['sender'] }}</span>
+                                    <span class="text-justify">{{ '(' . $message['email'] . ')' }}</span>
+                                </li>
+                            @endif
                         @endforeach
                     </ul>
-                @endif
+                </div>
+                <a href="{{ route('Admin.dashboard.messages') }}" class="btn text-secondary  border-secondary my-3 d-block">
+                    Guarda tutti i messaggi
+                </a>
             </div>
+        </div>
+    @endif
         </div>
 
 
-        @if (count($apartment->messages))
-            <div class="row col-12 col-md-10 col-lg-8 m-auto mb-5">
-                <div class="col">
-                    <h2>Messaggi ricevuti:</h2>
-                    <div class="ps-1 rounded-3">
-                        <ul class="list-group">
-                            @foreach ($apartment->messages as $message)
-                                @if ($loop->index < 3)
-                                    <li class="p-2 list-group-item ">
-                                        <span class="fw-bold fs-6 d-block">{{ $message['subject'] }}</span>
-                                        <span class="fw-semibold">{{ $message['sender'] }}</span>
-                                        <span class="text-justify">{{ '(' . $message['email'] . ')' }}</span>
-                                    </li>
-                                @endif
-                            @endforeach
-                        </ul>
-                    </div>
-                    <a href="{{ route('Admin.dashboard.messages') }}" class="btn btn-primary text-light my-3 d-block">
-                        Guarda tutti i messaggi
-                    </a>
-                </div>
-            </div>
-        @endif
+      
         </div>
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     </section>
