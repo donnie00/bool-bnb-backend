@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="w-75 m-auto">
+    <div class=" m-auto">
         @if ($userApartmentsCount)
             <h1 class="text-center text-lg-start">Hai <span class="text-primary">{{ $userApartmentsCount }}</span>
                 appartamenti in

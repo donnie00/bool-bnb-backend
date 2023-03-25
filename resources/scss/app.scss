@@ -42,7 +42,7 @@ $icon_color: linear-gradient(0deg, #cbe0e2 0%, #ffffff 100%);
 
 
 /* visualizzare */
-.aa{
+* {
   border: 1px solid rgb(216, 127, 228);
 
   @include media-breakpoint-up(xs) {
@@ -107,7 +107,6 @@ $icon_color: linear-gradient(0deg, #cbe0e2 0%, #ffffff 100%);
 
 
   &.index-container {
-  /*   z-index: -1; */
 
     & i {
 
@@ -143,14 +142,16 @@ $icon_color: linear-gradient(0deg, #cbe0e2 0%, #ffffff 100%);
 
 #ds-Show-Apartment {
   #subs-container {
- .card {
-  transform: scale(50%) translateX(40%) translateY(-50%);
-  @include media-breakpoint-up(md) {
-    transform: scale(60%) translateX(25%) translateY(-34%);
-  }
-  @include media-breakpoint-up(xl) {
-    transform: scale(70%) translateX(10%) translateY(-22%);
-  }
+    .card {
+      transform: scale(50%) translateX(40%) translateY(-50%);
+
+      @include media-breakpoint-up(md) {
+        transform: scale(60%) translateX(25%) translateY(-34%);
+      }
+
+      @include media-breakpoint-up(xl) {
+        transform: scale(70%) translateX(10%) translateY(-22%);
+      }
 
     }
   }
@@ -207,6 +208,7 @@ $icon_color: linear-gradient(0deg, #cbe0e2 0%, #ffffff 100%);
   .bg-end {
     background: linear-gradient(to bottom, $secondary_color_light, #929292);
   }
+
   .bg-silver {
     background: linear-gradient(to bottom, $secondary_color_light, $secondary_color_dark);
   }
@@ -377,15 +379,14 @@ nav {
 
 /* DASHBOARD */
 .dashboard-container {
-
   height: 100vh;
   width: 100vw;
 
   /* MAIN ***********************/
   main.dashboard {
-    margin-left: 90px;
     width: 100%;
     overflow-x: hidden;
+
 
     @include media-breakpoint-down(md) {
       margin-left: 40px;
@@ -425,6 +426,7 @@ nav {
 
   /* ASIDE ^^^^^^^^^^^^^^^^^^^^^*/
   aside.navigation {
+    
 
     * {
       padding: 5px;
@@ -442,6 +444,11 @@ nav {
     background: linear-gradient(0deg, rgba(255, 0, 110, 1) 0%, rgba(247, 100, 95, 1) 43%, rgba(247, 100, 95, 1) 100%);
     overflow-x: hidden;
 
+     position: sticky; 
+ 
+   width: 90px;
+
+
     .nav-title {
       color: white;
       display: none;
@@ -451,7 +458,8 @@ nav {
     }
 
     &.active {
-      width: 200px;
+     /*  width: 200px; */
+      width: 250px;
     }
 
     ul {
