@@ -25,7 +25,7 @@
                     <span class="icon text-cemter pt-2 d-block ">
                         <ion-icon class="fs-3" name="person-outline"></ion-icon>
                     </span>
-                    <span class="title d-block p-relative ps-3">Profile</span>
+                    <span class="title d-block p-relative ps-3">Profilo</span>
                 </a>
             </li>
 
@@ -37,7 +37,7 @@
                     <span class="icon text-cemter pt-2 d-block">
                         <ion-icon class="fs-3" name="images-outline"></ion-icon>
                     </span>
-                    <span class="title d-block p-relative ps-3">Apartments</span>
+                    <span class="title d-block p-relative ps-3">Appartamenti</span>
                 </a>
             </li>
 
@@ -49,7 +49,7 @@
                     <span class="icon text-cemter pt-2 d-block">
                         <ion-icon class="fs-3" name="mail-outline"></ion-icon>
                     </span>
-                    <span class="title d-block p-relative ps-3">Messages</span>
+                    <span class="title d-block p-relative ps-3">Messaggi</span>
                 </a>
             </li>
             {{-- logout link --}}

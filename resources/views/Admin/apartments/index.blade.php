@@ -24,8 +24,8 @@
         $frontendURL = env('MY_FRONTEND_URL');
     @endphp
 
-    <div class="my-2 me-4 text-center form-container index-container rounded-4 mt-4 px-5 py-3">
-        <a class="btn btn-primary text-light my-3 fs-4 py-2 px-3" href="{{ route('Admin.apartments.create') }}">Aggiungi nuovo
+    <div class="my-2 me-md-4 text-center form-container index-container rounded-4 mt-4 px-5 py-3">
+        <a class="add-apartment  btn btn-primary text-light my-3 fs-4 py-2 px-md-3" href="{{ route('Admin.apartments.create') }}">Aggiungi nuovo
             Appartamento
             <i class="fa fa-plus"></i>
         </a>

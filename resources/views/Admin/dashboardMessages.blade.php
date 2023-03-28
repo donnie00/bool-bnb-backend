@@ -325,7 +325,7 @@
                                             <span>{{ $singleMessage['subject'] }}</span>
                                         </a>
                                         <div class="collapse" id="collapseMessage{{ $varId }}">
-                                            <div class="text-center py-2">
+                                            <div class="text-center py-2 text-light">
                                                 {{ $singleMessage['message'] }}
                                             </div>
                                         </div>

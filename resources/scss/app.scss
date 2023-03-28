@@ -42,7 +42,7 @@ $icon_color: linear-gradient(0deg, #cbe0e2 0%, #ffffff 100%);
 
 
 /* visualizzare */
-* {
+.aa {
   border: 1px solid rgb(216, 127, 228);
 
   @include media-breakpoint-up(xs) {
@@ -387,10 +387,12 @@ nav {
     width: 100%;
     overflow-x: hidden;
 
-
-    @include media-breakpoint-down(md) {
-      margin-left: 40px;
+    .add-apartment{
+      @include media-breakpoint-down(md) {
+transform: scale(80%);
+      }
     }
+    
 
     /* APARTMENT SHOW  ***********************/
     #ds-Show-Apartment {
