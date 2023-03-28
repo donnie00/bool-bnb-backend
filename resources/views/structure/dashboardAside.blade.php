@@ -65,7 +65,7 @@
                         <span class="icon text-cemter pt-2 d-block">
                             <ion-icon class="fs-3" name="log-out-outline"></ion-icon>
                         </span>
-                        <span class="title d-block p-relative ps-3 ">Logout</span>
+                        <span class="title d-block p-relative ps-3 ">Esci</span>
                     </button>
                 </form>
             </li>
